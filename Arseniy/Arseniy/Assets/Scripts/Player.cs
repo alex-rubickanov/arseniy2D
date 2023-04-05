@@ -15,6 +15,14 @@ public class Player : MonoBehaviour
     Coroutine toCrossbow;
     Coroutine toThirdWeapon;
 
+    Weapon topGun;
+    Weapon midGun;
+    Weapon botGun;
+
+    GameObject topGunObj;
+    GameObject midGunObj;
+    GameObject botGunObj;
+
     private void Awake() //singleton
     {
         if (instance == null)
@@ -31,15 +39,34 @@ public class Player : MonoBehaviour
     private void Start()
     {
         ResetAllCoroutines();
-        SwipeDetection.OnSwipeEvent += ChangeWeapon;
-        
+        //SwipeDetection.OnSwipeEvent += ChangeWeapon;
+        SwipeDetection.OnSwipeEvent += SwapWeapon;
         
 
         Debug.Log(toMortar);
         Debug.Log(toCrossbow);
         Debug.Log(toThirdWeapon);
         DontDestroyOnLoad(gameObject);
+
+        topGun = Weapon.Mortar;
+        midGun = Weapon.Crossbow;
+        botGun = Weapon.FireGun;
+
+        topGunObj = GameObject.Find("Mortar");
+        midGunObj = GameObject.Find("Crossbow");
+        botGunObj = GameObject.Find("FireGun");
     }
+
+    private void Update()
+    {
+        activeGun = midGun;
+        Debug.Log(activeGun);
+    }
+
+
+
+
+
 
     private void ChangeWeapon(int i)
     {
@@ -98,4 +125,47 @@ public class Player : MonoBehaviour
         toThirdWeapon = null;
         toCrossbow= null;
     }
+    private void SwapWeapon(int i)
+    {
+        if(i == 1)
+        {
+             Weapon bridge;
+             bridge = topGun;
+             topGun = midGun;
+             midGun = bridge;
+
+            Vector3 bridgePos;
+            bridgePos = topGunObj.transform.position;
+            topGunObj.transform.position = midGunObj.transform.position;
+            midGunObj.transform.position = bridgePos;
+
+            GameObject bridgeObj;
+            bridgeObj = topGunObj;
+            topGunObj = midGunObj;
+            midGunObj = bridgeObj;
+
+        } else
+        {
+            
+            
+             Weapon bridge;
+             bridge = botGun;
+             botGun = midGun;
+             midGun = bridge;
+
+            Vector3 bridgePos;
+            bridgePos = botGunObj.transform.position;
+            botGunObj.transform.position = midGunObj.transform.position;
+            midGunObj.transform.position = bridgePos;
+
+            GameObject bridgeObj;
+            bridgeObj = botGunObj;
+            botGunObj = midGunObj;
+            midGunObj = bridgeObj;
+
+        }
+
+        
+    }
+    
 }
