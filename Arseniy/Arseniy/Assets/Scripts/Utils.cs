@@ -11,6 +11,7 @@ public static class Utils
         vec.z = 0f;
         return vec;
     }
+
     public static Vector3 GetMouseWorldPositionWithZ()
     {
         return GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);

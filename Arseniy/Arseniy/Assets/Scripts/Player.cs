@@ -24,6 +24,10 @@ public class Player : MonoBehaviour
     public GameObject midGunObj;
     public GameObject botGunObj;
 
+
+    Vector3 bridgeObjPos;
+
+
     private void Awake() //singleton
     {
         if (instance == null)
@@ -39,7 +43,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        ResetAllCoroutines();
+        bridgeObjPos = new Vector3(0, 0, 0);
         //SwipeDetection.OnSwipeEvent += ChangeWeapon;
         SwipeDetection.OnSwipeEvent += SwapWeapon;
         
@@ -47,7 +51,7 @@ public class Player : MonoBehaviour
         Debug.Log(toMortar);
         Debug.Log(toCrossbow);
         Debug.Log(toThirdWeapon);
-        DontDestroyOnLoad(gameObject);
+       // DontDestroyOnLoad(gameObject);
 
         topGun = Weapon.Mortar;
         midGun = Weapon.Crossbow;
@@ -126,6 +130,8 @@ public class Player : MonoBehaviour
         toThirdWeapon = null;
         toCrossbow= null;
     }
+
+
     private void SwapWeapon(int i)
     {
         if(i == 1) //SwipeUP
@@ -138,8 +144,8 @@ public class Player : MonoBehaviour
             botGun = bridge;
 
             //Changing OBJECTS' POSITION
-            Vector3 bridgeObjPos;
-            bridgeObjPos = topGunObj.transform.position;
+            
+            bridgeObjPos = topGunObj.transform.position;        
             topGunObj.transform.position = botGunObj.transform.position;
             botGunObj.transform.position = midGunObj.transform.position;
             midGunObj.transform.position = bridgeObjPos;
@@ -162,7 +168,7 @@ public class Player : MonoBehaviour
             topGun = bridge;
 
             //Changing OBJECTS' POSITION
-            Vector3 bridgeObjPos;
+            
             bridgeObjPos = botGunObj.transform.position;
             botGunObj.transform.position = topGunObj.transform.position;
             topGunObj.transform.position = midGunObj.transform.position;

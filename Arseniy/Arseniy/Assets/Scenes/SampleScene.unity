@@ -484,6 +484,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 0.8
+  topGunObj: {fileID: 575301020}
+  midGunObj: {fileID: 1117500348}
+  botGunObj: {fileID: 2054154973}
 --- !u!212 &146452406
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7421,7 +7424,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054154973}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
