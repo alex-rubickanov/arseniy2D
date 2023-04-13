@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -19,9 +20,9 @@ public class Player : MonoBehaviour
     Weapon midGun;
     Weapon botGun;
 
-    GameObject topGunObj;
-    GameObject midGunObj;
-    GameObject botGunObj;
+    public GameObject topGunObj;
+    public GameObject midGunObj;
+    public GameObject botGunObj;
 
     private void Awake() //singleton
     {
@@ -127,41 +128,52 @@ public class Player : MonoBehaviour
     }
     private void SwapWeapon(int i)
     {
-        if(i == 1)
+        if(i == 1) //SwipeUP
         {
-             Weapon bridge;
-             bridge = topGun;
-             topGun = midGun;
-             midGun = bridge;
+            //Changing WEAPON
+            Weapon bridge;
+            bridge = topGun;
+            topGun = midGun;
+            midGun = botGun;
+            botGun = bridge;
 
-            Vector3 bridgePos;
-            bridgePos = topGunObj.transform.position;
-            topGunObj.transform.position = midGunObj.transform.position;
-            midGunObj.transform.position = bridgePos;
+            //Changing OBJECTS' POSITION
+            Vector3 bridgeObjPos;
+            bridgeObjPos = topGunObj.transform.position;
+            topGunObj.transform.position = botGunObj.transform.position;
+            botGunObj.transform.position = midGunObj.transform.position;
+            midGunObj.transform.position = bridgeObjPos;
+            
 
+            //Changing OBJECT
             GameObject bridgeObj;
             bridgeObj = topGunObj;
             topGunObj = midGunObj;
-            midGunObj = bridgeObj;
+            midGunObj = botGunObj;
+            botGunObj = bridgeObj;
 
-        } else
+        } else //SwipeDOWN
         {
-            
-            
-             Weapon bridge;
-             bridge = botGun;
-             botGun = midGun;
-             midGun = bridge;
+            //Changing WEAPON
+            Weapon bridge;
+            bridge = botGun;
+            botGun = midGun;
+            midGun = topGun;
+            topGun = bridge;
 
-            Vector3 bridgePos;
-            bridgePos = botGunObj.transform.position;
-            botGunObj.transform.position = midGunObj.transform.position;
-            midGunObj.transform.position = bridgePos;
+            //Changing OBJECTS' POSITION
+            Vector3 bridgeObjPos;
+            bridgeObjPos = botGunObj.transform.position;
+            botGunObj.transform.position = topGunObj.transform.position;
+            topGunObj.transform.position = midGunObj.transform.position;
+            midGunObj.transform.position = bridgeObjPos;
 
+            //Changing OBJECT
             GameObject bridgeObj;
             bridgeObj = botGunObj;
             botGunObj = midGunObj;
-            midGunObj = bridgeObj;
+            midGunObj = topGunObj;
+            topGunObj = bridgeObj;
 
         }
 
