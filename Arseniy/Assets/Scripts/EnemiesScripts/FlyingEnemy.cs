@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class FlyingEnemy : MonoBehaviour
 {
-    public float amplitude = 1f; // Амплитуда синусоиды
-    public float frequency = 1f; // Частота синусоиды
-    public float speed = 1f; // Скорость движения
+    public float amplitude = 1f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float frequency = 1f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float speed = 1f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     private Vector3 startPosition;
 

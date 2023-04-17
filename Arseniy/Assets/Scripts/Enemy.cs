@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] float health = 100f;
-    [SerializeField] Slider healthBar;
+    [SerializeField] public Slider healthBar;
 
     private void Start()
     {
@@ -36,4 +36,6 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public abstract void Movement();
 }

@@ -3,29 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShieldEnemy : MonoBehaviour
+public class ShieldEnemy : Enemy
 {
     [SerializeField] private float _health = 150f;
     [SerializeField] private float _speed;
-    [SerializeField] private Slider _healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
-        _healthBar.value = _health;
+        healthBar.value = _health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        Movement();
         CheckDeath();
-    }
-
-    public void TakeDamage(float damage)
-    {
-        _health -= damage;
-        _healthBar.value = _health;
     }
 
     private void CheckDeath()
@@ -36,13 +29,13 @@ public class ShieldEnemy : MonoBehaviour
         }
     }
 
-    private void Move()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(-4f, 0, 0), _speed * Time.deltaTime);
-    }
-
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    public override void Movement()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(-4f, 0, 0), _speed * Time.deltaTime);
     }
 }

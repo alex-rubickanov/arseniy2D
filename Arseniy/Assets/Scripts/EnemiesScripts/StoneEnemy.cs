@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 public class StoneEnemy : MonoBehaviour
 {
-    [SerializeField] private int _health = 100; // Здоровье персонажа
-    [SerializeField] private float _speed = 2f; // Скорость персонажа
-    [SerializeField] private int _stopSteps = 10; // Количество шагов между остановками
-    [SerializeField] private float _stopDuration = 2f; // Продолжительность остановки
-    [SerializeField] private GameObject _rockPrefab; // Префаб валуна
-    [SerializeField] private Transform _throwPoint; // Точка броска валуна
+    [SerializeField] private int _health = 100; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    [SerializeField] private float _speed = 2f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    [SerializeField] private int _stopSteps = 10; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    [SerializeField] private float _stopDuration = 2f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    [SerializeField] private GameObject _rockPrefab; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    [SerializeField] private Transform _throwPoint; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     [SerializeField] private Slider _healthBar;
 
-    private int _steps = 0; // Счетчик шагов
-    private bool _isStopping = false; // Флаг остановки
-    private float _stopTime = 0f; // Время остановки
-    private Rigidbody2D _rigidbody; // Компонент физики
+    private int _steps = 0; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    private bool _isStopping = false; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private float _stopTime = 0f; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private Rigidbody2D _rigidbody; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
     private void Start()
     {
@@ -31,11 +31,11 @@ public class StoneEnemy : MonoBehaviour
 
         if (!_isStopping)
         {
-            // Если не остановлен, двигаемся вперед
+            // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             Move();
             _steps++;
 
-            // Если достигнуто нужное количество шагов, останавливаемся
+            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if (_steps >= _stopSteps)
             {
                 Stop();
@@ -43,12 +43,12 @@ public class StoneEnemy : MonoBehaviour
         }
         else
         {
-            // Если остановлены, ждем указанное время
+            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             if (Time.time >= _stopTime)
             {
                 _isStopping = false;
 
-                // Создаем валун и бросаем его в стену
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
                 ThrowRock();
             }
         }
