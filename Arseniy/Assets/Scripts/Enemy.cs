@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MovingEnemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     [SerializeField] float health = 100f;
     [SerializeField] Slider healthBar;
@@ -15,10 +15,14 @@ public class MovingEnemy : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(-4f, 0, 0), 1f * Time.deltaTime);
+        CheckDeath();
+    }
+
+    private void CheckDeath()
+    {
         if (health <= 0)
         {
-            Death();
+            Die();
         }
     }
 
@@ -28,7 +32,7 @@ public class MovingEnemy : MonoBehaviour
         healthBar.value = health;
     }
     
-    private void Death()
+    private void Die()
     {
         Destroy(gameObject);
     }

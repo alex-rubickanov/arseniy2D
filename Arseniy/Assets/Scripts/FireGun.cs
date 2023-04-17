@@ -31,7 +31,6 @@ public class FireGun : Weapon
                 {
                     Shoot();
                 }
-                
             }
             if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
             {
@@ -43,8 +42,6 @@ public class FireGun : Weapon
         {
             StopShoot();
         }
-
-
     }
 
     public override void Shoot()
@@ -66,13 +63,21 @@ public class FireGun : Weapon
         {
             Debug.Log("FIRE DAMAGE");
             collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime);
-
         }
         if (collision.tag == "MovingEnemy")
         {
             Debug.Log("FIRE DAMAGE");
             collision.GetComponent<MovingEnemy>().TakeDamage(damage * Time.fixedDeltaTime);
-
+        }
+        if (collision.tag == "Shield")
+        {
+            Debug.Log("FIRE DAMAGE");
+            collision.GetComponent<Shield>().TakeDamage(damage * Time.fixedDeltaTime);
+        }
+        if (collision.tag == "Enemy With Shield")
+        {
+            Debug.Log("FIRE DAMAGE");
+            collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime);
         }
     }
 }

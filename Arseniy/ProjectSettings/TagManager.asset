@@ -8,6 +8,10 @@ TagManager:
   - Fire
   - Enemy
   - MovingEnemy
+  - Bomb
+  - Enemy With Shield
+  - Shield
+  - FlyingEnemy
   layers:
   - Default
   - TransparentFX

@@ -20,6 +20,16 @@ public class BombProjectile : Projectile
             mortar.isSentProjectileDropped = true;
 
         }
+        if (collision.tag == "Enemy With Shield")
+        {
+            collision.GetComponent<ShieldEnemy>().TakeDamage(damage);
+            mortar.isSentProjectileDropped = true;
+        }
+        if (collision.tag == "Shield")
+        {
+            collision.GetComponent<Shield>().TakeDamage(damage);
+            mortar.isSentProjectileDropped = true;
+        }
     }
 
     private void Start()

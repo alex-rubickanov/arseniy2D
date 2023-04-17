@@ -10,9 +10,6 @@ public class Mortar : Weapon
     public Vector3 target;
     public bool isSentProjectileDropped = true;
     
-    
-
-
     public override void Aim()
     {
         Vector3 mousePosition = Utils.GetMouseWorldPosition();
@@ -24,7 +21,6 @@ public class Mortar : Weapon
         transform.eulerAngles = new Vector3(0, 0, Mathf.Clamp(angle, -weaponRotationClamp, weaponRotationClamp));
     }
     
-
     private void Update()
     {
         if (playerScript.activeGun == Player.Weapon.Mortar)
@@ -68,11 +64,8 @@ public class Mortar : Weapon
                 
                 isSentProjectileDropped = false;
             }
-
         }
     }
-
-    
 
     public override void Shoot()
     {

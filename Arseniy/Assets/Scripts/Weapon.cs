@@ -12,13 +12,11 @@ public abstract class Weapon : MonoBehaviour
 
     [SerializeField] public Transform projectileSpawnerTransform;
     
-
     public abstract void Aim();
 
     public abstract void Shoot();
 
     public const float weaponRotationClamp = 60f;
-
 
    private void Start()
     {
@@ -46,5 +44,4 @@ public abstract class Weapon : MonoBehaviour
     {
         crosshair.transform.position = new Vector3(Mathf.Clamp(Utils.GetMouseWorldPosition().x, -4.84f, 8f), Mathf.Clamp(Utils.GetMouseWorldPosition().y, -4.5f, 4.5f), 0);
     }
-    
 }

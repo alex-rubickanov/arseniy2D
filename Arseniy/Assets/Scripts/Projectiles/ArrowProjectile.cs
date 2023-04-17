@@ -23,6 +23,24 @@ public class ArrowProjectile : Projectile
             crossbow.isSentProjectileDropped = true;
             Destroy(gameObject);
         }
+        if(collision.tag == "Shield")
+        {
+            collision.GetComponent<Shield>().TakeDamage(damage);
+            crossbow.isSentProjectileDropped = true;
+            Destroy(gameObject);
+        }
+        if (collision.tag == "Enemy With Shield")
+        {
+            collision.GetComponent<ShieldEnemy>().TakeDamage(damage);
+            crossbow.isSentProjectileDropped = true;
+            Destroy(gameObject);
+        }
+        if(collision.tag == "FlyingEnemy")
+        {
+            collision.GetComponent<FlyingEnemy>().TakeDamage(damage);
+            crossbow.isSentProjectileDropped = true;
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
