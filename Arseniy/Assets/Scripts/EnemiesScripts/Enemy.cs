@@ -20,6 +20,8 @@ public abstract class Enemy : MonoBehaviour
     {
         if (!isAttacking) {
             Movement();
+        } else if(isAttacking) {
+            Attack();
         }
         CheckDeath();
         
@@ -55,5 +57,10 @@ public abstract class Enemy : MonoBehaviour
         if(collision.gameObject.name == "Wall") {
             isAttacking = true;
         }
+    }
+
+    public virtual void Attack()
+    {
+
     }
 }
