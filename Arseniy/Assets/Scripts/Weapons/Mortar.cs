@@ -71,5 +71,6 @@ public class Mortar : Weapon
     {
         Debug.Log("Shoot");
         sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
+        
     }
 }

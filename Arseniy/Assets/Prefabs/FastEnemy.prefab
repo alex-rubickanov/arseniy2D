@@ -302,7 +302,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 73.3
+  m_Value: 48.4
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -317,10 +317,10 @@ GameObject:
   - component: {fileID: 2510928172862851781}
   - component: {fileID: 8662196171040571056}
   - component: {fileID: 203686252292951017}
-  - component: {fileID: 7471586212247199849}
   - component: {fileID: 1213148765}
+  - component: {fileID: 9182409556127914240}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: FastEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,20 +408,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &7471586212247199849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9139428957088055403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782e813b210bb8e40ac890370285222d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  healthBar: {fileID: 7540918527916061863}
 --- !u!50 &1213148765
 Rigidbody2D:
   serializedVersion: 4
@@ -443,3 +429,19 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &9182409556127914240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139428957088055403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9567bfbb7a451e1499928a942abdea56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  healthBar: {fileID: 7540918527916061863}
+  speed: 0.5
+  isAttacking: 0

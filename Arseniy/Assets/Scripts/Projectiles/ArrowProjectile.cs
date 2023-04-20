@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ArrowProjectile : Projectile
@@ -10,16 +11,9 @@ public class ArrowProjectile : Projectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.tag == "Fast Enemy")
         {
             collision.GetComponent<Enemy>().TakeDamage(damage);
-            crossbow.isSentProjectileDropped = true;
-            Destroy(gameObject);
-        }
-
-        if(collision.tag == "MovingEnemy")
-        {
-            collision.GetComponent<MovingEnemy>().TakeDamage(damage);
             crossbow.isSentProjectileDropped = true;
             Destroy(gameObject);
         }
@@ -35,7 +29,7 @@ public class ArrowProjectile : Projectile
             crossbow.isSentProjectileDropped = true;
             Destroy(gameObject);
         }
-        if(collision.tag == "FlyingEnemy")
+        if(collision.tag == "Flying Enemy")
         {
             collision.GetComponent<FlyingEnemy>().TakeDamage(damage);
             crossbow.isSentProjectileDropped = true;
@@ -47,7 +41,7 @@ public class ArrowProjectile : Projectile
     {
         crossbow = GameObject.Find("Crossbow").GetComponent<Crossbow>();
 
-        DestroyThisIn(4f);
+        DestroyThisIn(10f);
     }
 
 }

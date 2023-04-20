@@ -8,17 +8,11 @@ public class BombProjectile : Projectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Fast Enemy")
         {
             collision.GetComponent<Enemy>().TakeDamage(damage);
             mortar.isSentProjectileDropped = true;
             
-        }
-        if (collision.tag == "MovingEnemy")
-        {
-            collision.GetComponent<MovingEnemy>().TakeDamage(damage);
-            mortar.isSentProjectileDropped = true;
-
         }
         if (collision.tag == "Enemy With Shield")
         {

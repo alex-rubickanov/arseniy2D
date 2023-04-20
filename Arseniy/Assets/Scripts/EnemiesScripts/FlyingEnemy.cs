@@ -3,52 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlyingEnemy : MonoBehaviour
+public class FlyingEnemy : Enemy
 {
-    public float amplitude = 1f; // ��������� ���������
-    public float frequency = 1f; // ������� ���������
-    public float speed = 1f; // �������� ��������
+    public float amplitude = 1f;
+    Vector3 startPosition;
 
-    private Vector3 startPosition;
 
-    [SerializeField] private float _health = 100f;
-    [SerializeField] private Slider _healthBar;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         startPosition = transform.position;
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void Movement()
     {
-        CheckDeath();
-        Move();
+        transform.position = startPosition + new Vector3(-1 * Time.time * speed, amplitude * Mathf.Sin(Time.time), 0);   
     }
 
-    private void Move()
-    {
-        float y = startPosition.y + Mathf.Sin(Time.time * speed * frequency) * amplitude;
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(-4f, y, 0), 1f * Time.deltaTime);
-    }
-
-    private void CheckDeath()
-    {
-        if (_health <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        _health -= damage;
-        _healthBar.value = _health;
-    }
-
-    private void Die()
-    {
-        Destroy(gameObject);
-    }
+   
 }
 

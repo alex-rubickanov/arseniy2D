@@ -64,11 +64,6 @@ public class FireGun : Weapon
             Debug.Log("FIRE DAMAGE");
             collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime);
         }
-        if (collision.tag == "MovingEnemy")
-        {
-            Debug.Log("FIRE DAMAGE");
-            collision.GetComponent<MovingEnemy>().TakeDamage(damage * Time.fixedDeltaTime);
-        }
         if (collision.tag == "Shield")
         {
             Debug.Log("FIRE DAMAGE");
