@@ -441,8 +441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b286f8337e4ef4bb7e1f81447eb515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 100
-  frequency: 1
+  health: 100
+  healthBar: {fileID: 5370344855209697007}
   speed: 1
-  _health: 100
-  _healthBar: {fileID: 5370344855209697007}
+  isAttacking: 0
+  amplitude: 2

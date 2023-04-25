@@ -16,6 +16,7 @@ public class Crossbow : Weapon
     {
         Debug.Log("Shoot");
         sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
+        sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
     }
 
     public override void Aim()
@@ -54,20 +55,20 @@ public class Crossbow : Weapon
             
         }
 
-        if (sentProjectile != null)
-        {
-            sentProjectile.transform.position = Vector3.MoveTowards(sentProjectile.transform.position, target, projectileSpeed * Time.deltaTime);
-            if (sentProjectile.transform.position == target)
-            {
-                isSentProjectileDropped = true;
-                sentProjectile.GetComponent<BoxCollider2D>().enabled = false; 
-            }
-            else
-            {
-                isSentProjectileDropped = false;
-            }
+        //if (sentProjectile != null)
+        //{
+            
+        //    if (sentProjectile.transform.position == target)
+        //    {
+        //        isSentProjectileDropped = true;
+        //        sentProjectile.GetComponent<BoxCollider2D>().enabled = false; 
+        //    }
+        //    else
+        //    {
+        //        isSentProjectileDropped = false;
+        //    }
 
-        }
+        //}
     }
 
 

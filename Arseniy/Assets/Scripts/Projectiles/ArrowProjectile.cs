@@ -1,44 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ArrowProjectile : Projectile
 {
     Crossbow crossbow; 
 
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        IDamageable damageable = collision.GetComponent<IDamageable>();
+        if (damageable != null)
         {
-            collision.GetComponent<Enemy>().TakeDamage(damage);
-            crossbow.isSentProjectileDropped = true;
-            Destroy(gameObject);
-        }
+            float damageMultiplier = 1.0f;
 
-        if(collision.tag == "MovingEnemy")
-        {
-            collision.GetComponent<MovingEnemy>().TakeDamage(damage);
+            switch (collision.tag)
+            {
+                case "Fast Enemy":
+                    damageMultiplier = 1.5f;
+                    break;
+                case "Shield":
+                    damageMultiplier = 0.5f;
+                    break;
+                case "Enemy With Shield":
+                    damageMultiplier = 0.75f;
+                    break;
+                case "Flying Enemy":
+                    damageMultiplier = 1.25f;
+                    break;
+            }
+
+            damageable.TakeDamage(damage, damageMultiplier);
             crossbow.isSentProjectileDropped = true;
             Destroy(gameObject);
         }
-        if(collision.tag == "Shield")
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Border"))
         {
-            collision.GetComponent<Shield>().TakeDamage(damage);
-            crossbow.isSentProjectileDropped = true;
-            Destroy(gameObject);
-        }
-        if (collision.tag == "Enemy With Shield")
-        {
-            collision.GetComponent<ShieldEnemy>().TakeDamage(damage);
-            crossbow.isSentProjectileDropped = true;
-            Destroy(gameObject);
-        }
-        if(collision.tag == "FlyingEnemy")
-        {
-            collision.GetComponent<FlyingEnemy>().TakeDamage(damage);
-            crossbow.isSentProjectileDropped = true;
             Destroy(gameObject);
         }
     }
@@ -47,7 +48,6 @@ public class ArrowProjectile : Projectile
     {
         crossbow = GameObject.Find("Crossbow").GetComponent<Crossbow>();
 
-        DestroyThisIn(4f);
+        DestroyThisIn(10f);
     }
-
 }

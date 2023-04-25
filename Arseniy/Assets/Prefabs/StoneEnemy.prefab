@@ -318,10 +318,10 @@ GameObject:
   - component: {fileID: 8662196171040571056}
   - component: {fileID: 203686252292951017}
   - component: {fileID: 1213148765}
-  - component: {fileID: 349969001406822955}
+  - component: {fileID: 1090238791194717744}
   m_Layer: 0
-  m_Name: MovingEnemy
-  m_TagString: MovingEnemy
+  m_Name: StoneEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -382,7 +382,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 0.6886792, g: 0.029236369, b: 0.0409492, a: 1}
+  m_Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -429,7 +429,7 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &349969001406822955
+--- !u!114 &1090238791194717744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -438,8 +438,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 9139428957088055403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04c902f90ee87ea419a4162c9dadf221, type: 3}
+  m_Script: {fileID: 11500000, guid: cece5e5a1c5863f4bb6c234abb588d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 150
   healthBar: {fileID: 7540918527916061863}
+  speed: 1
+  isAttacking: 0
+  _stopSteps: 300
+  _stopDuration: 2
+  _rockPrefab: {fileID: 3389718864824881538, guid: ce0b8f81bb56045478af4e8a0152b365, type: 3}
+  _throwPoint: {fileID: 0}

@@ -6,12 +6,15 @@ TagManager:
   tags:
   - Projectile
   - Fire
-  - Enemy
-  - MovingEnemy
   - Bomb
   - Enemy With Shield
   - Shield
+  - Wall
+  - Fast Enemy
+  - Flying Enemy
   - FlyingEnemy
+  - Enemy
+  - Border
   layers:
   - Default
   - TransparentFX
