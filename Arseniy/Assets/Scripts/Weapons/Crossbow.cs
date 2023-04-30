@@ -14,7 +14,7 @@ public class Crossbow : Weapon
 
     public override void Shoot()
     {
-        Debug.Log("Shoot");
+        //Debug.Log("Shoot");
         sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
         sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ArrowProjectile : Projectile
 {
-    Crossbow crossbow; 
+    Crossbow crossbow;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +16,7 @@ public class ArrowProjectile : Projectile
 
             switch (collision.tag)
             {
-                case "Fast Enemy":
+                case "Enemy":
                     damageMultiplier = 1.5f;
                     break;
                 case "Shield":
@@ -25,7 +25,7 @@ public class ArrowProjectile : Projectile
                 case "Enemy With Shield":
                     damageMultiplier = 0.75f;
                     break;
-                case "Flying Enemy":
+                case "FlyingEnemy":
                     damageMultiplier = 1.25f;
                     break;
             }
@@ -34,13 +34,11 @@ public class ArrowProjectile : Projectile
             crossbow.isSentProjectileDropped = true;
             Destroy(gameObject);
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Border"))
+        if (collision.tag == "Border")
         {
             Destroy(gameObject);
+
         }
     }
 

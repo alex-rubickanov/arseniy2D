@@ -59,28 +59,22 @@ public class FireGun : Weapon
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //if (collision.tag == "Enemy")
-        //{
-        //    Debug.Log("FIRE DAMAGE");
-        //    collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime);
-        //}
-        //if (collision.tag == "Shield")
-        //{
-        //    Debug.Log("FIRE DAMAGE");
-        //    collision.GetComponent<Shield>().TakeDamage(damage * Time.fixedDeltaTime);
-        //}
-        //if (collision.tag == "Enemy With Shield")
-        //{
-        //    Debug.Log("FIRE DAMAGE");
-        //    collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime);
-        //}
+        float damageMultiplier = 1.0f;
 
-        IDamageable damageable = collision.GetComponent<IDamageable>();
-        if (damageable != null)
+        if (collision.tag == "Enemy")
         {
-            float damageMultiplier = 1.0f;
-            damageable.TakeDamage(damage * Time.deltaTime, damageMultiplier);
-            Debug.Log("FIRE");
+           Debug.Log("FIRE DAMAGE");
+            collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+        }
+        if (collision.tag == "Shield")
+        {
+           Debug.Log("FIRE DAMAGE");
+            collision.GetComponent<Shield>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+        }
+        if (collision.tag == "Enemy With Shield")
+        {
+            Debug.Log("FIRE DAMAGE");
+           collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
         }
     }
 }

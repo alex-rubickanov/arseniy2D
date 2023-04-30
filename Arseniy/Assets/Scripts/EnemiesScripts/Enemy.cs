@@ -30,7 +30,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable
         CheckDeath();
     }
 
-    private void CheckDeath()
+    protected void CheckDeath()
     {
         if (health <= 0)
         {
@@ -40,8 +40,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage,  float damageMultiplier)
     {
-        int actualDamage = Mathf.RoundToInt(damage * damageMultiplier);
-        health -= actualDamage;
+        health -= damage * damageMultiplier;
         healthBar.value = health;
     }
     

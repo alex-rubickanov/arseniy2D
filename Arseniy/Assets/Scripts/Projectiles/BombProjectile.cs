@@ -24,12 +24,13 @@ public class BombProjectile : Projectile
                 case "Enemy With Shield":
                     damageMultiplier = 0.75f;
                     break;
-                case "Flying Enemy":
+                case "FlyingEnemy":
                     damageMultiplier = 0f;
                     break;
             }
 
             damageable.TakeDamage(damage, damageMultiplier);
+            Debug.Log(damageMultiplier + collision.tag);
             mortar.isSentProjectileDropped = true;
         }
     }

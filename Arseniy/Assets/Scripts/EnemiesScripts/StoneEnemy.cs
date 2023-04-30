@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class StoneEnemy : Enemy
 {
-    
-    [SerializeField] private int _stopSteps = 300; 
-    [SerializeField] private float _stopDuration = 2f; 
+    [SerializeField] private int _stopSteps = 600; 
+    [SerializeField] private float _stopDuration = 7f; 
     [SerializeField] private GameObject _rockPrefab; 
     [SerializeField] private Transform _throwPoint; 
     
@@ -15,7 +14,6 @@ public class StoneEnemy : Enemy
     private int _steps = 0; 
     private bool _isStopping = false; 
     private float _stopTime = 0f; 
-    private Rigidbody2D _rigidbody; 
 
     private void Update()
     {
@@ -32,24 +30,21 @@ public class StoneEnemy : Enemy
         }
         else
         {
-            
             if (Time.time >= _stopTime)
             {
                 _isStopping = false;
-
-                
-                ThrowRock();
             }
         }
-    }
 
-    
+        CheckDeath();
+    }
 
     private void Stop()
     {
         _isStopping = true;
         _steps = 0;
         _stopTime = Time.time + _stopDuration;
+        ThrowRock();
     }
 
     private void ThrowRock()

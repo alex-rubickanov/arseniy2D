@@ -69,7 +69,7 @@ public class Mortar : Weapon
 
     public override void Shoot()
     {
-        Debug.Log("Shoot");
+        //Debug.Log("Shoot");
         sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
     }
 }
