@@ -13,11 +13,9 @@ public class FlyingEnemy : Enemy
     {
         startPosition = transform.position;
     }
-    public override void Movement()
+    public override void Move()
     {
         transform.position = startPosition + new Vector3(-1 * Time.time * speed, amplitude * Mathf.Sin(Time.time), 0);   
     }
-
-   
 }
 

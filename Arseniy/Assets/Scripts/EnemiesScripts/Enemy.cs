@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] public float health = 100;
     [SerializeField] public Slider healthBar;
@@ -18,16 +18,19 @@ public abstract class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (!isAttacking) {
-            Movement();
-        } else if(isAttacking) {
+        if (!isAttacking) 
+        {
+            Move();
+        } 
+        else if(isAttacking) 
+        {
             Attack();
         }
+
         CheckDeath();
-        
     }
 
-    private void CheckDeath()
+    protected void CheckDeath()
     {
         if (health <= 0)
         {
@@ -35,9 +38,9 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage,  float damageMultiplier)
     {
-        health -= damage;
+        health -= damage * damageMultiplier;
         healthBar.value = health;
     }
     
@@ -46,7 +49,7 @@ public abstract class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void Movement()
+    public virtual void Move()
     {
         //transform.position = Vector3.MoveTowards(transform.position, new Vector3(-4f, transform.position.y, transform.position.z), speed * Time.deltaTime);
         transform.position += Vector3.left * speed * Time.deltaTime;

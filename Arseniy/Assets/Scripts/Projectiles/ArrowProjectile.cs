@@ -5,35 +5,40 @@ using UnityEngine;
 
 public class ArrowProjectile : Projectile
 {
-    Crossbow crossbow; 
-
-
+    Crossbow crossbow;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Fast Enemy")
+        IDamageable damageable = collision.GetComponent<IDamageable>();
+        if (damageable != null)
         {
-            collision.GetComponent<Enemy>().TakeDamage(damage);
+            float damageMultiplier = 1.0f;
+
+            switch (collision.tag)
+            {
+                case "Enemy":
+                    damageMultiplier = 1.5f;
+                    break;
+                case "Shield":
+                    damageMultiplier = 0.5f;
+                    break;
+                case "Enemy With Shield":
+                    damageMultiplier = 0.75f;
+                    break;
+                case "FlyingEnemy":
+                    damageMultiplier = 1.25f;
+                    break;
+            }
+
+            damageable.TakeDamage(damage, damageMultiplier);
             crossbow.isSentProjectileDropped = true;
             Destroy(gameObject);
         }
-        if(collision.tag == "Shield")
+
+        if (collision.tag == "Border")
         {
-            collision.GetComponent<Shield>().TakeDamage(damage);
-            crossbow.isSentProjectileDropped = true;
             Destroy(gameObject);
-        }
-        if (collision.tag == "Enemy With Shield")
-        {
-            collision.GetComponent<ShieldEnemy>().TakeDamage(damage);
-            crossbow.isSentProjectileDropped = true;
-            Destroy(gameObject);
-        }
-        if(collision.tag == "Flying Enemy")
-        {
-            collision.GetComponent<FlyingEnemy>().TakeDamage(damage);
-            crossbow.isSentProjectileDropped = true;
-            Destroy(gameObject);
+
         }
     }
 
@@ -43,5 +48,4 @@ public class ArrowProjectile : Projectile
 
         DestroyThisIn(10f);
     }
-
 }

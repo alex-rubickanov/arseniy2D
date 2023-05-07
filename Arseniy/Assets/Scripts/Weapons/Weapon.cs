@@ -27,7 +27,6 @@ public abstract class Weapon : MonoBehaviour
         CrosshairHide();
 
         projectileSpawnerTransform = gameObject.transform.GetChild(0);
-        
     }
  
     public void CrosshairUnHide()
