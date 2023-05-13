@@ -13,7 +13,13 @@ public class StoneEnemy : Enemy
 
     private int _steps = 0; 
     private bool _isStopping = false; 
-    private float _stopTime = 0f; 
+    private float _stopTime = 0f;
+
+    private void Awake()
+    {
+        healthBar.value = health;
+        health = 200;
+    }
 
     private void Update()
     {

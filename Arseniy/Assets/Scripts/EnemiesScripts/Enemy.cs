@@ -5,15 +5,20 @@ using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] public float health = 100;
+    [SerializeField] public float health;
     [SerializeField] public Slider healthBar;
     [SerializeField] public float speed = 0.5f;
+    [SerializeField] public float damage;
 
     [SerializeField] bool isAttacking = false;
 
+    [SerializeField]protected GameObject _wall;
+  
+
     private void Awake()
     {
-        healthBar.value = health;
+        //healthBar.value = health;
+        //_wall = GameObject.Find("Wall");
     }
 
     private void Update()
@@ -64,6 +69,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable
 
     public virtual void Attack()
     {
-
+        _wall.GetComponent<WallBehavior>().TakeDamage(damage);
     }
 }
