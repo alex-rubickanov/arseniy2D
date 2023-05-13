@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Shield : MonoBehaviour
+public class Shield : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _health = 200;
     [SerializeField] private Slider _healthBar;
@@ -28,7 +28,7 @@ public class Shield : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float damageMultiplier)
     {
         _health -= damage;
         _healthBar.value = _health;

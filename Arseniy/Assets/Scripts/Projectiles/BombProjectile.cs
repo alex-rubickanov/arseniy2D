@@ -8,20 +8,29 @@ public class BombProjectile : Projectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Fast Enemy")
+        IDamageable damageable = collision.GetComponent<IDamageable>();
+        if (damageable != null)
         {
-            collision.GetComponent<Enemy>().TakeDamage(damage);
-            mortar.isSentProjectileDropped = true;
-            
-        }
-        if (collision.tag == "Enemy With Shield")
-        {
-            collision.GetComponent<ShieldEnemy>().TakeDamage(damage);
-            mortar.isSentProjectileDropped = true;
-        }
-        if (collision.tag == "Shield")
-        {
-            collision.GetComponent<Shield>().TakeDamage(damage);
+            float damageMultiplier = 1.0f;
+
+            switch (collision.tag)
+            {
+                case "Fast Enemy":
+                    damageMultiplier = 1.5f;
+                    break;
+                case "Shield":
+                    damageMultiplier = 0.5f;
+                    break;
+                case "Enemy With Shield":
+                    damageMultiplier = 0.75f;
+                    break;
+                case "FlyingEnemy":
+                    damageMultiplier = 0f;
+                    break;
+            }
+
+            damageable.TakeDamage(damage, damageMultiplier);
+            Debug.Log(damageMultiplier + collision.tag);
             mortar.isSentProjectileDropped = true;
         }
     }

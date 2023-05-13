@@ -9,15 +9,21 @@ public class FlyingEnemy : Enemy
     Vector3 startPosition;
 
 
+    private void Awake()
+    {
+        healthBar.value = health;
+        health = 60;
+        damage = 6;
+        _wall = GameObject.Find("Wall");
+    }
+
     private void Start()
     {
         startPosition = transform.position;
     }
-    public override void Movement()
+    public override void Move()
     {
         transform.position = startPosition + new Vector3(-1 * Time.time * speed, amplitude * Mathf.Sin(Time.time), 0);   
     }
-
-   
 }
 
