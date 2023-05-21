@@ -6,6 +6,10 @@ public class Mortar : Weapon
 {
     
     [SerializeField] float projectileSpeed = 10f;
+    [SerializeField] float reloadTime = 2f;
+    [SerializeField] bool canShoot = true;
+    [SerializeField] bool isReloading = false;
+
     GameObject sentProjectile;
     public Vector3 target;
     public bool isSentProjectileDropped = true;
@@ -30,7 +34,7 @@ public class Mortar : Weapon
                 Crosshair();
                 CrosshairUnHide();
                 Aim();
-                if (isSentProjectileDropped)
+                if (isSentProjectileDropped && canShoot)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -70,7 +74,19 @@ public class Mortar : Weapon
     public override void Shoot()
     {
         //Debug.Log("Shoot");
-        sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
-        
+        if (!isReloading)
+        {
+            sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
+            canShoot = false;
+            isReloading = true;
+            StartCoroutine(Reload());
+        }
+    }
+
+    private IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(reloadTime);
+        canShoot = true;
+        isReloading = false;
     }
 }

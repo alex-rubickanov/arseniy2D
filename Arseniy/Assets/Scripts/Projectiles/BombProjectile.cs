@@ -27,6 +27,9 @@ public class BombProjectile : Projectile
                 case "FlyingEnemy":
                     damageMultiplier = 0f;
                     break;
+                case "Enemy":
+                    damageMultiplier = 1f;
+                    break;
             }
 
             damageable.TakeDamage(damage, damageMultiplier);

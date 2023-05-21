@@ -63,12 +63,8 @@ public class FireGun : Weapon
 
         if (collision.tag == "Enemy")
         {
-            Debug.Log("FIRE DAMAGE");
+           Debug.Log("FIRE DAMAGE");
             collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
-
-            if (!collision.GetComponent<FireDot>()) {
-                collision.gameObject.AddComponent<FireDot>();
-            }
         }
         if (collision.tag == "Shield")
         {

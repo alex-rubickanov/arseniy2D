@@ -48,7 +48,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable
         health -= damage * damageMultiplier;
         healthBar.value = health;
     }
-
+    
     private void Die()
     {
         Destroy(gameObject);
@@ -71,6 +71,4 @@ public abstract class Enemy : MonoBehaviour, IDamageable
     {
         _wall.GetComponent<WallBehavior>().TakeDamage(damage);
     }
-
-    
 }
