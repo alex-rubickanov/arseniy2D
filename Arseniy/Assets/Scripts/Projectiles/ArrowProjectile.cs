@@ -16,7 +16,7 @@ public class ArrowProjectile : Projectile
 
             switch (collision.tag)
             {
-                case "Enemy":
+                case "StoneEnemy":
                     damageMultiplier = 1.5f;
                     break;
                 case "Shield":

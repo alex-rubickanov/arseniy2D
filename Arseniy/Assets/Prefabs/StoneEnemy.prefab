@@ -444,7 +444,9 @@ MonoBehaviour:
   health: 200
   healthBar: {fileID: 7540918527916061863}
   speed: 1
-  isAttacking: 0
+  damage: 25
+  wall: {fileID: 0}
+  attackCooldown: 1
   _stopSteps: 300
   _stopDuration: 2
   _rockPrefab: {fileID: 3389718864824881538, guid: ce0b8f81bb56045478af4e8a0152b365, type: 3}

@@ -444,5 +444,8 @@ MonoBehaviour:
   health: 60
   healthBar: {fileID: 5370344855209697007}
   speed: 1
+  damage: 6
   isAttacking: 0
+  wall: {fileID: 0}
+  attackCooldown: 0.33
   amplitude: 2

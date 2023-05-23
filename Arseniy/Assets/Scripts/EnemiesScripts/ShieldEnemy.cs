@@ -5,11 +5,5 @@ using UnityEngine.UI;
 
 public class ShieldEnemy : Enemy
 {
-    private void Awake()
-    {
-        health = 75;
-        healthBar.value = health;
-        damage = 7;
-        _wall = GameObject.Find("Wall");
-    }
+    
 }

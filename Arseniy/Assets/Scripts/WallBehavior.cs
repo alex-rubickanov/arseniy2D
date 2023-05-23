@@ -25,7 +25,7 @@ public class WallBehavior : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        _health -= damage*Time.deltaTime;
+        _health -= damage;
         StartCoroutine(BlinkCoroutine());
     }
 

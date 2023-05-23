@@ -9,13 +9,7 @@ public class FlyingEnemy : Enemy
     Vector3 startPosition;
 
 
-    private void Awake()
-    {
-        healthBar.value = health;
-        health = 60;
-        damage = 6;
-        _wall = GameObject.Find("Wall");
-    }
+    
 
     private void Start()
     {

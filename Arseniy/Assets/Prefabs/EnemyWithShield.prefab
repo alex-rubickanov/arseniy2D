@@ -630,7 +630,10 @@ MonoBehaviour:
   health: 75
   healthBar: {fileID: 5406909853116123531}
   speed: 0.5
+  damage: 7
   isAttacking: 0
+  wall: {fileID: 0}
+  attackCooldown: 0.5
 --- !u!1 &5406909853961276972
 GameObject:
   m_ObjectHideFlags: 0

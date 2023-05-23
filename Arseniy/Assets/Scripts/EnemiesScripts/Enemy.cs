@@ -10,15 +10,19 @@ public abstract class Enemy : MonoBehaviour, IDamageable
     [SerializeField] public float speed = 0.5f;
     [SerializeField] public float damage;
 
-    [SerializeField] bool isAttacking = false;
+     bool isAttacking = false;
 
-    [SerializeField]protected GameObject _wall;
-  
+    [SerializeField] WallBehavior wall;
+    float lastAttackTime;
+    [SerializeField] float attackCooldown = 2f;
 
     private void Awake()
     {
-        //healthBar.value = health;
-        //_wall = GameObject.Find("Wall");
+        healthBar.value = health;
+        wall = GameObject.Find("Wall").GetComponent<WallBehavior>();
+
+        healthBar.maxValue = health; 
+        healthBar.value = health;
     }
 
     private void Update()
@@ -69,6 +73,10 @@ public abstract class Enemy : MonoBehaviour, IDamageable
 
     public virtual void Attack()
     {
-        _wall.GetComponent<WallBehavior>().TakeDamage(damage);
+        if(Time.time - lastAttackTime < attackCooldown) {
+            return;
+        }
+        lastAttackTime = Time.time;
+        wall.GetComponent<WallBehavior>().TakeDamage(damage);
     }
 }

@@ -64,17 +64,25 @@ public class FireGun : Weapon
         if (collision.tag == "Enemy")
         {
            Debug.Log("FIRE DAMAGE");
-            collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+           collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+
+            if (!collision.GetComponent<FireDot>()) {
+                collision.gameObject.AddComponent<FireDot>();
+            }
         }
-        if (collision.tag == "Shield")
-        {
-           Debug.Log("FIRE DAMAGE");
-            collision.GetComponent<Shield>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
-        }
+        //if (collision.tag == "Shield")
+        //{
+        //   Debug.Log("FIRE DAMAGE");
+        //    collision.GetComponent<Shield>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+        //}
         if (collision.tag == "Enemy With Shield")
         {
-            Debug.Log("FIRE DAMAGE");
+           Debug.Log("FIRE DAMAGE");
            collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+
+            if (!collision.GetComponent<FireDot>()) {
+                collision.gameObject.AddComponent<FireDot>();
+            }
         }
     }
 }

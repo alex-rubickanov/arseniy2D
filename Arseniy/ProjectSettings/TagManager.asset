@@ -15,6 +15,7 @@ TagManager:
   - FlyingEnemy
   - Enemy
   - Border
+  - StoneEnemy
   layers:
   - Default
   - TransparentFX

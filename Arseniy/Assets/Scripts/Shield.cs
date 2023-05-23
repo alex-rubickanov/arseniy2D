@@ -8,13 +8,12 @@ public class Shield : MonoBehaviour, IDamageable
     [SerializeField] private float _health = 200;
     [SerializeField] private Slider _healthBar;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        _healthBar.value = _health;
+        _healthBar.maxValue = _health;
+        _healthBar.value= _health;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         CheckDeath();
