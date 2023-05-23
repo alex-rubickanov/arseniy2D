@@ -45,6 +45,14 @@ public class StoneEnemy : Enemy
         CheckDeath();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Wall")
+        {
+            speed = 0;
+        }
+    }
+
     private void Stop()
     {
         _isStopping = true;
@@ -59,4 +67,6 @@ public class StoneEnemy : Enemy
         Rigidbody2D rockRigidbody = rock.GetComponent<Rigidbody2D>();
         rockRigidbody.AddForce(Vector2.left * 500f);
     }
+
+
 }
