@@ -5,15 +5,19 @@ using UnityEngine;
 public class Mortar : Weapon
 {
     
-    [SerializeField] public float projectileSpeed = 10f;
-    [SerializeField] float reloadTime = 2f;
-    [SerializeField] bool canShoot = true;
-    [SerializeField] bool isReloading = false;
+    
+     bool canShoot = true;
+     bool isReloading = false;
 
     GameObject sentProjectile;
-    public Vector3 target;
-    
-    
+    [HideInInspector] public Vector3 target;
+
+    [Space]
+    [Header("----------PROPERTIES----------")]
+    [SerializeField] public float projectileSpeed = 10f;
+    [SerializeField] float reloadTime = 2f;
+
+
     public override void Aim()
     {
         Vector3 mousePosition = Utils.GetMouseWorldPosition();

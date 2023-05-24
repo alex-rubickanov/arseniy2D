@@ -5,12 +5,15 @@ using UnityEngine;
 public class Crossbow : Weapon
 {
 
-    [SerializeField] public float projectileSpeed = 10f;
-    public Vector3 target;
+    
+    [HideInInspector]public Vector3 target;
     GameObject sentProjectile;
-    public bool isSentProjectileDropped = true;
+    bool isSentProjectileDropped = true;
 
-    [SerializeField] float projectileDamage;
+    [Space]
+    [Header("----------PROPERTIES----------")]
+    [SerializeField] public float projectileDamage;
+    [SerializeField] public float projectileSpeed = 10f;
 
     public override void Shoot()
     {

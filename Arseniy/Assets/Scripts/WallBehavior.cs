@@ -31,7 +31,7 @@ public class WallBehavior : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        Time.timeScale = 0.0f;
     }
 
     private IEnumerator BlinkCoroutine()

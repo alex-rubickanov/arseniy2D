@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] public float health;
     [SerializeField] public Slider healthBar;
-    [SerializeField] public float speed = 0.5f;
-    [SerializeField] public float damage;
-
-     bool isAttacking = false;
-
     [SerializeField] WallBehavior wall;
     float lastAttackTime;
+    bool isAttacking = false;
+
+    [Space]
+    [Header("----------PROPERTIES----------")]
+    [SerializeField] public float health;
+    [SerializeField] public float speed = 0.5f;
+    [SerializeField] public float damage;
     [SerializeField] float attackCooldown = 2f;
 
     private void Awake()
     {
-        healthBar.value = health;
         wall = GameObject.Find("Wall").GetComponent<WallBehavior>();
 
         healthBar.maxValue = health; 
@@ -60,7 +60,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable
 
     public virtual void Move()
     {
-        //transform.position = Vector3.MoveTowards(transform.position, new Vector3(-4f, transform.position.y, transform.position.z), speed * Time.deltaTime);
         transform.position += Vector3.left * speed * Time.deltaTime;
     }
 

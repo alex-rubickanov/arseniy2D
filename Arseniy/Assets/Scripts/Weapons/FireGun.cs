@@ -6,9 +6,17 @@ public class FireGun : Weapon
 {
     [SerializeField] ParticleSystem fireParticle;
     [SerializeField] BoxCollider2D boxCollider;
-
-    [SerializeField] float damage;
     
+
+
+
+    [Header("----------PROPERTIES----------")]
+    [SerializeField] float damage;
+
+    [Header("----------DOT PROPERTIES----------")]
+    [SerializeField] public float dotDamage;
+    [SerializeField] public int dotTicks;
+    [SerializeField] public float dotDelay;
 
     public override void Aim()
     {

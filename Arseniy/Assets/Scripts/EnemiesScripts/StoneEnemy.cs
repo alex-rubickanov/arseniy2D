@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class StoneEnemy : Enemy
 {
+    [SerializeField] private GameObject _rockPrefab;
+    [SerializeField] private Transform _throwPoint;
+
+    [Header("----------MOVEMENT PROPERTIES----------")]
     [SerializeField] private int _stopSteps = 600; 
     [SerializeField] private float _stopDuration = 7f; 
-    [SerializeField] private GameObject _rockPrefab; 
-    [SerializeField] private Transform _throwPoint; 
+    
     
 
     private int _steps = 0; 

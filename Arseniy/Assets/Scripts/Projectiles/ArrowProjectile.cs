@@ -31,7 +31,7 @@ public class ArrowProjectile : Projectile
             }
 
             damageable.TakeDamage(damage, damageMultiplier);
-            crossbow.isSentProjectileDropped = true;
+            
             Destroy(gameObject);
         }
 
@@ -45,7 +45,7 @@ public class ArrowProjectile : Projectile
     private void Start()
     {
         crossbow = GameObject.Find("Crossbow").GetComponent<Crossbow>();
-
+        damage = crossbow.projectileDamage;
         DestroyThisIn(10f);
     }
 }
