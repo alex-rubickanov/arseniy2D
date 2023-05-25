@@ -5,5 +5,5 @@ using UnityEngine.UI;
 
 public class ShieldEnemy : Enemy
 {
-    
+    public bool isShieldAlive = true;
 }

@@ -26,7 +26,7 @@ public class FireDot : MonoBehaviour
     private IEnumerator DotDamage()
     {
         for (int i = 0; i < ticks; i++) {
-            parentEnemy.TakeDamage(damage, 1);
+            parentEnemy.TakeDamage(damage);
             yield return new WaitForSeconds(delay);
         }
 

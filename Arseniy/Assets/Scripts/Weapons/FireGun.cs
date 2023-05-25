@@ -67,12 +67,12 @@ public class FireGun : Weapon
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        float damageMultiplier = 1.0f;
+       
 
         if (collision.tag == "Enemy")
         {
            Debug.Log("FIRE DAMAGE");
-           collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+           collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime);
 
             if (!collision.GetComponent<FireDot>()) {
                 collision.gameObject.AddComponent<FireDot>();
@@ -85,8 +85,20 @@ public class FireGun : Weapon
         //}
         if (collision.tag == "Enemy With Shield")
         {
-           Debug.Log("FIRE DAMAGE");
-           collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+            if(collision.GetComponent<ShieldEnemy>().isShieldAlive == false) {
+                Debug.Log("FIRE DAMAGE");
+                collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime);
+
+                if (!collision.GetComponent<FireDot>()) {
+                    collision.gameObject.AddComponent<FireDot>();
+                }
+            }
+           
+        }
+
+        if (collision.tag == "FlyingEnemy") {
+            Debug.Log("FIRE DAMAGE");
+            collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime);
 
             if (!collision.GetComponent<FireDot>()) {
                 collision.gameObject.AddComponent<FireDot>();

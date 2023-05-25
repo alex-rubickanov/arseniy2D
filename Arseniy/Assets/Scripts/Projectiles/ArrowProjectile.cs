@@ -9,31 +9,14 @@ public class ArrowProjectile : Projectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable damageable = collision.GetComponent<IDamageable>();
-        if (damageable != null)
-        {
-            float damageMultiplier = 1.0f;
+        Enemy enemy = collision.GetComponent<Enemy>();
 
-            switch (collision.tag)
-            {
-                case "StoneEnemy":
-                    damageMultiplier = 1.5f;
-                    break;
-                case "Shield":
-                    damageMultiplier = 0.5f;
-                    break;
-                case "Enemy With Shield":
-                    damageMultiplier = 0.75f;
-                    break;
-                case "FlyingEnemy":
-                    damageMultiplier = 1.25f;
-                    break;
-            }
+        if (enemy != null) {
 
-            damageable.TakeDamage(damage, damageMultiplier);
-            
+            enemy.TakeDamage(damage);
             Destroy(gameObject);
         }
+        
 
         if (collision.tag == "Border")
         {

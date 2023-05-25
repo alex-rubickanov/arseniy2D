@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Enemy : MonoBehaviour, IDamageable
+public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] public Slider healthBar;
     [SerializeField] WallBehavior wall;
@@ -16,6 +16,16 @@ public abstract class Enemy : MonoBehaviour, IDamageable
     [SerializeField] public float speed = 0.5f;
     [SerializeField] public float damage;
     [SerializeField] float attackCooldown = 2f;
+
+
+    [Header("----------DAMAGE RESIST----------")]
+    [SerializeField] float armor;
+    [SerializeField] float arrowDamageResist;
+    [SerializeField] float bombDamageResist;
+    [SerializeField] float fireDamageResist;
+    float damageReduce;
+    float actualDamage;
+
 
     private void Awake()
     {
@@ -47,9 +57,12 @@ public abstract class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(float damage,  float damageMultiplier)
+    public void TakeDamage(float weaponDamage, )
     {
-        health -= damage * damageMultiplier;
+        damageReduce = armor / (armor + 400);
+        actualDamage = (weaponDamage * (1 - damageReduce)) * (1 /*- damageResist*/);
+        health -= actualDamage;
+
         healthBar.value = health;
     }
     
