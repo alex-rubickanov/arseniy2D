@@ -9,14 +9,26 @@ public class Crossbow : Weapon
     public Vector3 target;
     GameObject sentProjectile;
     public bool isSentProjectileDropped = true;
+<<<<<<< Updated upstream
+=======
+    [SerializeField] float reloadTime = 2f;
+    [SerializeField] bool canShoot = true;
+    [SerializeField] bool isReloading = false;
+>>>>>>> Stashed changes
 
     [SerializeField] float projectileDamage;
 
     public override void Shoot()
     {
         //Debug.Log("Shoot");
-        sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
-        sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
+        if (!isReloading)
+        {
+            sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
+            sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
+            canShoot = false;
+            isReloading = true;
+            StartCoroutine(Reload());
+        }
     }
 
     public override void Aim()
@@ -54,22 +66,12 @@ public class Crossbow : Weapon
 
             
         }
-
-        //if (sentProjectile != null)
-        //{
-            
-        //    if (sentProjectile.transform.position == target)
-        //    {
-        //        isSentProjectileDropped = true;
-        //        sentProjectile.GetComponent<BoxCollider2D>().enabled = false; 
-        //    }
-        //    else
-        //    {
-        //        isSentProjectileDropped = false;
-        //    }
-
-        //}
     }
 
-
+    private IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(reloadTime);
+        canShoot = true;
+        isReloading = false;
+    }
 }
