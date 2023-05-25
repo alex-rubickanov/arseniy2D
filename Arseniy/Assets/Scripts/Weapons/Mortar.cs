@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Mortar : Weapon
 {
-    
-    
-     bool canShoot = true;
      bool isReloading = false;
 
     GameObject sentProjectile;
@@ -38,7 +35,7 @@ public class Mortar : Weapon
                 Crosshair();
                 CrosshairUnHide();
                 Aim();
-                if (canShoot)
+                if (!isReloading)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -77,11 +74,9 @@ public class Mortar : Weapon
 
     public override void Shoot()
     {
-        //Debug.Log("Shoot");
         if (!isReloading)
         {
             GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
-            canShoot = false;
             isReloading = true;
             StartCoroutine(Reload());
         }
@@ -90,7 +85,6 @@ public class Mortar : Weapon
     private IEnumerator Reload()
     {
         yield return new WaitForSeconds(reloadTime);
-        canShoot = true;
         isReloading = false;
     }
 }

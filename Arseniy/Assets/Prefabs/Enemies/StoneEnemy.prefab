@@ -441,13 +441,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cece5e5a1c5863f4bb6c234abb588d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
   healthBar: {fileID: 7540918527916061863}
+  wall: {fileID: 0}
+  health: 200
   speed: 1
   damage: 25
-  wall: {fileID: 0}
   attackCooldown: 1
-  _stopSteps: 300
-  _stopDuration: 2
+  armor: 30
+  arrowDamageResist: 0.4
+  bombDamageResist: 0.2
+  fireDamageResist: 1
   _rockPrefab: {fileID: 3389718864824881538, guid: ce0b8f81bb56045478af4e8a0152b365, type: 3}
   _throwPoint: {fileID: 0}
+  _stopSteps: 300
+  _stopDuration: 2

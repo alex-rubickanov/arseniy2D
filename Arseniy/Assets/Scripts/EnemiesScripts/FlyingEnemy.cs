@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class FlyingEnemy : Enemy
 {
-    public float amplitude = 1f;
+    [Header("----------FLY PROPERTIES----------")]
+    [SerializeField] float amplitude = 1f;
     Vector3 startPosition;
 
 

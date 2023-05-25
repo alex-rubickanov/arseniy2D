@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] public Slider healthBar;
-    [SerializeField] WallBehavior wall;
+    WallBehavior wall;
     float lastAttackTime;
     bool isAttacking = false;
 
@@ -19,10 +19,15 @@ public abstract class Enemy : MonoBehaviour
 
 
     [Header("----------DAMAGE RESIST----------")]
-    [SerializeField] float armor;
-    [SerializeField] float arrowDamageResist;
-    [SerializeField] float bombDamageResist;
-    [SerializeField] float fireDamageResist;
+    [SerializeField] public float armor;
+    [SerializeField] public float arrowDamageResist;
+    [SerializeField] public float bombDamageResist;
+    [SerializeField] public float fireDamageResist;
+    private float currentDamageResist;
+    private const string BALLISTA = "Ballista";
+    private const string MORTAR = "Mortar";
+    private const string FIREGUN= "FireGun";
+
     float damageReduce;
     float actualDamage;
 
@@ -57,10 +62,25 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float weaponDamage, )
+    public void TakeDamage(float weaponDamage, string weaponName)
     {
+        
+        switch (weaponName) {
+            case BALLISTA:
+                currentDamageResist = arrowDamageResist;
+                break;
+            case MORTAR:
+                currentDamageResist = bombDamageResist;
+                break;
+            case FIREGUN:
+                currentDamageResist = fireDamageResist;
+                break;
+        }
+            
+
+
         damageReduce = armor / (armor + 400);
-        actualDamage = (weaponDamage * (1 - damageReduce)) * (1 /*- damageResist*/);
+        actualDamage = (weaponDamage * (1 - damageReduce)) * (1 - currentDamageResist);
         health -= actualDamage;
 
         healthBar.value = health;
