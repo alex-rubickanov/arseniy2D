@@ -2680,6 +2680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FastEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 9182409556127914240, guid: 2d4640ae940a6b044a2fad6f9bd01e6f, type: 3}
+      propertyPath: armor
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d4640ae940a6b044a2fad6f9bd01e6f, type: 3}
 --- !u!1 &1162614690
@@ -7955,7 +7959,7 @@ MonoBehaviour:
   fireParticle: {fileID: 1536018730}
   boxCollider: {fileID: 2054154976}
   damage: 10
-  dotDamage: 20
+  dotDamage: 2
   dotTicks: 5
   dotDelay: 2
 --- !u!61 &2054154976
