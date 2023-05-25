@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StoneEnemy : Enemy
 {
+    [Header("----------DO !NOT! TOUCH----------")]
     [SerializeField] private GameObject _rockPrefab;
     [SerializeField] private Transform _throwPoint;
 

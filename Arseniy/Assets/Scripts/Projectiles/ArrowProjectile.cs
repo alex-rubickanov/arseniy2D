@@ -6,6 +6,7 @@ using UnityEngine;
 public class ArrowProjectile : Projectile
 {
     Crossbow crossbow;
+    private string NAME_OF_WEAPON = "Ballista";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,7 +14,7 @@ public class ArrowProjectile : Projectile
 
         if (enemy != null) {
 
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage, NAME_OF_WEAPON);
             Destroy(gameObject);
         }
         

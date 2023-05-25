@@ -1,37 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class Shield : MonoBehaviour
+public class Shield : Enemy
 {
-    [SerializeField] private float _health = 200;
-    [SerializeField] private Slider _healthBar;
+    public string NOTE = "CHANGE SHIELD PROPERTIES IN ENEMY WITH SHIELD PREFAB";
 
-    private void Awake()
+    [SerializeField] ShieldEnemy parentEnemy;
+
+    private void Start()
     {
-        _healthBar.maxValue = _health;
-        _healthBar.value= _health;
+        parentEnemy = gameObject.GetComponentInParent<ShieldEnemy>();
+        armor = parentEnemy.shieldArmor;
+        arrowDamageResist = parentEnemy.shieldArrowDamageResist;
+        bombDamageResist = parentEnemy.shieldBombDamageResist;
+        fireDamageResist = parentEnemy.shieldFireDamageResist;
     }
-    
     void Update()
     {
         CheckDeath();
     }
 
-    private void CheckDeath()
-    {
-        if (_health <= 0)
-        {
-            Death();
-        }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        _health -= damage;
-        _healthBar.value = _health;
-    }
+    
 
     private void Death()
     {

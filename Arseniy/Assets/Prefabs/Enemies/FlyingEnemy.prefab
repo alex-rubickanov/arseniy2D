@@ -441,11 +441,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b286f8337e4ef4bb7e1f81447eb515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 60
   healthBar: {fileID: 5370344855209697007}
+  wall: {fileID: 0}
+  health: 60
   speed: 1
   damage: 6
-  isAttacking: 0
-  wall: {fileID: 0}
   attackCooldown: 0.33
+  armor: 6
+  arrowDamageResist: 0
+  bombDamageResist: 0
+  fireDamageResist: 0
   amplitude: 2

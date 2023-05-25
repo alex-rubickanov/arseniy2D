@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireDot : MonoBehaviour
+public class FireDot : Projectile
 {
     private Enemy parentEnemy;
     private int ticks;
-    private float damage;
     private float delay;
+    private string NAME_OF_WEAPON = "FireGun";
 
     FireGun fireGun;
 
@@ -26,7 +26,7 @@ public class FireDot : MonoBehaviour
     private IEnumerator DotDamage()
     {
         for (int i = 0; i < ticks; i++) {
-            parentEnemy.TakeDamage(damage);
+            parentEnemy.TakeDamage(damage, NAME_OF_WEAPON);
             yield return new WaitForSeconds(delay);
         }
 

@@ -7,38 +7,15 @@ public class BombProjectile : Projectile
 {
     Mortar mortar;
     Vector3 projectileTarget;
-    
+    private string NAME_OF_WEAPON = "Mortar";
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    IDamageable damageable = collision.GetComponent<IDamageable>();
-    //    if (damageable != null)
-    //    {
-    //        float damageMultiplier = 1.0f;
-
-    //        switch (collision.tag)
-    //        {
-    //            case "Fast Enemy":
-    //                damageMultiplier = 1.5f;
-    //                break;
-    //            case "Shield":
-    //                damageMultiplier = 0.5f;
-    //                break;
-    //            case "Enemy With Shield":
-    //                damageMultiplier = 0.75f;
-    //                break;
-    //            case "FlyingEnemy":
-    //                damageMultiplier = 0f;
-    //                break;
-    //            case "StoneEnemy":
-    //                damageMultiplier = 1f;
-    //                break;
-    //        }
-
-    //        damageable.TakeDamage(damage, damageMultiplier);
-    //        Debug.Log(damageMultiplier + collision.tag);
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Enemy enemy = collision.GetComponent<Enemy>();
+        if(enemy != null) {
+            enemy.TakeDamage(damage, NAME_OF_WEAPON);
+        }
+    }
 
     private void Start()
     {
