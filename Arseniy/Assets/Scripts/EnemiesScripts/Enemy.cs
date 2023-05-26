@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] public Slider healthBar;
-    WallBehavior wall;
+    [HideInInspector] public WallBehavior wall;
     float lastAttackTime;
-    bool isAttacking = false;
+    [HideInInspector] public bool isAttacking = false;
 
     [Space]
     [Header("----------PROPERTIES----------")]
@@ -42,6 +42,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void Update()
     {
+        
         if (!isAttacking) 
         {
             Move();

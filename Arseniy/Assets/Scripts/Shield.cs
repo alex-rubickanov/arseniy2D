@@ -14,6 +14,9 @@ public class Shield : Enemy
     private void Start()
     {
         parentEnemy = gameObject.GetComponentInParent<ShieldEnemy>();
+        health = parentEnemy.shieldHealth;
+        healthBar.maxValue = health;
+        healthBar.value = health;
         armor = parentEnemy.shieldArmor;
         arrowDamageResist = parentEnemy.shieldArrowDamageResist;
         bombDamageResist = parentEnemy.shieldBombDamageResist;
