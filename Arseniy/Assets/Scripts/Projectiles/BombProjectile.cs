@@ -13,7 +13,12 @@ public class BombProjectile : Projectile
     {
         Enemy enemy = collision.GetComponent<Enemy>();
         if(enemy != null) {
-            enemy.TakeDamage(damage, NAME_OF_WEAPON);
+            if(collision.GetComponent<ShieldEnemy>() != null) {
+                collision.GetComponent<ShieldEnemy>().TakeDamage(damage, NAME_OF_WEAPON, gameObject);
+            } else {
+                enemy.TakeDamage(damage, NAME_OF_WEAPON);
+            }
+            
         }
     }
 

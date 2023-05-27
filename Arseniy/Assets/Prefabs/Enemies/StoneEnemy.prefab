@@ -444,7 +444,7 @@ MonoBehaviour:
   healthBar: {fileID: 7540918527916061863}
   wall: {fileID: 0}
   isAttacking: 0
-  health: 200
+  health: 100
   speed: 1
   damage: 25
   attackCooldown: 1
@@ -452,6 +452,9 @@ MonoBehaviour:
   arrowDamageResist: 0.4
   bombDamageResist: 0.2
   fireDamageResist: 1
+  currentDamageResist: 0
+  damageReduce: 0
+  actualDamage: 0
   _rockPrefab: {fileID: 3389718864824881538, guid: ce0b8f81bb56045478af4e8a0152b365, type: 3}
   _throwPoint: {fileID: 0}
   _stopSteps: 800

@@ -1,5 +1,62 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5108195827670726648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7663040634278386955}
+  - component: {fileID: 519558065674806920}
+  m_Layer: 0
+  m_Name: InFrontOfShield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7663040634278386955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108195827670726648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5406909853707276220}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &519558065674806920
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108195827670726648}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.7871307, y: 0.006270647}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.2415855, y: 2.2666678}
+  m_EdgeRadius: 0
 --- !u!1 &5406909852791572175
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +581,7 @@ Transform:
   m_Children:
   - {fileID: 5406909853249938647}
   - {fileID: 5406909853973987068}
+  - {fileID: 7663040634278386955}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -630,7 +688,7 @@ MonoBehaviour:
   healthBar: {fileID: 5406909853116123531}
   wall: {fileID: 0}
   isAttacking: 0
-  health: 75
+  health: 37.5
   speed: 0.5
   damage: 7
   attackCooldown: 0.5
@@ -638,12 +696,16 @@ MonoBehaviour:
   arrowDamageResist: 0.05
   bombDamageResist: 0.02
   fireDamageResist: 0.3
+  currentDamageResist: 0
+  damageReduce: 0
+  actualDamage: 0
   isShieldAlive: 1
-  shieldHealth: 150
-  shieldArmor: 15
-  shieldArrowDamageResist: 0.1
+  shieldHealth: 75
+  shieldArmor: 0
+  shieldArrowDamageResist: 0
   shieldBombDamageResist: 0.1
   shieldFireDamageResist: 0.15
+  shieldBombDamageXAxisReduce: 0.2
 --- !u!1 &5406909853961276972
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +938,9 @@ MonoBehaviour:
   arrowDamageResist: 0
   bombDamageResist: 0
   fireDamageResist: 0
+  currentDamageResist: 0
+  damageReduce: 0
+  actualDamage: 0
   NOTE: CHANGE SHIELD PROPERTIES IN ENEMY WITH SHIELD PREFAB
   parentEnemy: {fileID: 0}
 --- !u!1 &5406909854059128354

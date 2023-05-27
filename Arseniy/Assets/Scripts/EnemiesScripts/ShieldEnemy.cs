@@ -13,4 +13,34 @@ public class ShieldEnemy : Enemy
     [SerializeField] public float shieldArrowDamageResist;
     [SerializeField] public float shieldBombDamageResist;
     [SerializeField] public float shieldFireDamageResist;
+    [SerializeField] private float shieldBombDamageXAxisReduce = 0.2f;
+
+
+    public void TakeDamage(float weaponDamage, string weaponName, GameObject projectile)
+    {
+
+        switch (weaponName) {
+            case BALLISTA:
+                currentDamageResist = arrowDamageResist;
+                break;
+            case MORTAR:
+                currentDamageResist = bombDamageResist;
+                break;
+            case FIREGUN:
+                currentDamageResist = fireDamageResist;
+                break;
+        }
+
+
+
+        damageReduce = armor / (armor + 400);
+        actualDamage = (weaponDamage * (1 - damageReduce)) * (1 - currentDamageResist);
+        if(weaponName == MORTAR && isShieldAlive) {
+            if(projectile.transform.position.x > transform.position.x - shieldBombDamageXAxisReduce) {
+                health -= actualDamage;
+                healthBar.value = health;
+            }
+        }
+        
+    }
 }
