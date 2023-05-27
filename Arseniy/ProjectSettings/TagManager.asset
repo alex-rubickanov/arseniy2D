@@ -16,6 +16,7 @@ TagManager:
   - Enemy
   - Border
   - StoneEnemy
+  - InFront
   layers:
   - Default
   - TransparentFX

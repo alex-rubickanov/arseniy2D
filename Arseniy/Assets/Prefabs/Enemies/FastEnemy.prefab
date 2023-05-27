@@ -444,7 +444,7 @@ MonoBehaviour:
   healthBar: {fileID: 7540918527916061863}
   wall: {fileID: 0}
   isAttacking: 0
-  health: 50
+  health: 25
   speed: 1
   damage: 3
   attackCooldown: 0.2
@@ -452,3 +452,6 @@ MonoBehaviour:
   arrowDamageResist: 0
   bombDamageResist: 0
   fireDamageResist: 0
+  currentDamageResist: 0
+  damageReduce: 0
+  actualDamage: 0

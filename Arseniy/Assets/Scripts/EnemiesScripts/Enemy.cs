@@ -23,13 +23,13 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] public float arrowDamageResist;
     [SerializeField] public float bombDamageResist;
     [SerializeField] public float fireDamageResist;
-    private float currentDamageResist;
-    private const string BALLISTA = "Ballista";
-    private const string MORTAR = "Mortar";
-    private const string FIREGUN= "FireGun";
+    public float currentDamageResist;
+    public const string BALLISTA = "Ballista";
+    public const string MORTAR = "Mortar";
+    public const string FIREGUN= "FireGun";
 
-    float damageReduce;
-    float actualDamage;
+    public float damageReduce;
+    public float actualDamage;
 
 
     private void Awake()
@@ -63,7 +63,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float weaponDamage, string weaponName)
+    public virtual void TakeDamage(float weaponDamage, string weaponName)
     {
         
         switch (weaponName) {
