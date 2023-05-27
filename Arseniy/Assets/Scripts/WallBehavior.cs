@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WallBehavior : MonoBehaviour
 {
@@ -8,9 +9,13 @@ public class WallBehavior : MonoBehaviour
     private Renderer _renderer;
     private int _blinkCount = 5;
 
+    [SerializeField] private Slider healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
+        healthBar.maxValue = _health;
+        healthBar.value = _health;
         _renderer = GetComponent<Renderer>();
     }
 
@@ -26,6 +31,7 @@ public class WallBehavior : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _health -= damage;
+        healthBar.value = _health;
         StartCoroutine(BlinkCoroutine());
     }
 

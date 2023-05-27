@@ -20,6 +20,7 @@ public class BombProjectile : Projectile
     private void Start()
     {
         mortar = GameObject.Find("Mortar").GetComponent<Mortar>();
+        damage = mortar.projectileDamage;
         projectileTarget = mortar.target;
     }
     private void Update()
