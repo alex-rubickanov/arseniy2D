@@ -444,15 +444,17 @@ MonoBehaviour:
   healthBar: {fileID: 2837744516719490324}
   wall: {fileID: 0}
   isAttacking: 0
-  health: 60
+  health: 20
   speed: 1
   damage: 6
   attackCooldown: 0.33
   armor: 6
   arrowDamageResist: 0
-  bombDamageResist: 0
+  bombDamageResist: 1
   fireDamageResist: 0
-  amplitude: 2
-  upOrDown: -1
-  waveSpeed: 1
+  currentDamageResist: 0
+  damageReduce: 0
+  actualDamage: 0
+  upOrDown: 2
+  waveSpeed: 2
   bonusHeight: 2

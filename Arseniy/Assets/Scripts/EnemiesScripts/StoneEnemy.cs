@@ -44,7 +44,7 @@ public class StoneEnemy : Enemy
         CheckDeath();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Wall")
         {

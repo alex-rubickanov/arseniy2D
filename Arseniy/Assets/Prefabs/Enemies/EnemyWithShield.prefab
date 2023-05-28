@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 519558065674806920}
   m_Layer: 0
   m_Name: InFrontOfShield
-  m_TagString: Untagged
+  m_TagString: InFront
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -1.7871307, y: 0.006270647}
@@ -672,7 +672,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5406909853707276217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +704,7 @@ MonoBehaviour:
   shieldArmor: 0
   shieldArrowDamageResist: 0
   shieldBombDamageResist: 0.1
-  shieldFireDamageResist: 0.15
+  shieldFireDamageResist: 1
   shieldBombDamageXAxisReduce: 0.2
 --- !u!1 &5406909853961276972
 GameObject:
