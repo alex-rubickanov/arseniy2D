@@ -6,34 +6,18 @@ using UnityEngine;
 public class ArrowProjectile : Projectile
 {
     Crossbow crossbow;
+    private string NAME_OF_WEAPON = "Ballista";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable damageable = collision.GetComponent<IDamageable>();
-        if (damageable != null)
-        {
-            float damageMultiplier = 1.0f;
+        Enemy enemy = collision.GetComponent<Enemy>();
 
-            switch (collision.tag)
-            {
-                case "Enemy":
-                    damageMultiplier = 1.5f;
-                    break;
-                case "Shield":
-                    damageMultiplier = 0.5f;
-                    break;
-                case "Enemy With Shield":
-                    damageMultiplier = 0.75f;
-                    break;
-                case "FlyingEnemy":
-                    damageMultiplier = 1.25f;
-                    break;
-            }
+        if (enemy != null) {
 
-            damageable.TakeDamage(damage, damageMultiplier);
-            crossbow.isSentProjectileDropped = true;
+            enemy.TakeDamage(damage, NAME_OF_WEAPON);
             Destroy(gameObject);
         }
+        
 
         if (collision.tag == "Border")
         {
@@ -45,7 +29,7 @@ public class ArrowProjectile : Projectile
     private void Start()
     {
         crossbow = GameObject.Find("Crossbow").GetComponent<Crossbow>();
-
+        damage = crossbow.projectileDamage;
         DestroyThisIn(10f);
     }
 }

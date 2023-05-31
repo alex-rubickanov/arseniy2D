@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Mortar : Weapon
 {
-    
-    [SerializeField] float projectileSpeed = 10f;
-    [SerializeField] float reloadTime = 2f;
-    [SerializeField] bool canShoot = true;
-    [SerializeField] bool isReloading = false;
+     bool isReloading = false;
 
     GameObject sentProjectile;
-    public Vector3 target;
-    public bool isSentProjectileDropped = true;
-    
+    [HideInInspector] public Vector3 target;
+
+    [Space]
+    [Header("----------PROPERTIES----------")]
+    [SerializeField] public float projectileDamage;
+    [SerializeField] public float projectileSpeed = 10f;
+    [SerializeField] float reloadTime = 2f;
+
+
     public override void Aim()
     {
         Vector3 mousePosition = Utils.GetMouseWorldPosition();
@@ -34,7 +36,7 @@ public class Mortar : Weapon
                 Crosshair();
                 CrosshairUnHide();
                 Aim();
-                if (isSentProjectileDropped && canShoot)
+                if (!isReloading)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -52,32 +54,30 @@ public class Mortar : Weapon
             
         }
 
-        if (sentProjectile != null)
-        {
-            sentProjectile.transform.position = Vector3.MoveTowards(sentProjectile.transform.position, target, projectileSpeed * Time.deltaTime);
-            if (sentProjectile.transform.position == target)
-            {
-                isSentProjectileDropped = true;
-                sentProjectile.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-                sentProjectile.transform.GetComponent<Animator>().SetTrigger("Explosion");
-                sentProjectile.GetComponent<CircleCollider2D>().enabled = true;
+        //if (sentProjectile != null)
+        //{
+            
+        //    if (sentProjectile.transform.position == target)
+        //    {
+        //        isSentProjectileDropped = true;
+        //        sentProjectile.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+        //        sentProjectile.transform.GetComponent<Animator>().SetTrigger("Explosion");
+        //        sentProjectile.GetComponent<CircleCollider2D>().enabled = true;
 
-            }
-            else
-            {
+        //    }
+        //    else
+        //    {
                 
-                isSentProjectileDropped = false;
-            }
-        }
+        //        isSentProjectileDropped = false;
+        //    }
+        //}
     }
 
     public override void Shoot()
     {
-        //Debug.Log("Shoot");
         if (!isReloading)
         {
-            sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
-            canShoot = false;
+            GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
             isReloading = true;
             StartCoroutine(Reload());
         }
@@ -86,7 +86,6 @@ public class Mortar : Weapon
     private IEnumerator Reload()
     {
         yield return new WaitForSeconds(reloadTime);
-        canShoot = true;
         isReloading = false;
     }
 }

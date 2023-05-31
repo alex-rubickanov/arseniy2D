@@ -5,21 +5,20 @@ using UnityEngine.UI;
 
 public class StoneEnemy : Enemy
 {
+    [Header("----------DO !NOT! TOUCH----------")]
+    [SerializeField] private GameObject _rockPrefab;
+    [SerializeField] private Transform _throwPoint;
+
+    [Header("----------MOVEMENT PROPERTIES----------")]
     [SerializeField] private int _stopSteps = 600; 
     [SerializeField] private float _stopDuration = 7f; 
-    [SerializeField] private GameObject _rockPrefab; 
-    [SerializeField] private Transform _throwPoint; 
+    
     
 
     private int _steps = 0; 
     private bool _isStopping = false; 
     private float _stopTime = 0f;
 
-    private void Awake()
-    {
-        healthBar.value = health;
-        health = 200;
-    }
 
     private void Update()
     {
@@ -45,7 +44,7 @@ public class StoneEnemy : Enemy
         CheckDeath();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Wall")
         {

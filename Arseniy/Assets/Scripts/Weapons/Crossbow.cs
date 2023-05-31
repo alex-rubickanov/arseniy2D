@@ -5,27 +5,25 @@ using UnityEngine;
 public class Crossbow : Weapon
 {
 
-    [SerializeField] public float projectileSpeed = 10f;
-    public Vector3 target;
+    
+    [HideInInspector]public Vector3 target;
     GameObject sentProjectile;
-    public bool isSentProjectileDropped = true;
-<<<<<<< Updated upstream
-=======
-    [SerializeField] float reloadTime = 2f;
-    [SerializeField] bool canShoot = true;
-    [SerializeField] bool isReloading = false;
->>>>>>> Stashed changes
+    bool isSentProjectileDropped = true;
 
-    [SerializeField] float projectileDamage;
+    [Space]
+    [Header("----------PROPERTIES----------")]
+    [SerializeField] public float projectileDamage;
+    [SerializeField] public float projectileSpeed = 10f;
+    [SerializeField] float reloadTime = 2f;
+
+    
+    bool isReloading = false;
 
     public override void Shoot()
     {
-        //Debug.Log("Shoot");
-        if (!isReloading)
-        {
+        if (!isReloading) {
             sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
-            canShoot = false;
             isReloading = true;
             StartCoroutine(Reload());
         }
@@ -71,7 +69,8 @@ public class Crossbow : Weapon
     private IEnumerator Reload()
     {
         yield return new WaitForSeconds(reloadTime);
-        canShoot = true;
         isReloading = false;
     }
+
+
 }

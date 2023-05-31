@@ -3,26 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Enemy : MonoBehaviour, IDamageable
+public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] public float health;
     [SerializeField] public Slider healthBar;
+    [HideInInspector] public WallBehavior wall;
+    float lastAttackTime;
+    [HideInInspector] public bool isAttacking = false;
+
+    [Space]
+    [Header("----------PROPERTIES----------")]
+    [SerializeField] public float health;
     [SerializeField] public float speed = 0.5f;
     [SerializeField] public float damage;
+    [SerializeField] float attackCooldown = 2f;
 
-    [SerializeField] bool isAttacking = false;
 
-    [SerializeField]protected GameObject _wall;
-  
+    [Header("----------DAMAGE RESIST----------")]
+    [SerializeField] public float armor;
+    [SerializeField] public float arrowDamageResist;
+    [SerializeField] public float bombDamageResist;
+    [SerializeField] public float fireDamageResist;
+    public float currentDamageResist;
+    public const string BALLISTA = "Ballista";
+    public const string MORTAR = "Mortar";
+    public const string FIREGUN= "FireGun";
+
+    [HideInInspector] public float damageReduce;
+    [HideInInspector] public float actualDamage;
+
+
 
     private void Awake()
     {
-        //healthBar.value = health;
-        //_wall = GameObject.Find("Wall");
+        wall = GameObject.Find("Wall").GetComponent<WallBehavior>();
+
+        healthBar.maxValue = health; 
+        healthBar.value = health;
     }
 
     private void Update()
     {
+        
         if (!isAttacking) 
         {
             Move();
@@ -43,32 +64,53 @@ public abstract class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(float damage,  float damageMultiplier)
+    public virtual void TakeDamage(float weaponDamage, string weaponName)
     {
-        health -= damage * damageMultiplier;
+        
+        switch (weaponName) {
+            case BALLISTA:
+                currentDamageResist = arrowDamageResist;
+                break;
+            case MORTAR:
+                currentDamageResist = bombDamageResist;
+                break;
+            case FIREGUN:
+                currentDamageResist = fireDamageResist;
+                break;
+        }
+            
+
+
+        damageReduce = armor / (armor + 400);
+        actualDamage = (weaponDamage * (1 - damageReduce)) * (1 - currentDamageResist);
+        health -= actualDamage;
+
         healthBar.value = health;
     }
     
-    private void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }
 
     public virtual void Move()
     {
-        //transform.position = Vector3.MoveTowards(transform.position, new Vector3(-4f, transform.position.y, transform.position.z), speed * Time.deltaTime);
         transform.position += Vector3.left * speed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "Wall") {
+        if(collision.gameObject.name == "Wall" ) {
             isAttacking = true;
         }
     }
 
     public virtual void Attack()
     {
-        _wall.GetComponent<WallBehavior>().TakeDamage(damage);
+        if(Time.time - lastAttackTime < attackCooldown) {
+            return;
+        }
+        lastAttackTime = Time.time;
+        wall.GetComponent<WallBehavior>().TakeDamage(damage);
     }
 }

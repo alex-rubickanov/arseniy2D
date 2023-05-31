@@ -6,9 +6,17 @@ public class FireGun : Weapon
 {
     [SerializeField] ParticleSystem fireParticle;
     [SerializeField] BoxCollider2D boxCollider;
+    private string NAME_OF_WEAPON = "FireGun";
 
+
+
+    [Header("----------PROPERTIES----------")]
     [SerializeField] float damage;
-    
+
+    [Header("----------DOT PROPERTIES----------")]
+    [SerializeField] public float dotDamage;
+    [SerializeField] public int dotTicks;
+    [SerializeField] public float dotDelay;
 
     public override void Aim()
     {
@@ -59,22 +67,25 @@ public class FireGun : Weapon
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        float damageMultiplier = 1.0f;
+        Enemy enemy = collision.GetComponent<Enemy>();
+        if(enemy != null) {
+            if(collision.tag == "Enemy With Shield") {
+                if (collision.GetComponent<ShieldEnemy>().isShieldAlive == false) {
+                    Debug.Log("FIRE DAMAGE");
+                    collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime, NAME_OF_WEAPON);
 
-        if (collision.tag == "Enemy")
-        {
-           Debug.Log("FIRE DAMAGE");
-            collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
-        }
-        if (collision.tag == "Shield")
-        {
-           Debug.Log("FIRE DAMAGE");
-            collision.GetComponent<Shield>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
-        }
-        if (collision.tag == "Enemy With Shield")
-        {
-            Debug.Log("FIRE DAMAGE");
-           collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime, damageMultiplier);
+                    if (!collision.GetComponent<FireDot>()) {
+                        collision.gameObject.AddComponent<FireDot>();
+                    }
+                }
+            } else {
+                Debug.Log("FIRE DAMAGE");
+                collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime, NAME_OF_WEAPON);
+
+                if (!collision.GetComponent<FireDot>()) {
+                    collision.gameObject.AddComponent<FireDot>();
+                }
+            }
         }
     }
 }

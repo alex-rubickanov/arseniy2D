@@ -2,28 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class FlyingEnemy : Enemy
 {
-    public float amplitude = 1f;
+    [Header("----------FLY PROPERTIES----------")]
+    //[SerializeField] float amplitude = 1f;
+    [SerializeField] int upOrDown;
+    [SerializeField] private float waveSpeed = 1f; // Higher make the wave faster
+    [SerializeField] private float bonusHeight = 1f; // Set higher if you want more wave intensity
+
     Vector3 startPosition;
+    private float time;
 
-
-    private void Awake()
-    {
-        healthBar.value = health;
-        health = 60;
-        damage = 6;
-        _wall = GameObject.Find("Wall");
-    }
+    
+    
+    private float cycle; // This variable increases with time and allows the sine to produce numbers between -1 and 1
+    private Vector3 basePosition; // This variable maintains the location of the object without applying sine changes
+    private Transform target;
 
     private void Start()
     {
-        startPosition = transform.position;
+        target = wall.transform;
+        basePosition = transform.position;
+        
+    }
+    private void Update()
+    {
+        
+        if (!isAttacking) {
+            Move();
+        } else if (isAttacking) {
+            Attack();
+        }
+
+        CheckDeath();
     }
     public override void Move()
     {
-        transform.position = startPosition + new Vector3(-1 * Time.time * speed, amplitude * Mathf.Sin(Time.time), 0);   
+        cycle += Time.deltaTime * waveSpeed;
+        transform.position = basePosition + (Vector3.up * bonusHeight) * upOrDown * Mathf.Sin(cycle);
+        if (target) basePosition = Vector3.MoveTowards(basePosition, target.position, Time.deltaTime * speed);
+
+
+        //transform.position = startPosition + new Vector3(-1 * time * speed, amplitude * Mathf.Sin(time), 0);
+        Debug.Log(time);
     }
 }
 

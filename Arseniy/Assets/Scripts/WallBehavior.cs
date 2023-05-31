@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WallBehavior : MonoBehaviour
 {
+    public Collider2D ignoredCollider;
     [SerializeField] private float _health;
     private Renderer _renderer;
     private int _blinkCount = 5;
 
+    [SerializeField] private Slider healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
+        healthBar.maxValue = _health;
+        healthBar.value = _health;
         _renderer = GetComponent<Renderer>();
+        Physics2D.IgnoreLayerCollision(gameObject.layer, ignoredCollider.gameObject.layer, true);
     }
 
     // Update is called once per frame
@@ -25,13 +32,14 @@ public class WallBehavior : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        _health -= damage*Time.deltaTime;
+        _health -= damage;
+        healthBar.value = _health;
         StartCoroutine(BlinkCoroutine());
     }
 
     private void Die()
     {
-        Destroy(gameObject);
+        Time.timeScale = 0.0f;
     }
 
     private IEnumerator BlinkCoroutine()
