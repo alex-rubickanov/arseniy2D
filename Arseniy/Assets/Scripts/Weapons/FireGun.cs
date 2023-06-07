@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireGun : Weapon
 {
     [SerializeField] ParticleSystem fireParticle;
-    [SerializeField] BoxCollider2D boxCollider;
+    [SerializeField] PolygonCollider2D fireCollider;
     private string NAME_OF_WEAPON = "FireGun";
 
 
@@ -55,14 +55,14 @@ public class FireGun : Weapon
     public override void Shoot()
     {
         fireParticle.Play();
-        boxCollider.enabled = true;
+        fireCollider.enabled = true;
 
     }
 
     public void StopShoot()
     {
         fireParticle.Stop();
-        boxCollider.enabled = false;
+        fireCollider.enabled = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -8214,13 +8214,13 @@ MonoBehaviour:
   projectile: {fileID: 0}
   projectileSpawnerTransform: {fileID: 0}
   fireParticle: {fileID: 1536018730}
-  boxCollider: {fileID: 2054154976}
+  fireCollider: {fileID: 2054154976}
   damage: 8.8
   dotDamage: 2
   dotTicks: 5
   dotDelay: 2
---- !u!61 &2054154976
-BoxCollider2D:
+--- !u!60 &2054154976
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8229,10 +8229,10 @@ BoxCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.9867973, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -8242,9 +8242,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 7.708454, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.2578053, y: 0.5632739}
+      - {x: 2.1659727, y: 0.13009527}
+      - {x: 2.1638498, y: -0.050589442}
+      - {x: 7.0096364, y: -1.5791271}
+      - {x: 7.0288444, y: 1.6852802}
 --- !u!4 &9066831126746341896
 Transform:
   m_ObjectHideFlags: 0
