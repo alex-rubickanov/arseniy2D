@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireGun : Weapon
 {
     [SerializeField] ParticleSystem fireParticle;
-    [SerializeField] PolygonCollider2D boxCollider;
+    [SerializeField] BoxCollider2D boxCollider;
     private string NAME_OF_WEAPON = "FireGun";
 
 
