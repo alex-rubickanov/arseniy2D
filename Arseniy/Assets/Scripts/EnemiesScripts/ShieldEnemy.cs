@@ -15,7 +15,7 @@ public class ShieldEnemy : Enemy
     [SerializeField] public float shieldFireDamageResist;
     [SerializeField] private float shieldBombDamageXAxisReduce = 0.2f;
 
-
+    private bool triggerHit = false;
     public void TakeDamage(float weaponDamage, string weaponName, GameObject projectile)
     {
 
@@ -35,12 +35,27 @@ public class ShieldEnemy : Enemy
 
         damageReduce = armor / (armor + 400);
         actualDamage = (weaponDamage * (1 - damageReduce)) * (1 - currentDamageResist);
-        if(weaponName == MORTAR && isShieldAlive) {
-            if(projectile.transform.position.x > transform.position.x - shieldBombDamageXAxisReduce) {
+        if(weaponName == MORTAR) {
+            if(isShieldAlive) {
+                if (projectile.transform.position.x > transform.position.x - shieldBombDamageXAxisReduce) {
+                    health -= actualDamage;
+                    healthBar.value = health;
+                }
+            } else {
                 health -= actualDamage;
                 healthBar.value = health;
             }
-        }
+            
+        } 
         
+    }
+
+
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Wall" && triggerHit) {
+            isAttacking = true;
+        }
+        triggerHit = true;
     }
 }

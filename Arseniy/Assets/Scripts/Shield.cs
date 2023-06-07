@@ -22,14 +22,14 @@ public class Shield : Enemy
         bombDamageResist = parentEnemy.shieldBombDamageResist;
         fireDamageResist = parentEnemy.shieldFireDamageResist;
     }
-    void Update()
+    private void Update()
     {
         CheckDeath();
     }
 
     
 
-    private void Death()
+    public override void Die()
     {
         gameObject.GetComponentInParent<ShieldEnemy>().isShieldAlive = false;
         Destroy(gameObject);

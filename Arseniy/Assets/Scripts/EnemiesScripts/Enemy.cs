@@ -28,8 +28,9 @@ public abstract class Enemy : MonoBehaviour
     public const string MORTAR = "Mortar";
     public const string FIREGUN= "FireGun";
 
-    public float damageReduce;
-    public float actualDamage;
+    [HideInInspector] public float damageReduce;
+    [HideInInspector] public float actualDamage;
+
 
 
     private void Awake()
@@ -87,7 +88,7 @@ public abstract class Enemy : MonoBehaviour
         healthBar.value = health;
     }
     
-    private void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }
@@ -97,9 +98,9 @@ public abstract class Enemy : MonoBehaviour
         transform.position += Vector3.left * speed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "Wall") {
+        if(collision.gameObject.name == "Wall" ) {
             isAttacking = true;
         }
     }
