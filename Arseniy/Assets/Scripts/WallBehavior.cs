@@ -8,6 +8,7 @@ public class WallBehavior : MonoBehaviour
     [SerializeField] private float _health;
     private Renderer _renderer;
     private int _blinkCount = 5;
+    public BoxCollider2D ignoredCollider;
 
     [SerializeField] private Slider healthBar;
 
@@ -17,6 +18,7 @@ public class WallBehavior : MonoBehaviour
         healthBar.maxValue = _health;
         healthBar.value = _health;
         _renderer = GetComponent<Renderer>();
+        Physics2D.IgnoreLayerCollision(gameObject.layer, ignoredCollider.gameObject.layer, true);
     }
 
     // Update is called once per frame
