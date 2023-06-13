@@ -9,12 +9,15 @@ public class WallBehavior : MonoBehaviour
     private Renderer _renderer;
     private int _blinkCount = 5;
     public BoxCollider2D ignoredCollider;
+    [SerializeField] private GameObject myGameObject;
+
 
     [SerializeField] private Slider healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
+        ignoredCollider = myGameObject.GetComponentInChildren<IgnoredCollider>().GetComponent<BoxCollider2D>();
         healthBar.maxValue = _health;
         healthBar.value = _health;
         _renderer = GetComponent<Renderer>();
