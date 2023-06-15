@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7663040634278386955}
   - component: {fileID: 519558065674806920}
-  m_Layer: 0
+  - component: {fileID: 1519670002869519364}
+  m_Layer: 6
   m_Name: InFrontOfShield
   m_TagString: InFront
   m_Icon: {fileID: 0}
@@ -57,6 +58,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2415855, y: 2.2666678}
   m_EdgeRadius: 0
+--- !u!114 &1519670002869519364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108195827670726648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d129063658031454c9a6b09352cb1566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5406909852791572175
 GameObject:
   m_ObjectHideFlags: 0
