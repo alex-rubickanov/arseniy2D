@@ -43,7 +43,6 @@ public abstract class Enemy : MonoBehaviour
 
     private void Update()
     {
-        
         if (!isAttacking) 
         {
             Move();
@@ -53,6 +52,7 @@ public abstract class Enemy : MonoBehaviour
             Attack();
         }
 
+        UpdateHealthBar();
         CheckDeath();
     }
 
@@ -84,8 +84,6 @@ public abstract class Enemy : MonoBehaviour
         damageReduce = armor / (armor + 400);
         actualDamage = (weaponDamage * (1 - damageReduce)) * (1 - currentDamageResist);
         health -= actualDamage;
-
-        healthBar.value = health;
     }
     
     public virtual void Die()
@@ -112,5 +110,10 @@ public abstract class Enemy : MonoBehaviour
         }
         lastAttackTime = Time.time;
         wall.GetComponent<WallBehavior>().TakeDamage(damage);
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthBar.value = health;
     }
 }

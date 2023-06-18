@@ -88,4 +88,18 @@ public class FireGun : Weapon
             }
         }
     }
+
+    public void FireGunAbility()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach(Enemy enemy in enemies) {
+            if(enemy.GetComponent<ShieldEnemy>() != null || enemy.GetComponent<StoneEnemy>() != null) {
+                enemy.health = enemy.health / 2;
+            } else if(enemy.GetComponent<Shield>() != null) {
+                // no damage to shield
+            } else {
+                enemy.health = 0;
+            }
+        }
+    }
 }
