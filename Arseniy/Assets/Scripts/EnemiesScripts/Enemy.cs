@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
 
     [Space]
     [Header("----------PROPERTIES----------")]
+    [SerializeField] public float maxHealth;
     [SerializeField] public float health;
     [SerializeField] public float speed = 0.5f;
     [SerializeField] public float damage;
@@ -37,8 +38,8 @@ public abstract class Enemy : MonoBehaviour
     {
         wall = GameObject.Find("Wall").GetComponent<WallBehavior>();
 
-        healthBar.maxValue = health; 
-        healthBar.value = health;
+        health = maxHealth;
+        healthBar.maxValue = maxHealth; 
     }
 
     private void Update()
