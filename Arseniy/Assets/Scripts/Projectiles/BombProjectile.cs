@@ -9,19 +9,6 @@ public class BombProjectile : Projectile
     Vector3 projectileTarget;
     private string NAME_OF_WEAPON = "Mortar";
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if(enemy != null) {
-            if(collision.GetComponent<ShieldEnemy>() != null) {
-                collision.GetComponent<ShieldEnemy>().TakeDamage(damage, NAME_OF_WEAPON, gameObject);
-            } else {
-                enemy.TakeDamage(damage, NAME_OF_WEAPON);
-            }
-            
-        }
-    }
-
     private void Start()
     {
         mortar = GameObject.Find("Mortar").GetComponent<Mortar>();
@@ -30,17 +17,37 @@ public class BombProjectile : Projectile
     }
     private void Update()
     {
-        if(mortar != null) {
-            if(gameObject.transform.position != projectileTarget) {
+        if(mortar != null) 
+        {
+            if(gameObject.transform.position != projectileTarget) 
+            {
                 transform.position = Vector3.MoveTowards(transform.position, projectileTarget, mortar.projectileSpeed * Time.deltaTime);
-            } else {
-
+            }
+            else
+            { 
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
                 transform.GetComponent<Animator>().SetTrigger("Explosion");
                 GetComponent<CircleCollider2D>().enabled = true;
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Enemy enemy = collision.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            if (collision.GetComponent<ShieldEnemy>() != null)
+            {
+                collision.GetComponent<ShieldEnemy>().TakeDamage(damage, NAME_OF_WEAPON, gameObject);
+            }
+            else
+            {
+                enemy.TakeDamage(damage, NAME_OF_WEAPON);
+            }
+        }
+    }
+
     public void DestroyAfterAnimation()
     {
         Destroy(gameObject);

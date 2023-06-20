@@ -9,6 +9,7 @@ public abstract class Enemy : MonoBehaviour
     [HideInInspector] public WallBehavior wall;
     float lastAttackTime;
     [HideInInspector] public bool isAttacking = false;
+    [HideInInspector] public bool isAttracted = false;
 
     [Space]
     [Header("----------PROPERTIES----------")]
@@ -23,10 +24,13 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] public float arrowDamageResist;
     [SerializeField] public float bombDamageResist;
     [SerializeField] public float fireDamageResist;
+    [SerializeField] public GameObject centerObject;
     public float currentDamageResist;
     public const string BALLISTA = "Ballista";
     public const string MORTAR = "Mortar";
     public const string FIREGUN= "FireGun";
+
+    float speedValue;
 
     [HideInInspector] public float damageReduce;
     [HideInInspector] public float actualDamage;
@@ -39,18 +43,23 @@ public abstract class Enemy : MonoBehaviour
 
         healthBar.maxValue = health; 
         healthBar.value = health;
+
+        speedValue = speed;
     }
 
     private void Update()
     {
-        
-        if (!isAttacking) 
+        if (!isAttacking && !isAttracted) 
         {
             Move();
         } 
         else if(isAttacking) 
         {
             Attack();
+        }
+        else if(isAttracted)
+        {
+            BeAttracted();
         }
 
         CheckDeath();
@@ -62,6 +71,31 @@ public abstract class Enemy : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public  void GetStunned()
+    {
+        speed = 0;
+    }
+    public void GetAttracted()
+    {
+        isAttracted = true;
+    }
+
+    public void BeAttracted()
+    {
+        Vector3 targetPosition = centerObject.transform.position;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+    }
+
+    public void GetUnattracted()
+    {
+        isAttracted = false;
+    }
+
+    public void GetUnstunned()
+    {
+        speed = speedValue;
     }
 
     public virtual void TakeDamage(float weaponDamage, string weaponName)

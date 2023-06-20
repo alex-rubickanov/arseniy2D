@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5370344854324064584}
   - component: {fileID: 5370344854324064585}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 5370344854455249980}
   - component: {fileID: 5370344854455249982}
   - component: {fileID: 5370344854455249981}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5370344854692762500}
   - component: {fileID: 5370344854692762501}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: 'Canvas '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 5370344855209696994}
   - component: {fileID: 5370344855209696993}
   - component: {fileID: 5370344855209697007}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: FillBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 5370344855728931551}
   - component: {fileID: 5370344855728931550}
   - component: {fileID: 5370344855728931549}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlyingEnemy
   m_TagString: FlyingEnemy
   m_Icon: {fileID: 0}
@@ -444,6 +444,7 @@ MonoBehaviour:
   healthBar: {fileID: 5370344855209697007}
   wall: {fileID: 0}
   isAttacking: 0
+  isAttracted: 0
   health: 30
   speed: 1
   damage: 6
@@ -452,6 +453,7 @@ MonoBehaviour:
   arrowDamageResist: 0
   bombDamageResist: 1
   fireDamageResist: 0.3
+  centerObject: {fileID: 4972140678034856437, guid: daccb1cae4864794a9854973fe02d6f0, type: 3}
   currentDamageResist: 0
   damageReduce: 0
   actualDamage: 0

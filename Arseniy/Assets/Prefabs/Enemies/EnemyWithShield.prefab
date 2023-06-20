@@ -701,6 +701,7 @@ MonoBehaviour:
   healthBar: {fileID: 5406909853116123531}
   wall: {fileID: 0}
   isAttacking: 0
+  isAttracted: 0
   health: 37.5
   speed: 0.5
   damage: 7
@@ -709,6 +710,7 @@ MonoBehaviour:
   arrowDamageResist: 0.05
   bombDamageResist: 0.02
   fireDamageResist: 0.3
+  centerObject: {fileID: 4972140678034856437, guid: daccb1cae4864794a9854973fe02d6f0, type: 3}
   currentDamageResist: 0
   damageReduce: 0
   actualDamage: 0
@@ -943,6 +945,7 @@ MonoBehaviour:
   healthBar: {fileID: 5406909853168926469}
   wall: {fileID: 0}
   isAttacking: 0
+  isAttracted: 0
   health: 0
   speed: 0.5
   damage: 0
@@ -951,6 +954,7 @@ MonoBehaviour:
   arrowDamageResist: 0
   bombDamageResist: 0
   fireDamageResist: 0
+  centerObject: {fileID: 0}
   currentDamageResist: 0
   damageReduce: 0
   actualDamage: 0

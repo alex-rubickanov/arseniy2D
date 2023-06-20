@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8671973926127698590}
   - component: {fileID: 4247187000195802649}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3292855004121970092}
   - component: {fileID: 1364878276627747220}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 1344338117777261320}
   - component: {fileID: 4654230706457653822}
   - component: {fileID: 5406112154207370743}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 8012155019247894040}
   - component: {fileID: 7692083563856067604}
   - component: {fileID: 7540918527916061863}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: FillBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,9 +319,9 @@ GameObject:
   - component: {fileID: 203686252292951017}
   - component: {fileID: 1213148765}
   - component: {fileID: 9182409556127914240}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FastEnemy
-  m_TagString: Enemy
+  m_TagString: Fast Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,6 +444,7 @@ MonoBehaviour:
   healthBar: {fileID: 7540918527916061863}
   wall: {fileID: 0}
   isAttacking: 0
+  isAttracted: 0
   health: 25
   speed: 1
   damage: 3
@@ -452,6 +453,7 @@ MonoBehaviour:
   arrowDamageResist: 0
   bombDamageResist: 0
   fireDamageResist: 0
+  centerObject: {fileID: 4972140678034856437, guid: daccb1cae4864794a9854973fe02d6f0, type: 3}
   currentDamageResist: 0
   damageReduce: 0
   actualDamage: 0
