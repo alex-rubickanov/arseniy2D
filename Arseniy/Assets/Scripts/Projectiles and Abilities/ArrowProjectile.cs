@@ -7,14 +7,16 @@ public class ArrowProjectile : Projectile
 {
     Crossbow crossbow;
     private string NAME_OF_WEAPON = "Ballista";
+    private bool hasEntered = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Enemy enemy = collision.GetComponent<Enemy>();
 
-        if (enemy != null) {
+        if (enemy != null && !hasEntered) {
 
             enemy.TakeDamage(damage, NAME_OF_WEAPON);
+            hasEntered = true;
             Destroy(gameObject);
         }
         
