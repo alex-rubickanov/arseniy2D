@@ -445,7 +445,8 @@ MonoBehaviour:
   wall: {fileID: 0}
   isAttacking: 0
   isAttracted: 0
-  health: 100
+  maxHealth: 100
+  health: 0
   speed: 1
   damage: 25
   attackCooldown: 1

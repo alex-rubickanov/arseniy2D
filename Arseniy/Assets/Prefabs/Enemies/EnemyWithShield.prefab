@@ -702,7 +702,8 @@ MonoBehaviour:
   wall: {fileID: 0}
   isAttacking: 0
   isAttracted: 0
-  health: 37.5
+  maxHealth: 37.5
+  health: 0
   speed: 0.5
   damage: 7
   attackCooldown: 0.5
@@ -946,6 +947,7 @@ MonoBehaviour:
   wall: {fileID: 0}
   isAttacking: 0
   isAttracted: 0
+  maxHealth: 0
   health: 0
   speed: 0.5
   damage: 0
