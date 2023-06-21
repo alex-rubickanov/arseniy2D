@@ -16,8 +16,14 @@ public class Crossbow : Weapon
     [SerializeField] public float projectileSpeed = 10f;
     [SerializeField] float reloadTime = 2f;
 
-    
+    [SerializeField] GameObject superProjectile;
+    [SerializeField] float coolDownTime;
+    [SerializeField] int superShootsCount = 3;
+    [SerializeField] public float superProjectileSpeed = 10f;
+
+
     bool isReloading = false;
+    bool isSuperPowerActivated = false;
 
     public override void Shoot()
     {
@@ -25,6 +31,18 @@ public class Crossbow : Weapon
             sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
             isReloading = true;
+            StartCoroutine(Reload());
+        }
+    }
+
+    public void SuperShoot()
+    {
+        if (!isReloading)
+        {
+            sentProjectile = GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
+            sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * superProjectileSpeed, ForceMode2D.Impulse);
+            isReloading = true;
+            superShootsCount--;
             StartCoroutine(Reload());
         }
     }
@@ -52,8 +70,15 @@ public class Crossbow : Weapon
                     if (Input.GetMouseButtonDown(0))
                     {
                         target = crosshair.transform.position;
-                        Shoot();
-
+                        
+                        if(isSuperPowerActivated && superShootsCount > 0)
+                        {
+                            SuperShoot();
+                        }
+                        else
+                        {
+                            Shoot();
+                        }
                     }
                 }
             }
@@ -61,9 +86,18 @@ public class Crossbow : Weapon
             {
                 //CrosshairDisabled();
             }
-
-            
         }
+
+        if (superShootsCount == 0)
+        {
+            isSuperPowerActivated = false;
+            StartCoroutine(Cooldown());
+        }
+    }
+
+    public void ActivatePower()
+    {
+        isSuperPowerActivated = true;
     }
 
     private IEnumerator Reload()
@@ -71,6 +105,9 @@ public class Crossbow : Weapon
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
     }
-
-
+    private IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(coolDownTime);
+        superShootsCount = 3;
+    }
 }

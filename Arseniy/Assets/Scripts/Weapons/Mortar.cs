@@ -15,6 +15,13 @@ public class Mortar : Weapon
     [SerializeField] public float projectileSpeed = 10f;
     [SerializeField] float reloadTime = 2f;
 
+    [SerializeField] GameObject superProjectile;
+    [SerializeField] float coolDownTime;
+    [SerializeField] int superShootsCount = 3;
+    [SerializeField] public float superProjectileSpeed = 10f;
+
+    bool isSuperPowerActivated = false;
+
 
     public override void Aim()
     {
@@ -41,8 +48,15 @@ public class Mortar : Weapon
                     if (Input.GetMouseButtonDown(0))
                     {
                         target = crosshair.transform.position;
-                        Shoot();
 
+                        if (isSuperPowerActivated && superShootsCount > 0)
+                        {
+                            SuperShoot();
+                        }
+                        else
+                        {
+                            Shoot();
+                        }
                     }
                 }
             }
@@ -54,23 +68,16 @@ public class Mortar : Weapon
             
         }
 
-        //if (sentProjectile != null)
-        //{
-            
-        //    if (sentProjectile.transform.position == target)
-        //    {
-        //        isSentProjectileDropped = true;
-        //        sentProjectile.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-        //        sentProjectile.transform.GetComponent<Animator>().SetTrigger("Explosion");
-        //        sentProjectile.GetComponent<CircleCollider2D>().enabled = true;
+        if (superShootsCount == 0)
+        {
+            isSuperPowerActivated = false;
+            StartCoroutine(Cooldown());
+        }
+    }
 
-        //    }
-        //    else
-        //    {
-                
-        //        isSentProjectileDropped = false;
-        //    }
-        //}
+    public void ActivatePower()
+    {
+        isSuperPowerActivated = true;
     }
 
     public override void Shoot()
@@ -83,9 +90,26 @@ public class Mortar : Weapon
         }
     }
 
+    public  void SuperShoot()
+    {
+        if (!isReloading)
+        {
+            GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
+            isReloading = true;
+            superShootsCount--;
+            StartCoroutine(Reload());
+        }
+    }
+
     private IEnumerator Reload()
     {
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
+    }
+
+    private IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(coolDownTime);
+        superShootsCount = 3;
     }
 }

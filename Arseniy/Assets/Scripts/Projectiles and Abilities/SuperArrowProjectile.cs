@@ -15,9 +15,12 @@ public class SuperArrowProjectile : Projectile
         if (enemy != null) {
 
             enemy.TakeDamage(damage, NAME_OF_WEAPON);
-            Destroy(gameObject);
         }
-        
+
+        if (collision.CompareTag("Shield") || collision.CompareTag("Fast Enemy") || collision.CompareTag("FlyingEnemy"))
+        {
+            Destroy(collision.gameObject);
+        }
 
         if (collision.tag == "Border")
         {

@@ -30,10 +30,17 @@ public class FlyingEnemy : Enemy
     private void Update()
     {
         
-        if (!isAttacking) {
+        if (!isAttacking && !isAttracted) 
+        {
             Move();
-        } else if (isAttacking) {
+        } 
+        else if (isAttacking) 
+        {
             Attack();
+        }
+        else if (isAttracted)
+        {
+            BeAttracted();
         }
 
         CheckDeath();
@@ -42,7 +49,8 @@ public class FlyingEnemy : Enemy
     {
         cycle += Time.deltaTime * waveSpeed;
         transform.position = basePosition + (Vector3.up * bonusHeight) * upOrDown * Mathf.Sin(cycle);
-        if (target) basePosition = Vector3.MoveTowards(basePosition, target.position, Time.deltaTime * speed);
+        if (target)
+            basePosition = Vector3.MoveTowards(basePosition, target.position, Time.deltaTime * speed);
 
 
         //transform.position = startPosition + new Vector3(-1 * time * speed, amplitude * Mathf.Sin(time), 0);
