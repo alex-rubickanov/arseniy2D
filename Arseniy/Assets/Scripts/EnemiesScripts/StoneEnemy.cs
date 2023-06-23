@@ -22,7 +22,7 @@ public class StoneEnemy : Enemy
 
     private void Update()
     {
-
+        healthBar.value = health;
         if (!_isStopping)
         {
             Move();

@@ -1,14 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FireGun : Weapon
 {
+    public event EventHandler OnAbilityAction;
+
     [SerializeField] ParticleSystem fireParticle;
     [SerializeField] PolygonCollider2D fireCollider;
     private string NAME_OF_WEAPON = "FireGun";
-
-
 
     [Header("----------PROPERTIES----------")]
     [SerializeField] float damage;
@@ -21,6 +22,8 @@ public class FireGun : Weapon
     [Header("----------ULT PROPERTIES----------")]
     [SerializeField] private float percentOfSmallEnemies;
     [SerializeField] private float percentOfBigEnemies;
+    [SerializeField] private float abilityCooldown;
+    [SerializeField] private FiregunAbilityButton abilityButton;
 
     public override void Aim()
     {
@@ -58,9 +61,10 @@ public class FireGun : Weapon
 
     public override void Shoot()
     {
-        fireParticle.Play();
-        fireCollider.enabled = true;
-
+        if (!abilityButton.IsCooldown()) {
+            fireParticle.Play();
+            fireCollider.enabled = true;
+        }
     }
 
     public void StopShoot()
@@ -96,6 +100,7 @@ public class FireGun : Weapon
     public void FireGunAbility()
     {
         if(playerScript.activeGun == Player.Weapon.FireGun) {
+            OnAbilityAction?.Invoke(this, EventArgs.Empty);
             Enemy[] enemies = FindObjectsOfType<Enemy>();
             foreach (Enemy enemy in enemies) {
                 if (enemy.GetComponent<ShieldEnemy>() != null || enemy.GetComponent<StoneEnemy>() != null) {
@@ -109,5 +114,10 @@ public class FireGun : Weapon
                 }
             }
         }
+    }
+
+    public float GetAbilityCooldown()
+    {
+        return abilityCooldown;
     }
 }

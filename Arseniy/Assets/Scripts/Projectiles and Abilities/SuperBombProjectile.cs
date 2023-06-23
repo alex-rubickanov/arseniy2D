@@ -8,10 +8,8 @@ public class SuperBombProjectile : Projectile
 {
     Mortar mortar;
     Vector3 projectileTarget;
-    private string NAME_OF_WEAPON = "Mortar";
     [SerializeField] float magnetRadius = 5f;
     [SerializeField] float stunRadius = 2f;
-    [SerializeField] float attractForce = 10f;
     [SerializeField] float destroyTime = 2f;
 
     private void Start()
