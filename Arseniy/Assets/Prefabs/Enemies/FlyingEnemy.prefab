@@ -450,6 +450,8 @@ MonoBehaviour:
   speed: 1
   damage: 6
   attackCooldown: 0.33
+  score: 34
+  gameManager: {fileID: 0}
   armor: 6
   arrowDamageResist: 0
   bombDamageResist: 1

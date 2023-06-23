@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Crossbow : Weapon
 {
@@ -17,44 +20,21 @@ public class Crossbow : Weapon
     [SerializeField] float reloadTime = 2f;
 
     [SerializeField] GameObject superProjectile;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite defaultSprite;
+    [SerializeField] Sprite superPowerSprite;
     [SerializeField] float coolDownTime;
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
+    [SerializeField] Button button;
 
 
     bool isReloading = false;
     bool isSuperPowerActivated = false;
 
-    public override void Shoot()
+    private void Awake()
     {
-        if (!isReloading) {
-            sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
-            sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
-            isReloading = true;
-            StartCoroutine(Reload());
-        }
-    }
-
-    public void SuperShoot()
-    {
-        if (!isReloading)
-        {
-            sentProjectile = GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
-            sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * superProjectileSpeed, ForceMode2D.Impulse);
-            isReloading = true;
-            superShootsCount--;
-            StartCoroutine(Reload());
-        }
-    }
-
-    public override void Aim()
-    {
-        Vector3 mousePosition = Utils.GetMouseWorldPosition();
-
-        Vector3 aimDirection = (mousePosition - playerTransform.transform.position).normalized;
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-
-        transform.eulerAngles = new Vector3(0, 0, Mathf.Clamp(angle, -weaponRotationClamp, weaponRotationClamp));
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -95,9 +75,43 @@ public class Crossbow : Weapon
         }
     }
 
+    public override void Shoot()
+    {
+        if (!isReloading)
+        {
+            sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
+            sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
+            isReloading = true;
+            StartCoroutine(Reload());
+        }
+    }
+
+    public void SuperShoot()
+    {
+        if (!isReloading)
+        {
+            sentProjectile = GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
+            sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * superProjectileSpeed, ForceMode2D.Impulse);
+            isReloading = true;
+            superShootsCount--;
+            StartCoroutine(Reload());
+        }
+    }
+
+    public override void Aim()
+    {
+        Vector3 mousePosition = Utils.GetMouseWorldPosition();
+
+        Vector3 aimDirection = (mousePosition - playerTransform.transform.position).normalized;
+        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+
+        transform.eulerAngles = new Vector3(0, 0, Mathf.Clamp(angle, -weaponRotationClamp, weaponRotationClamp));
+    }
+
     public void ActivatePower()
     {
         isSuperPowerActivated = true;
+        spriteRenderer.sprite = superPowerSprite;
     }
 
     private IEnumerator Reload()
@@ -107,7 +121,19 @@ public class Crossbow : Weapon
     }
     private IEnumerator Cooldown()
     {
+        spriteRenderer.sprite = defaultSprite;
+
+        ColorBlock colors = button.colors;
+        Color originalColor = colors.normalColor;
+
+        colors.normalColor = Color.red;
+        button.colors = colors;
+
         yield return new WaitForSeconds(coolDownTime);
+
+        colors.normalColor = originalColor;
+        button.colors = colors;
+
         superShootsCount = 3;
     }
 }

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Mortar : Weapon
 {
@@ -19,6 +22,7 @@ public class Mortar : Weapon
     [SerializeField] float coolDownTime;
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
+    [SerializeField] Button button;
 
     bool isSuperPowerActivated = false;
 
@@ -109,7 +113,17 @@ public class Mortar : Weapon
 
     private IEnumerator Cooldown()
     {
+        ColorBlock colors = button.colors;
+        Color originalColor = colors.normalColor;
+
+        colors.normalColor = Color.red;
+        button.colors = colors;
+
         yield return new WaitForSeconds(coolDownTime);
+
+        colors.normalColor = originalColor;
+        button.colors = colors;
+
         superShootsCount = 3;
     }
 }

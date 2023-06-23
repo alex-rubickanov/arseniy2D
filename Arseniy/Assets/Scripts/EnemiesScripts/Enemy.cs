@@ -18,6 +18,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] public float speed = 0.5f;
     [SerializeField] public float damage;
     [SerializeField] float attackCooldown = 2f;
+    [SerializeField] int score;
+    [SerializeField] private GameManager gameManager;
 
 
     [Header("----------DAMAGE RESIST----------")]
@@ -44,6 +46,7 @@ public abstract class Enemy : MonoBehaviour
 
         health = maxHealth;
         healthBar.maxValue = maxHealth;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         speedValue = speed;
     }
@@ -64,6 +67,8 @@ public abstract class Enemy : MonoBehaviour
         }
 
         CheckDeath();
+        
+        healthBar.value = health;
     }
 
     protected void CheckDeath()
@@ -126,6 +131,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+        gameManager.UpdateScore(score);
     }
 
     public virtual void Move()
