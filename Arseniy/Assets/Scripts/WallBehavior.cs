@@ -10,6 +10,7 @@ public class WallBehavior : MonoBehaviour
     private int _blinkCount = 5;
     public BoxCollider2D ignoredCollider;
     [SerializeField] private GameObject myGameObject;
+    [SerializeField] private GameManager gameManager;
 
 
     [SerializeField] private Slider healthBar;
@@ -18,6 +19,7 @@ public class WallBehavior : MonoBehaviour
     void Start()
     {
         ignoredCollider = myGameObject.GetComponentInChildren<IgnoredCollider>().GetComponent<BoxCollider2D>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         healthBar.maxValue = _health;
         healthBar.value = _health;
         _renderer = GetComponent<Renderer>();
@@ -43,6 +45,7 @@ public class WallBehavior : MonoBehaviour
     private void Die()
     {
         Time.timeScale = 0.0f;
+        gameManager.GameOver();
     }
 
     private IEnumerator BlinkCoroutine()

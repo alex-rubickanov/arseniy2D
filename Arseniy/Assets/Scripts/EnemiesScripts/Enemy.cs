@@ -13,10 +13,13 @@ public abstract class Enemy : MonoBehaviour
 
     [Space]
     [Header("----------PROPERTIES----------")]
+    [SerializeField] public float maxHealth;
     [SerializeField] public float health;
     [SerializeField] public float speed = 0.5f;
     [SerializeField] public float damage;
     [SerializeField] float attackCooldown = 2f;
+    [SerializeField] int score;
+    [SerializeField] private GameManager gameManager;
 
 
     [Header("----------DAMAGE RESIST----------")]
@@ -41,8 +44,9 @@ public abstract class Enemy : MonoBehaviour
     {
         wall = GameObject.Find("Wall").GetComponent<WallBehavior>();
 
-        healthBar.maxValue = health; 
-        healthBar.value = health;
+        health = maxHealth;
+        healthBar.maxValue = maxHealth;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         speedValue = speed;
     }
@@ -63,6 +67,8 @@ public abstract class Enemy : MonoBehaviour
         }
 
         CheckDeath();
+        
+        healthBar.value = health;
     }
 
     protected void CheckDeath()
@@ -125,6 +131,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+        gameManager.UpdateScore(score);
     }
 
     public virtual void Move()

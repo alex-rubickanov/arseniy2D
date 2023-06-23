@@ -445,10 +445,13 @@ MonoBehaviour:
   wall: {fileID: 0}
   isAttacking: 0
   isAttracted: 0
-  health: 30
+  maxHealth: 30
+  health: 0
   speed: 1
   damage: 6
   attackCooldown: 0.33
+  score: 34
+  gameManager: {fileID: 0}
   armor: 6
   arrowDamageResist: 0
   bombDamageResist: 1

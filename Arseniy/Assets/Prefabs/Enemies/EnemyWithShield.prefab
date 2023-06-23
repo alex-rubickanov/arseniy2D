@@ -702,10 +702,13 @@ MonoBehaviour:
   wall: {fileID: 0}
   isAttacking: 0
   isAttracted: 0
-  health: 37.5
+  maxHealth: 37.5
+  health: 0
   speed: 0.5
   damage: 7
   attackCooldown: 0.5
+  score: 50
+  gameManager: {fileID: 0}
   armor: 7
   arrowDamageResist: 0.05
   bombDamageResist: 0.02
@@ -946,10 +949,13 @@ MonoBehaviour:
   wall: {fileID: 0}
   isAttacking: 0
   isAttracted: 0
+  maxHealth: 0
   health: 0
   speed: 0.5
   damage: 0
   attackCooldown: 2
+  score: 0
+  gameManager: {fileID: 0}
   armor: 0
   arrowDamageResist: 0
   bombDamageResist: 0

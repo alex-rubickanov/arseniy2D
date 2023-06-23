@@ -18,6 +18,10 @@ public class FireGun : Weapon
     [SerializeField] public int dotTicks;
     [SerializeField] public float dotDelay;
 
+    [Header("----------ULT PROPERTIES----------")]
+    [SerializeField] private float percentOfSmallEnemies;
+    [SerializeField] private float percentOfBigEnemies;
+
     public override void Aim()
     {
         Vector3 mousePosition = Utils.GetMouseWorldPosition();
@@ -84,6 +88,24 @@ public class FireGun : Weapon
 
                 if (!collision.GetComponent<FireDot>()) {
                     collision.gameObject.AddComponent<FireDot>();
+                }
+            }
+        }
+    }
+
+    public void FireGunAbility()
+    {
+        if(playerScript.activeGun == Player.Weapon.FireGun) {
+            Enemy[] enemies = FindObjectsOfType<Enemy>();
+            foreach (Enemy enemy in enemies) {
+                if (enemy.GetComponent<ShieldEnemy>() != null || enemy.GetComponent<StoneEnemy>() != null) {
+                    float onePercentHealth = enemy.maxHealth / 100;
+                    enemy.health -= onePercentHealth * percentOfBigEnemies;
+                } else if (enemy.GetComponent<Shield>() != null) {
+                    // no damage to shield
+                } else {
+                    float onePercentHealth = enemy.maxHealth / 100;
+                    enemy.health -= onePercentHealth * percentOfSmallEnemies;
                 }
             }
         }
