@@ -54,7 +54,6 @@ public class FlyingEnemy : Enemy
 
 
         //transform.position = startPosition + new Vector3(-1 * time * speed, amplitude * Mathf.Sin(time), 0);
-        Debug.Log(time);
     }
 }
 

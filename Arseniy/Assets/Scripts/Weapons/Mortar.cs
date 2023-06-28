@@ -6,12 +6,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 
-
 public class Mortar : Weapon
 {
-    public event EventHandler OnAbilityAction;
+     bool isReloading = false;
 
-    bool isReloading = false;
+    public static event EventHandler OnMortarShot;
 
     GameObject sentProjectile;
     [HideInInspector] public Vector3 target;
@@ -27,10 +26,18 @@ public class Mortar : Weapon
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
     [SerializeField] Button button;
-    [SerializeField] private MortarAbilityButton abilityButton;
 
     bool isSuperPowerActivated = false;
 
+    public static void ResetStaticData()
+    {
+        OnMortarShot = null;
+    }
+
+    private void Awake()
+    {
+        ResetStaticData();
+    }
 
     public override void Aim()
     {
@@ -45,7 +52,6 @@ public class Mortar : Weapon
     
     private void Update()
     {
-        if (playerScript.activeGun == Player.Weapon.Mortar)
         if (playerScript.activeGun == Player.Weapon.Mortar)
         {
             if (Input.GetMouseButton(1))
@@ -96,7 +102,12 @@ public class Mortar : Weapon
         {
             GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
             isReloading = true;
+
+            OnMortarShot?.Invoke(this, EventArgs.Empty);
+
             StartCoroutine(Reload());
+
+            
         }
     }
 
@@ -104,11 +115,12 @@ public class Mortar : Weapon
     {
         if (!isReloading)
         {
-            OnAbilityAction?.Invoke(this, EventArgs.Empty);
             GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
             isReloading = true;
             superShootsCount--;
             StartCoroutine(Reload());
+
+            //OnMortarShot?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -120,13 +132,17 @@ public class Mortar : Weapon
 
     private IEnumerator Cooldown()
     {
+        ColorBlock colors = button.colors;
+        Color originalColor = colors.normalColor;
+
+        colors.normalColor = Color.red;
+        button.colors = colors;
+
         yield return new WaitForSeconds(coolDownTime);
 
-        superShootsCount = 3;
-    }
+        colors.normalColor = originalColor;
+        button.colors = colors;
 
-    public float GetAbilityCooldown()
-    {
-        return coolDownTime;
+        superShootsCount = 3;
     }
 }

@@ -14,7 +14,7 @@ public class FiregunAbilityButton : MonoBehaviour
 
     private void Start()
     {
-        fireGun.OnAbilityAction += FireGun_OnAbilityAction;
+        FireGun.OnAbilityAction += FireGun_OnAbilityAction;
         abilityCooldown = fireGun.GetAbilityCooldown();
         HideCooldownText();
     }

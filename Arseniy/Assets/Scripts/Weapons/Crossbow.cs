@@ -8,8 +8,9 @@ using System;
 
 public class Crossbow : Weapon
 {
-    public event EventHandler OnAbilityAction;
-
+    public static event EventHandler OnBallistaDefaultShot;
+    public static event EventHandler OnBallistaSuperShot;
+    
     [HideInInspector]public Vector3 target;
     GameObject sentProjectile;
     bool isSentProjectileDropped = true;
@@ -33,9 +34,17 @@ public class Crossbow : Weapon
     bool isReloading = false;
     bool isSuperPowerActivated = false;
 
+    public static void ResetStaticData()
+    {
+        OnBallistaDefaultShot = null;
+        OnBallistaSuperShot = null;
+    }
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        ResetStaticData();
     }
 
     private void Update()
@@ -84,6 +93,8 @@ public class Crossbow : Weapon
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
             isReloading = true;
             StartCoroutine(Reload());
+
+            OnBallistaDefaultShot?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -91,12 +102,13 @@ public class Crossbow : Weapon
     {
         if (!isReloading)
         {
-            OnAbilityAction?.Invoke(this, EventArgs.Empty);
             sentProjectile = GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * superProjectileSpeed, ForceMode2D.Impulse);
             isReloading = true;
             superShootsCount--;
             StartCoroutine(Reload());
+
+            OnBallistaSuperShot?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -125,13 +137,17 @@ public class Crossbow : Weapon
     {
         spriteRenderer.sprite = defaultSprite;
 
+        ColorBlock colors = button.colors;
+        Color originalColor = colors.normalColor;
+
+        colors.normalColor = Color.red;
+        button.colors = colors;
+
         yield return new WaitForSeconds(coolDownTime);
 
-        superShootsCount = 3;
-    }
+        colors.normalColor = originalColor;
+        button.colors = colors;
 
-    public float GetAbilityCooldown()
-    {
-        return coolDownTime;
+        superShootsCount = 3;
     }
 }
