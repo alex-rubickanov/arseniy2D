@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,16 +6,22 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BombProjectile : Projectile
 {
+    public static event EventHandler OnBombExplosion;
+
     Mortar mortar;
     Vector3 projectileTarget;
     private string NAME_OF_WEAPON = "Mortar";
 
+    private bool once = true;
+
+    
     private void Start()
     {
         mortar = GameObject.Find("Mortar").GetComponent<Mortar>();
         damage = mortar.projectileDamage;
         projectileTarget = mortar.target;
     }
+
     private void Update()
     {
         if(mortar != null) 
@@ -28,6 +35,12 @@ public class BombProjectile : Projectile
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
                 transform.GetComponent<Animator>().SetTrigger("Explosion");
                 GetComponent<CircleCollider2D>().enabled = true;
+
+                if (once) {
+                    OnBombExplosion?.Invoke(this, EventArgs.Empty);
+                    once = false;
+                }
+                
             }
         }
     }

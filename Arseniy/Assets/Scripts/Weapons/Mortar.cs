@@ -4,10 +4,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class Mortar : Weapon
 {
      bool isReloading = false;
+
+    public static event EventHandler OnMortarShot;
 
     GameObject sentProjectile;
     [HideInInspector] public Vector3 target;
@@ -26,6 +29,15 @@ public class Mortar : Weapon
 
     bool isSuperPowerActivated = false;
 
+    public static void ResetStaticData()
+    {
+        OnMortarShot = null;
+    }
+
+    private void Awake()
+    {
+        ResetStaticData();
+    }
 
     public override void Aim()
     {
@@ -90,7 +102,12 @@ public class Mortar : Weapon
         {
             GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
             isReloading = true;
+
+            OnMortarShot?.Invoke(this, EventArgs.Empty);
+
             StartCoroutine(Reload());
+
+            
         }
     }
 
@@ -102,6 +119,8 @@ public class Mortar : Weapon
             isReloading = true;
             superShootsCount--;
             StartCoroutine(Reload());
+
+            //OnMortarShot?.Invoke(this, EventArgs.Empty);
         }
     }
 

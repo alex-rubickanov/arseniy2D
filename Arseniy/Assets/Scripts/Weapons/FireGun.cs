@@ -7,6 +7,9 @@ public class FireGun : Weapon
 {
     public event EventHandler OnAbilityAction;
 
+    public static event  EventHandler OnFireGunStartShooting;
+    public static event EventHandler OnFireGunStopShooting;
+
     [SerializeField] ParticleSystem fireParticle;
     [SerializeField] PolygonCollider2D fireCollider;
     private string NAME_OF_WEAPON = "FireGun";
@@ -25,6 +28,12 @@ public class FireGun : Weapon
     [SerializeField] private float abilityCooldown;
     [SerializeField] private FiregunAbilityButton abilityButton;
 
+    private void Awake()
+    {
+        gameObject.AddComponent<AudioSource>();
+        ResetStaticData();
+    }
+
     public override void Aim()
     {
         Vector3 mousePosition = Utils.GetMouseWorldPosition();
@@ -33,6 +42,12 @@ public class FireGun : Weapon
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
 
         transform.eulerAngles = new Vector3(0, 0, Mathf.Clamp(angle, -weaponRotationClamp, weaponRotationClamp));
+    }
+
+    public static void ResetStaticData()
+    {
+        OnFireGunStartShooting = null;
+        OnFireGunStopShooting = null;
     }
 
     private void Update()
@@ -64,6 +79,8 @@ public class FireGun : Weapon
         if (!abilityButton.IsCooldown()) {
             fireParticle.Play();
             fireCollider.enabled = true;
+
+            OnFireGunStartShooting?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -71,6 +88,8 @@ public class FireGun : Weapon
     {
         fireParticle.Stop();
         fireCollider.enabled = false;
+
+        OnFireGunStopShooting?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -79,7 +98,6 @@ public class FireGun : Weapon
         if(enemy != null) {
             if(collision.tag == "Enemy With Shield") {
                 if (collision.GetComponent<ShieldEnemy>().isShieldAlive == false) {
-                    Debug.Log("FIRE DAMAGE");
                     collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime, NAME_OF_WEAPON);
 
                     if (!collision.GetComponent<FireDot>()) {
@@ -87,7 +105,6 @@ public class FireGun : Weapon
                     }
                 }
             } else {
-                Debug.Log("FIRE DAMAGE");
                 collision.GetComponent<Enemy>().TakeDamage(damage * Time.fixedDeltaTime, NAME_OF_WEAPON);
 
                 if (!collision.GetComponent<FireDot>()) {

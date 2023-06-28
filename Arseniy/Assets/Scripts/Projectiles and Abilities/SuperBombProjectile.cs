@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,13 @@ public class SuperBombProjectile : Projectile
     [SerializeField] float magnetRadius = 5f;
     [SerializeField] float stunRadius = 2f;
     [SerializeField] float destroyTime = 2f;
+
+    public static event EventHandler OnSuperBombActivation;
+
+    public static void ResetStaticData()
+    {
+        OnSuperBombActivation = null;
+    }
 
     private void Start()
     {
@@ -33,6 +41,7 @@ public class SuperBombProjectile : Projectile
                 GetComponent<CircleCollider2D>().enabled = true;
                 StartCoroutine(DestroyCoroutine(destroyTime));
 
+                OnSuperBombActivation?.Invoke(this, EventArgs.Empty);
             }
         }
     }
