@@ -36,3 +36,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a94ea4bce1805e54d96f8e6fb5d21c3d, type: 3}
   superBombExplosionSound: {fileID: 8300000, guid: 3261358ce259aa54fb9c05773bb33825, type: 3}
   arrowHitSound: {fileID: 8300000, guid: 01f815a9b97683249951f68d84dc7141, type: 3}
+  firegunAbilitySound: {fileID: 8300000, guid: 96046eeebb0008d4bbf2e387878677a7, type: 3}

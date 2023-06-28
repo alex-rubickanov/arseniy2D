@@ -12,4 +12,5 @@ public class AudioClipsRefsSO : ScriptableObject
     public AudioClip[] ballistaAbilityShotSound;
     public AudioClip superBombExplosionSound;
     public AudioClip arrowHitSound;
+    public AudioClip firegunAbilitySound;
 }

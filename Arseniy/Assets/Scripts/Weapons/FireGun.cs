@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FireGun : Weapon
 {
-    public event EventHandler OnAbilityAction;
+    public static event EventHandler OnAbilityAction;
 
     public static event  EventHandler OnFireGunStartShooting;
     public static event EventHandler OnFireGunStopShooting;
@@ -48,6 +48,7 @@ public class FireGun : Weapon
     {
         OnFireGunStartShooting = null;
         OnFireGunStopShooting = null;
+        //OnAbilityAction = null;
     }
 
     private void Update()
