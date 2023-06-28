@@ -4,11 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class Crossbow : Weapon
 {
+    public event EventHandler OnAbilityAction;
 
-    
     [HideInInspector]public Vector3 target;
     GameObject sentProjectile;
     bool isSentProjectileDropped = true;
@@ -90,6 +91,7 @@ public class Crossbow : Weapon
     {
         if (!isReloading)
         {
+            OnAbilityAction?.Invoke(this, EventArgs.Empty);
             sentProjectile = GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * superProjectileSpeed, ForceMode2D.Impulse);
             isReloading = true;
@@ -123,17 +125,13 @@ public class Crossbow : Weapon
     {
         spriteRenderer.sprite = defaultSprite;
 
-        ColorBlock colors = button.colors;
-        Color originalColor = colors.normalColor;
-
-        colors.normalColor = Color.red;
-        button.colors = colors;
-
         yield return new WaitForSeconds(coolDownTime);
 
-        colors.normalColor = originalColor;
-        button.colors = colors;
-
         superShootsCount = 3;
+    }
+
+    public float GetAbilityCooldown()
+    {
+        return coolDownTime;
     }
 }

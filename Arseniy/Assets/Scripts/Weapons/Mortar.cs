@@ -4,10 +4,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
+
 
 public class Mortar : Weapon
 {
-     bool isReloading = false;
+    public event EventHandler OnAbilityAction;
+
+    bool isReloading = false;
 
     GameObject sentProjectile;
     [HideInInspector] public Vector3 target;
@@ -23,6 +27,7 @@ public class Mortar : Weapon
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
     [SerializeField] Button button;
+    [SerializeField] private MortarAbilityButton abilityButton;
 
     bool isSuperPowerActivated = false;
 
@@ -40,6 +45,7 @@ public class Mortar : Weapon
     
     private void Update()
     {
+        if (playerScript.activeGun == Player.Weapon.Mortar)
         if (playerScript.activeGun == Player.Weapon.Mortar)
         {
             if (Input.GetMouseButton(1))
@@ -98,6 +104,7 @@ public class Mortar : Weapon
     {
         if (!isReloading)
         {
+            OnAbilityAction?.Invoke(this, EventArgs.Empty);
             GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
             isReloading = true;
             superShootsCount--;
@@ -113,17 +120,13 @@ public class Mortar : Weapon
 
     private IEnumerator Cooldown()
     {
-        ColorBlock colors = button.colors;
-        Color originalColor = colors.normalColor;
-
-        colors.normalColor = Color.red;
-        button.colors = colors;
-
         yield return new WaitForSeconds(coolDownTime);
 
-        colors.normalColor = originalColor;
-        button.colors = colors;
-
         superShootsCount = 3;
+    }
+
+    public float GetAbilityCooldown()
+    {
+        return coolDownTime;
     }
 }

@@ -17,9 +17,29 @@ public class SuperArrowProjectile : Projectile
             enemy.TakeDamage(damage, NAME_OF_WEAPON);
         }
 
-        if (collision.CompareTag("Shield") || collision.CompareTag("Fast Enemy") || collision.CompareTag("FlyingEnemy"))
+        if (collision.CompareTag("Shield"))
         {
             Destroy(collision.gameObject);
+        }
+
+        if(collision.CompareTag("Fast Enemy") )
+        {
+            var dieComponent = collision.GetComponent<FastEnemy>();
+
+            if (dieComponent != null)
+            {
+                dieComponent.Die();
+            }
+        }
+
+        if ( collision.CompareTag("FlyingEnemy"))
+        {
+            var dieComponent = collision.GetComponent<FlyingEnemy>();
+
+            if (dieComponent != null)
+            {
+                dieComponent.Die();
+            }
         }
 
         if (collision.tag == "Border")
