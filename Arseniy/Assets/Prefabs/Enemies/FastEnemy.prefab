@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 1213148765}
   - component: {fileID: 9182409556127914240}
   - component: {fileID: 5947858272253930557}
+  - component: {fileID: 6843328406678559822}
   m_Layer: 7
   m_Name: FastEnemy
   m_TagString: Fast Enemy
@@ -436,6 +437,7 @@ MonoBehaviour:
   attackCooldown: 0.2
   score: 10
   gameManager: {fileID: 0}
+  walkAnimationClip: {fileID: 7400000, guid: 1053bdce39e70cb41845ccb2d3014b43, type: 2}
   armor: 5
   arrowDamageResist: 0
   bombDamageResist: 0
@@ -461,7 +463,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.4457974, y: 2.576}
+    oldSize: {x: 3.8898556, y: 1.84}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -470,3 +472,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.4457974, y: 2.576}
   m_EdgeRadius: 0
+--- !u!95 &6843328406678559822
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139428957088055403}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 68157b26e74a48246a39b21919c0d9ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

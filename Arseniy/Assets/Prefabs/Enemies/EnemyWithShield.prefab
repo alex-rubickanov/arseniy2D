@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 5406909853707276219}
   - component: {fileID: 5406909853707276217}
   - component: {fileID: 7801493622915064449}
+  - component: {fileID: -1573197880362484188}
   m_Layer: 0
   m_Name: EnemyWithShield
   m_TagString: Enemy With Shield
@@ -693,6 +694,7 @@ MonoBehaviour:
   attackCooldown: 0.5
   score: 50
   gameManager: {fileID: 0}
+  walkAnimationClip: {fileID: 7400000, guid: eb0fe023fb462734687d3b9791960d98, type: 2}
   armor: 7
   arrowDamageResist: 0.05
   bombDamageResist: 0.02
@@ -734,6 +736,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3550136, y: 3.8053346}
   m_EdgeRadius: 0
+--- !u!95 &-1573197880362484188
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406909853707276214}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 65868c63d0ac75f4786129c57061e0a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &5406909853961276972
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,6 +845,7 @@ GameObject:
   - component: {fileID: 5406909853973987041}
   - component: {fileID: 5406909853973987070}
   - component: {fileID: 5406909853973987043}
+  - component: {fileID: 4309069794961391867}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Shield
@@ -966,6 +989,7 @@ MonoBehaviour:
   attackCooldown: 2
   score: 0
   gameManager: {fileID: 0}
+  walkAnimationClip: {fileID: 7400000, guid: 4bb92d8126bf46e48beda1d8271a6958, type: 2}
   armor: 0
   arrowDamageResist: 0
   bombDamageResist: 0
@@ -976,6 +1000,26 @@ MonoBehaviour:
   actualDamage: 0
   NOTE: CHANGE SHIELD PROPERTIES IN ENEMY WITH SHIELD PREFAB
   parentEnemy: {fileID: 0}
+--- !u!95 &4309069794961391867
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406909853973987069}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 385dc423af904e64ba08c01a1c151c06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &5406909854059128354
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         gameOverText.text = "Game over!\r\n You total score: " + score;
         isGameActive = false;
-        RestartButton.gameObject.SetActive(true);
-        PauseButton.gameObject.SetActive(false);
+        //RestartButton.gameObject.SetActive(true);
+        //PauseButton.gameObject.SetActive(false);
     }
 
     public void RestartGame()

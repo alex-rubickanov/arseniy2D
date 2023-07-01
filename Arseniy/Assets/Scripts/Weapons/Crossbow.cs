@@ -90,7 +90,7 @@ public class Crossbow : Weapon
     {
         if (!isReloading)
         {
-            OnAbilityAction?.Invoke(this, EventArgs.Empty);
+
             sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
             isReloading = true;
@@ -104,6 +104,7 @@ public class Crossbow : Weapon
     {
         if (!isReloading)
         {
+            OnAbilityAction?.Invoke(this, EventArgs.Empty);
             sentProjectile = GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * superProjectileSpeed, ForceMode2D.Impulse);
             isReloading = true;
@@ -126,8 +127,11 @@ public class Crossbow : Weapon
 
     public void ActivatePower()
     {
-        isSuperPowerActivated = true;
-        spriteRenderer.sprite = superPowerSprite;
+        if(playerScript.activeGun == Player.Weapon.Crossbow)
+        {
+            isSuperPowerActivated = true;
+            spriteRenderer.sprite = superPowerSprite;
+        }
     }
 
     private IEnumerator Reload()

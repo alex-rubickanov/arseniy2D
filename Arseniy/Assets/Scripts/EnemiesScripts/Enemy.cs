@@ -20,6 +20,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] float attackCooldown = 2f;
     [SerializeField] int score;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private AnimationClip walkAnimationClip;
+
+    private Animation animationComponent;
 
 
     [Header("----------DAMAGE RESIST----------")]
@@ -49,6 +52,8 @@ public abstract class Enemy : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         speedValue = speed;
+        animationComponent = gameObject.AddComponent<Animation>();
+        animationComponent.AddClip(walkAnimationClip, "Walk");
     }
 
     private void Update()
@@ -136,6 +141,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Move()
     {
+        //animationComponent.Play("Walk");
         transform.position += Vector3.left * speed * Time.deltaTime;
     }
 

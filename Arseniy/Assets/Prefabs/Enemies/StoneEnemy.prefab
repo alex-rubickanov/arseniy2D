@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 1213148765}
   - component: {fileID: 1090238791194717744}
   - component: {fileID: 7923770351237144557}
+  - component: {fileID: -5617263909711953554}
   m_Layer: 0
   m_Name: StoneEnemy
   m_TagString: Enemy
@@ -436,6 +437,7 @@ MonoBehaviour:
   attackCooldown: 1
   score: 76
   gameManager: {fileID: 0}
+  walkAnimationClip: {fileID: 7400000, guid: 7a6395c4cc7558048a1acb39186aef02, type: 2}
   armor: 30
   arrowDamageResist: 0.4
   bombDamageResist: 0.2
@@ -474,3 +476,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3763924, y: 3.764566}
   m_EdgeRadius: 0
+--- !u!95 &-5617263909711953554
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139428957088055403}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ef886a5e77c43b4f9ec1c2114e45242, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
