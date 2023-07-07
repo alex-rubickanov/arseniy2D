@@ -18,7 +18,12 @@ public abstract class Weapon : MonoBehaviour
 
     public const float weaponRotationClamp = 60f;
 
-   private void Start()
+    [SerializeField] protected GameObject abilityButtonUI;
+
+    [Range(1, 2)]
+    [SerializeField] protected float buttonScale;
+
+    private void Start()
     {
         playerTransform = GameObject.Find("Player").transform;
         playerScript = playerTransform.GetComponent<Player>();

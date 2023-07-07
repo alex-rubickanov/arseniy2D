@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FireGun : Weapon
 {
     public static event EventHandler OnAbilityAction;
 
-    public static event  EventHandler OnFireGunStartShooting;
+    public static event EventHandler OnFireGunStartShooting;
     public static event EventHandler OnFireGunStopShooting;
 
     [SerializeField] ParticleSystem fireParticle;
@@ -28,12 +29,12 @@ public class FireGun : Weapon
     [SerializeField] private float abilityCooldown;
     [SerializeField] private FiregunAbilityButton abilityButton;
     [SerializeField] private GameObject explosionPrefab;
-
     private void Awake()
     {
         gameObject.AddComponent<AudioSource>();
         ResetStaticData();
     }
+
 
     public override void Aim()
     {
@@ -54,36 +55,34 @@ public class FireGun : Weapon
 
     private void Update()
     {
-        if (playerScript.activeGun == Player.Weapon.FireGun)
-        {
-            if (Input.GetMouseButton(1))
-            {
+
+        if (playerScript.activeGun == Player.Weapon.FireGun) {
+            abilityButtonUI.transform.localScale = new Vector3(buttonScale, buttonScale, 1);
+            if (Input.GetMouseButton(1)) {
                 Aim();
-                if (Input.GetMouseButtonDown(0))
-                {
+                if (Input.GetMouseButtonDown(0)) {
                     Shoot();
                 }
             }
-            if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
-            {
+            if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)) {
                 StopShoot();
             }
+        } else {
+            abilityButtonUI.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        if(playerScript.activeGun != Player.Weapon.FireGun)
-        {
+        if (playerScript.activeGun != Player.Weapon.FireGun) {
             StopShoot();
         }
     }
 
     public override void Shoot()
     {
-        if (!abilityButton.IsCooldown()) {
-            fireParticle.Play();
-            fireCollider.enabled = true;
 
-            OnFireGunStartShooting?.Invoke(this, EventArgs.Empty);
-        }
+        fireParticle.Play();
+        fireCollider.enabled = true;
+
+        OnFireGunStartShooting?.Invoke(this, EventArgs.Empty);
     }
 
     public void StopShoot()
@@ -97,8 +96,8 @@ public class FireGun : Weapon
     private void OnTriggerStay2D(Collider2D collision)
     {
         Enemy enemy = collision.GetComponent<Enemy>();
-        if(enemy != null) {
-            if(collision.tag == "Enemy With Shield") {
+        if (enemy != null) {
+            if (collision.tag == "Enemy With Shield") {
                 if (collision.GetComponent<ShieldEnemy>().isShieldAlive == false) {
                     collision.GetComponent<ShieldEnemy>().TakeDamage(damage * Time.fixedDeltaTime, NAME_OF_WEAPON);
 
@@ -118,7 +117,8 @@ public class FireGun : Weapon
 
     public void FireGunAbility()
     {
-        if(playerScript.activeGun == Player.Weapon.FireGun) {
+        if (playerScript.activeGun == Player.Weapon.FireGun) {
+
             OnAbilityAction?.Invoke(this, EventArgs.Empty);
             Enemy[] enemies = FindObjectsOfType<Enemy>();
             foreach (Enemy enemy in enemies) {
@@ -135,6 +135,8 @@ public class FireGun : Weapon
 
             Vector3 explosionPosition = new Vector3(2.5f, 0.25f, 0f);
             Instantiate(explosionPrefab, explosionPosition, Quaternion.identity);
+
+            
         }
     }
 
