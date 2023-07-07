@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class StoneEnemy : Enemy
 {
+    private Animator animator;
+
     [Header("----------DO !NOT! TOUCH----------")]
     [SerializeField] private GameObject _rockPrefab;
     [SerializeField] private Transform _throwPoint;
@@ -18,7 +20,6 @@ public class StoneEnemy : Enemy
     private int _steps = 0; 
     private bool _isStopping = false; 
     private float _stopTime = 0f;
-
 
     private void Update()
     {
@@ -65,6 +66,7 @@ public class StoneEnemy : Enemy
         GameObject rock = Instantiate(_rockPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rockRigidbody = rock.GetComponent<Rigidbody2D>();
         rockRigidbody.AddForce(Vector2.left * 500f);
+
     }
 
 

@@ -1,48 +1,43 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TempSpawner : MonoBehaviour
 {
-    public GameObject[] objectsArray1;
-    public GameObject[] objectsArray2;
+    [SerializeField] private List<GameObject> enemyPrefabs;
+    [SerializeField] private int maxEnemies = 15;
+    [SerializeField] private float spawnDelay = 2f;
+    [SerializeField] private int enemiesPerIncrease = 2;
+    [SerializeField] private float minY = -0.27f;
+    [SerializeField] private float maxY = 2.97f;
 
-    private WaitForSeconds initialDelay = new WaitForSeconds(2f);
-    private WaitForSeconds secondCycleDelay = new WaitForSeconds(5f);
+    private int currentEnemies = 0;
+    private float nextSpawnTime = 0f;
 
     private void Start()
     {
-        StartCoroutine(SpawnObjectsFirstCycle());
+        nextSpawnTime = Time.time + spawnDelay;
     }
 
-    private IEnumerator SpawnObjectsFirstCycle()
+    private void Update()
     {
-        for (int i = 0; i < 2; i++)
+        if (Time.time >= nextSpawnTime)
         {
-            yield return initialDelay;
-
-            int randomIndex = Random.Range(0, objectsArray1.Length);
-            GameObject newObject = Instantiate(objectsArray1[randomIndex], transform.position, Quaternion.identity);
-
+            SpawnEnemy();
+            nextSpawnTime = Time.time + spawnDelay;
         }
-
-        StartCoroutine(SpawnObjectsSecondCycle());
     }
 
-    private IEnumerator SpawnObjectsSecondCycle()
+    private void SpawnEnemy()
     {
-        yield return new WaitForSeconds(5f);
+        GameObject randomEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+        float randomY = Random.Range(minY, maxY);
+        Vector3 spawnPosition = new Vector3(transform.position.x, randomY, transform.position.z);
+        GameObject enemy = Instantiate(randomEnemyPrefab, spawnPosition, Quaternion.identity);
 
-        while (true)
+        if (currentEnemies % enemiesPerIncrease == 0 && currentEnemies < maxEnemies)
         {
-            yield return secondCycleDelay;
-
-            int randomIndex = Random.Range(0, objectsArray2.Length);
-
-            float randomY = Random.Range(-5f, 5f);
-            Vector3 spawnPosition = new Vector3(transform.position.x, randomY, transform.position.z);
-
-            GameObject newObject = Instantiate(objectsArray2[randomIndex], spawnPosition, Quaternion.identity);
+            currentEnemies += enemiesPerIncrease;
         }
     }
 }
-

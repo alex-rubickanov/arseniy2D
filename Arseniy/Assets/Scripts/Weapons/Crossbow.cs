@@ -8,6 +8,7 @@ using System;
 
 public class Crossbow : Weapon
 {
+    public event EventHandler OnAbilityAction;
     public static event EventHandler OnBallistaDefaultShot;
     public static event EventHandler OnBallistaSuperShot;
     
@@ -28,7 +29,7 @@ public class Crossbow : Weapon
     [SerializeField] float coolDownTime;
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
-    [SerializeField] Button button;
+    [SerializeField] private CrossbowAbilityButton abilityButton;
 
 
     bool isReloading = false;
@@ -89,6 +90,7 @@ public class Crossbow : Weapon
     {
         if (!isReloading)
         {
+
             sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
             isReloading = true;
@@ -102,6 +104,7 @@ public class Crossbow : Weapon
     {
         if (!isReloading)
         {
+            OnAbilityAction?.Invoke(this, EventArgs.Empty);
             sentProjectile = GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * superProjectileSpeed, ForceMode2D.Impulse);
             isReloading = true;
@@ -124,8 +127,11 @@ public class Crossbow : Weapon
 
     public void ActivatePower()
     {
-        isSuperPowerActivated = true;
-        spriteRenderer.sprite = superPowerSprite;
+        if(playerScript.activeGun == Player.Weapon.Crossbow)
+        {
+            isSuperPowerActivated = true;
+            spriteRenderer.sprite = superPowerSprite;
+        }
     }
 
     private IEnumerator Reload()
@@ -133,21 +139,18 @@ public class Crossbow : Weapon
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
     }
+
     private IEnumerator Cooldown()
     {
         spriteRenderer.sprite = defaultSprite;
 
-        ColorBlock colors = button.colors;
-        Color originalColor = colors.normalColor;
-
-        colors.normalColor = Color.red;
-        button.colors = colors;
-
         yield return new WaitForSeconds(coolDownTime);
 
-        colors.normalColor = originalColor;
-        button.colors = colors;
-
         superShootsCount = 3;
+    }
+
+    public float GetAbilityCooldown()
+    {
+        return coolDownTime;
     }
 }

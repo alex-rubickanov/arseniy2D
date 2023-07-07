@@ -27,6 +27,7 @@ public class FireGun : Weapon
     [SerializeField] private float percentOfBigEnemies;
     [SerializeField] private float abilityCooldown;
     [SerializeField] private FiregunAbilityButton abilityButton;
+    [SerializeField] private GameObject explosionPrefab;
 
     private void Awake()
     {
@@ -131,6 +132,9 @@ public class FireGun : Weapon
                     enemy.health -= onePercentHealth * percentOfSmallEnemies;
                 }
             }
+
+            Vector3 explosionPosition = new Vector3(2.5f, 0.25f, 0f);
+            Instantiate(explosionPrefab, explosionPosition, Quaternion.identity);
         }
     }
 
