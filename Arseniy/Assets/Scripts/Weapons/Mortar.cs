@@ -56,6 +56,7 @@ public class Mortar : Weapon
     {
         if (playerScript.activeGun == Player.Weapon.Mortar)
         {
+            abilityButtonUI.transform.localScale = new Vector3(buttonScale, buttonScale, 1);
             if (Input.GetMouseButton(1))
             {
                 Crosshair();
@@ -84,6 +85,8 @@ public class Mortar : Weapon
             }
 
             
+        } else {
+            abilityButtonUI.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         if (superShootsCount == 0)

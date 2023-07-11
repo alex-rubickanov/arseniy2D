@@ -30,8 +30,7 @@ public class Crossbow : Weapon
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
     [SerializeField] private CrossbowAbilityButton abilityButton;
-
-
+    
     bool isReloading = false;
     bool isSuperPowerActivated = false;
 
@@ -52,6 +51,7 @@ public class Crossbow : Weapon
     {
         if (playerScript.activeGun == Player.Weapon.Crossbow)
         {
+            abilityButtonUI.transform.localScale = new Vector3(buttonScale, buttonScale, 1);
             if (Input.GetMouseButton(1))
             {
                 Crosshair();
@@ -77,6 +77,9 @@ public class Crossbow : Weapon
             {
                 //CrosshairDisabled();
             }
+        }
+        else {
+            abilityButtonUI.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         if (superShootsCount == 0)

@@ -22,7 +22,13 @@ public class SuperArrowProjectile : Projectile
             Destroy(collision.gameObject);
         }
 
-        if(collision.CompareTag("Fast Enemy") )
+        if (collision.tag == "Rock")
+        {
+            Destroy(collision.gameObject);
+
+        }
+
+        if (collision.CompareTag("Fast Enemy") )
         {
             var dieComponent = collision.GetComponent<FastEnemy>();
 

@@ -434,6 +434,7 @@ MonoBehaviour:
   health: 0
   speed: 1
   damage: 6
+  weight: 2
   attackCooldown: 0.33
   score: 34
   gameManager: {fileID: 0}

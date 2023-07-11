@@ -58,4 +58,12 @@ public class ShieldEnemy : Enemy
         }
         triggerHit = true;
     }
+
+    public override void Die()
+    {
+        Destroy(gameObject);
+        gameManager.UpdateScore(score);
+        enemySpawner.DecreaseEnemiesCount();
+        enemySpawner.KilledShieldEnemiesIncrease();
+    }
 }

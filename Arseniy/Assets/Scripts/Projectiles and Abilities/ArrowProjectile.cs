@@ -12,6 +12,13 @@ public class ArrowProjectile : Projectile
     private string NAME_OF_WEAPON = "Ballista";
     private bool hasEntered = false;
 
+    private void Start()
+    {
+        crossbow = GameObject.Find("Crossbow").GetComponent<Crossbow>();
+        damage = crossbow.projectileDamage;
+        DestroyThisIn(10f);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Enemy enemy = collision.GetComponent<Enemy>();
@@ -33,12 +40,11 @@ public class ArrowProjectile : Projectile
             Destroy(gameObject);
 
         }
-    }
 
-    private void Start()
-    {
-        crossbow = GameObject.Find("Crossbow").GetComponent<Crossbow>();
-        damage = crossbow.projectileDamage;
-        DestroyThisIn(10f);
+        if (collision.tag == "Rock")
+        {
+            Destroy(collision.gameObject);
+
+        }
     }
 }

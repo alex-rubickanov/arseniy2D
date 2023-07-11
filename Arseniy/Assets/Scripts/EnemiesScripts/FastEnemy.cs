@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class FastEnemy : Enemy
 {
-    
+    public override void Die()
+    {
+        Destroy(gameObject);
+        gameManager.UpdateScore(score);
+        enemySpawner.DecreaseEnemiesCount();
+        enemySpawner.KilledFastEnemiesIncrease();
+    }
 }

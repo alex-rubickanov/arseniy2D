@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: -5617263909711953554}
   m_Layer: 0
   m_Name: StoneEnemy
-  m_TagString: Enemy
+  m_TagString: StoneEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -434,9 +434,11 @@ MonoBehaviour:
   health: 0
   speed: 1
   damage: 25
+  weight: 5
   attackCooldown: 1
   score: 76
   gameManager: {fileID: 0}
+  enemySpawner: {fileID: 0}
   walkAnimationClip: {fileID: 7400000, guid: 7a6395c4cc7558048a1acb39186aef02, type: 2}
   armor: 30
   arrowDamageResist: 0.4

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,11 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] public float health;
     [SerializeField] public float speed = 0.5f;
     [SerializeField] public float damage;
+    [SerializeField] public int weight;
     [SerializeField] float attackCooldown = 2f;
-    [SerializeField] int score;
-    [SerializeField] private GameManager gameManager;
+    [SerializeField]  protected int score;
+    [SerializeField] protected GameManager gameManager;
+    [SerializeField] protected TempSpawner enemySpawner;
     [SerializeField] private AnimationClip walkAnimationClip;
 
     private Animation animationComponent;
@@ -50,6 +53,7 @@ public abstract class Enemy : MonoBehaviour
         health = maxHealth;
         healthBar.maxValue = maxHealth;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        enemySpawner = GameObject.Find("EnemySpawnerTemp").GetComponent<TempSpawner>();
 
         speedValue = speed;
         animationComponent = gameObject.AddComponent<Animation>();
@@ -137,6 +141,7 @@ public abstract class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
         gameManager.UpdateScore(score);
+        enemySpawner.DecreaseEnemiesCount();
     }
 
     public virtual void Move()
@@ -159,5 +164,10 @@ public abstract class Enemy : MonoBehaviour
         }
         lastAttackTime = Time.time;
         wall.GetComponent<WallBehavior>().TakeDamage(damage);
+    }
+
+    public virtual int GetWeight()
+    {
+        return weight;
     }
 }

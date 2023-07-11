@@ -691,6 +691,7 @@ MonoBehaviour:
   health: 0
   speed: 0.5
   damage: 7
+  weight: 3
   attackCooldown: 0.5
   score: 50
   gameManager: {fileID: 0}
@@ -986,6 +987,7 @@ MonoBehaviour:
   health: 0
   speed: 0.5
   damage: 0
+  weight: 0
   attackCooldown: 2
   score: 0
   gameManager: {fileID: 0}

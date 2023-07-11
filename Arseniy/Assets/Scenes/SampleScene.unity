@@ -2186,6 +2186,8 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   projectile: {fileID: 4972140678034856437, guid: e0f1bb73fc7722e458077217ff1ffda0, type: 3}
   projectileSpawnerTransform: {fileID: 0}
+  abilityButtonUI: {fileID: 511669890}
+  buttonScale: 1.3
   target: {x: 0, y: 0, z: 0}
   projectileDamage: 30
   projectileSpeed: 5
@@ -3549,7 +3551,7 @@ GameObject:
   m_Layer: 0
   m_Name: EnemySpawnerTemp
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3570,11 +3572,20 @@ MonoBehaviour:
   - {fileID: 9139428957088055403, guid: 2d4640ae940a6b044a2fad6f9bd01e6f, type: 3}
   - {fileID: 9139428957088055403, guid: 76bdefd548df5144ea14179170c1fd91, type: 3}
   - {fileID: 5370344855728931548, guid: 457331258104cfd49a8d68828f9ab415, type: 3}
-  maxEnemies: 15
+  maxEnemies: 16
   spawnDelay: 2
-  enemiesPerIncrease: 2
-  minY: -0.27
-  maxY: 2.97
+  forBigMinY: -0.27
+  forBigMaxY: 2.97
+  forSmallMinY: -0.27
+  forSmallMaxY: -1.9
+  fastEnemyNumber: 1
+  flyingEnemyNumber: 2
+  shieldEnemyNumber: 3
+  golemEnemyNumber: 5
+  fastEnemiesCount: 0
+  flyingEnemiesCount: 0
+  shieldEnemiesCount: 0
+  golemEnemiesCount: 0
 --- !u!4 &1095748629
 Transform:
   m_ObjectHideFlags: 0
@@ -3583,7 +3594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1095748627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.69282, y: -3.45, z: -6.6781306}
+  m_LocalPosition: {x: 9.69282, y: -0.05, z: -6.6781306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3850,6 +3861,8 @@ MonoBehaviour:
   crosshair: {fileID: 9066831126746341898}
   projectile: {fileID: 132967213884406870, guid: 1f23339eb4e876f4ea2243c779046489, type: 3}
   projectileSpawnerTransform: {fileID: 0}
+  abilityButtonUI: {fileID: 283509097}
+  buttonScale: 1.3
   target: {x: 0, y: 0, z: 0}
   projectileDamage: 13
   projectileSpeed: 8.67
@@ -10084,6 +10097,8 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   projectile: {fileID: 0}
   projectileSpawnerTransform: {fileID: 0}
+  abilityButtonUI: {fileID: 1947172716}
+  buttonScale: 1.3
   fireParticle: {fileID: 1536018730}
   fireCollider: {fileID: 2054154976}
   damage: 8.8
