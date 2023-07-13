@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static Player;
 
 public class Player : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] public Weapon activeGun;
 
-    static Player instance;
+    public static Player Instance;
 
 
 
@@ -20,6 +21,12 @@ public class Player : MonoBehaviour
      public static GameObject topGunObj;
      public static GameObject midGunObj;
      public static GameObject botGunObj;
+
+    [SerializeField] private int coins;
+
+    private bool hasFiregunAbility;
+    private bool hasCrossbowAbility;
+    private bool hasMortarAbility;
 
     private void Awake() //singleton
     {
@@ -33,9 +40,9 @@ public class Player : MonoBehaviour
 
         activeGun = midGun;
 
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -67,35 +74,6 @@ public class Player : MonoBehaviour
         
     }
 
-
-
-
-
-
-    //private void ChangeWeapon(int i)
-    //{
-    //    switch (activeGun + i)
-    //    {
-    //        case Weapon.Mortar:
-    //            CheckAndStopCoroutine(toCrossbow);
-    //            CheckAndStopCoroutine(toThirdWeapon);
-    //            Debug.Log(activeGun);
-    //            break;
-
-    //        case Weapon.Crossbow:
-    //            CheckAndStopCoroutine(toThirdWeapon);
-    //            CheckAndStopCoroutine(toMortar);    
-    //            Debug.Log(activeGun);
-    //            break;
-
-    //        case Weapon.FireGun:
-    //            CheckAndStopCoroutine(toCrossbow);
-    //            CheckAndStopCoroutine(toMortar);
-    //            Debug.Log(activeGun);
-    //            break; 
-    //    }
-    //}
-
     public void CheckAndStopCoroutine(Coroutine coroutine)
     {
         if(coroutine != null)
@@ -104,12 +82,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    //private void ResetAllCoroutines()
-    //{
-    //    toMortar = null;
-    //    toThirdWeapon = null;
-    //    toCrossbow= null;
-    //}
     private void SwapWeapon(int i)
     {
         if(i == 1) //SwipeUP
@@ -164,6 +136,48 @@ public class Player : MonoBehaviour
         
     }
 
-    
+    public bool CheckAbility(Weapon weapon)
+    {
+        switch (weapon) {
+            case Weapon.FireGun:
+                return hasFiregunAbility;
+            case Weapon.Crossbow:
+                return hasCrossbowAbility;
+            case Weapon.Mortar:
+                return hasMortarAbility;
+            default: 
+                return false;
+        }
+    }
+
+    public void ActivateAbility(Weapon weapon)
+    {
+        switch (weapon) {
+            case Weapon.FireGun:
+                hasFiregunAbility = true;
+                break;
+            case Weapon.Crossbow:
+                hasCrossbowAbility = true;
+                break;
+            case Weapon.Mortar:
+                hasMortarAbility = true;
+                break;
+        }
+    }
+
+    public void AddCoins(int coinsToAdd)
+    {
+        coins += coinsToAdd;
+    } 
+
+    public void SpendCoins(int spentCoins)
+    {
+        coins -= spentCoins;
+    }
+
+    public int GetCoins()
+    {
+        return coins;
+    }
 
 }

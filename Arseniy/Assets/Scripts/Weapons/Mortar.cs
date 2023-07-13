@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using System.Runtime.CompilerServices;
 
 public class Mortar : Weapon
 {
@@ -28,6 +29,22 @@ public class Mortar : Weapon
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
     [SerializeField] private MortarAbilityButton abilityButton;
+
+    [Header("----------UPGRADING----------")]
+    [SerializeField] private DamageLevel currentDamageLevel;
+    [SerializeField] private float mortarDamageLevel1;
+    [SerializeField] private float mortarDamageLevel2;
+    [SerializeField] private float mortarDamageLevel3;
+    [SerializeField] private float mortarDamageLevel4;
+
+    public enum DamageLevel
+    {
+        Level1 = 1,
+        Level2 = 2,
+        Level3 = 3,
+        Level4 = 4
+    }
+
 
     bool isSuperPowerActivated = false;
 
@@ -94,6 +111,8 @@ public class Mortar : Weapon
             isSuperPowerActivated = false;
             StartCoroutine(Cooldown());
         }
+
+        HandleUpgrading();
     }
 
     public void ActivatePower()
@@ -126,7 +145,7 @@ public class Mortar : Weapon
             superShootsCount--;
             StartCoroutine(Reload());
 
-            //OnMortarShot?.Invoke(this, EventArgs.Empty);
+            OnMortarShot?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -146,5 +165,44 @@ public class Mortar : Weapon
     public float GetAbilityCooldown()
     {
         return coolDownTime;
+    }
+
+    public void SetDamage(float newDamage)
+    {
+        projectileDamage = newDamage;
+    }
+
+    private void HandleUpgrading()
+    {
+        switch (currentDamageLevel) {
+            case DamageLevel.Level1:
+                projectileDamage = mortarDamageLevel1;
+                break;
+            case DamageLevel.Level2:
+                projectileDamage = mortarDamageLevel2;
+                break;
+            case DamageLevel.Level3:
+                projectileDamage = mortarDamageLevel3;
+                break;
+            case DamageLevel.Level4:
+                projectileDamage = mortarDamageLevel4;
+                break;
+        }
+    }
+
+    public void UpgradeDamageLevel()
+    {
+        if (currentDamageLevel == DamageLevel.Level4) return;
+
+        currentDamageLevel++;
+    }
+    public DamageLevel GetCurrentDamageLevel()
+    {
+        return currentDamageLevel;
+    }
+
+    public float GetCurrentDamage()
+    {
+        return projectileDamage;
     }
 }

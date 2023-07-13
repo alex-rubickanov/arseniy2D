@@ -11,8 +11,8 @@ public class Crossbow : Weapon
     public event EventHandler OnAbilityAction;
     public static event EventHandler OnBallistaDefaultShot;
     public static event EventHandler OnBallistaSuperShot;
-    
-    [HideInInspector]public Vector3 target;
+
+    [HideInInspector] public Vector3 target;
     GameObject sentProjectile;
     bool isSentProjectileDropped = true;
 
@@ -30,9 +30,24 @@ public class Crossbow : Weapon
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
     [SerializeField] private CrossbowAbilityButton abilityButton;
-    
+
     bool isReloading = false;
     bool isSuperPowerActivated = false;
+
+    [Header("----------CROSSBOW UPGRADING----------")]
+    [SerializeField] private DamageLevel currentDamageLevel;
+    [SerializeField] private float crossbowDamageLevel1;
+    [SerializeField] private float crossbowDamageLevel2;
+    [SerializeField] private float crossbowDamageLevel3;
+    [SerializeField] private float crossbowDamageLevel4;
+
+    public enum DamageLevel
+    {
+        Level1 = 1,
+        Level2 = 2,
+        Level3 = 3,
+        Level4 = 4
+    }
 
     public static void ResetStaticData()
     {
@@ -49,50 +64,41 @@ public class Crossbow : Weapon
 
     private void Update()
     {
-        if (playerScript.activeGun == Player.Weapon.Crossbow)
-        {
+        if (playerScript.activeGun == Player.Weapon.Crossbow) {
             abilityButtonUI.transform.localScale = new Vector3(buttonScale, buttonScale, 1);
-            if (Input.GetMouseButton(1))
-            {
+            if (Input.GetMouseButton(1)) {
                 Crosshair();
                 Aim();
-                if (isSentProjectileDropped)
-                {
-                    if (Input.GetMouseButtonDown(0))
-                    {
+                if (isSentProjectileDropped) {
+                    if (Input.GetMouseButtonDown(0)) {
                         target = crosshair.transform.position;
-                        
-                        if(isSuperPowerActivated && superShootsCount > 0)
-                        {
+
+                        if (isSuperPowerActivated && superShootsCount > 0) {
                             SuperShoot();
-                        }
-                        else
-                        {
+                        } else {
                             Shoot();
                         }
                     }
                 }
             }
-            if (Input.GetMouseButtonUp(1))
-            {
+            if (Input.GetMouseButtonUp(1)) {
                 //CrosshairDisabled();
             }
-        }
-        else {
+        } else {
             abilityButtonUI.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        if (superShootsCount == 0)
-        {
+        if (superShootsCount == 0) {
             isSuperPowerActivated = false;
             StartCoroutine(Cooldown());
         }
+
+        HandleUpgrading();
     }
 
     public override void Shoot()
     {
-        if (!isReloading)
-        {
+        if (!isReloading) {
 
             sentProjectile = GameObject.Instantiate(projectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * projectileSpeed, ForceMode2D.Impulse);
@@ -105,8 +111,7 @@ public class Crossbow : Weapon
 
     public void SuperShoot()
     {
-        if (!isReloading)
-        {
+        if (!isReloading) {
             OnAbilityAction?.Invoke(this, EventArgs.Empty);
             sentProjectile = GameObject.Instantiate(superProjectile, projectileSpawnerTransform.position, transform.rotation);
             sentProjectile.GetComponent<Rigidbody2D>().AddForce(projectileSpawnerTransform.right * superProjectileSpeed, ForceMode2D.Impulse);
@@ -130,8 +135,7 @@ public class Crossbow : Weapon
 
     public void ActivatePower()
     {
-        if(playerScript.activeGun == Player.Weapon.Crossbow)
-        {
+        if (playerScript.activeGun == Player.Weapon.Crossbow) {
             isSuperPowerActivated = true;
             spriteRenderer.sprite = superPowerSprite;
         }
@@ -155,5 +159,42 @@ public class Crossbow : Weapon
     public float GetAbilityCooldown()
     {
         return coolDownTime;
+    }
+    public void SetDamage(float newDamage)
+    {
+        projectileDamage = newDamage;
+    }
+    private void HandleUpgrading()
+    {
+        switch (currentDamageLevel) {
+            case DamageLevel.Level1:
+                projectileDamage = crossbowDamageLevel1;
+                break;
+            case DamageLevel.Level2:
+                projectileDamage = crossbowDamageLevel2;
+                break;
+            case DamageLevel.Level3:
+                projectileDamage = crossbowDamageLevel3;
+                break;
+            case DamageLevel.Level4:
+                projectileDamage = crossbowDamageLevel4;
+                break;
+        }
+    }
+
+    public void UpgradeDamageLevel()
+    {
+        if (currentDamageLevel == DamageLevel.Level4) return;
+
+        currentDamageLevel++;
+    }
+    public DamageLevel GetCurrentDamageLevel()
+    {
+        return currentDamageLevel;
+    }
+
+    public float GetCurrentDamage()
+    {
+        return projectileDamage;
     }
 }
