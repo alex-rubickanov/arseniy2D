@@ -29,6 +29,50 @@ public class FireGun : Weapon
     [SerializeField] private float abilityCooldown;
     [SerializeField] private FiregunAbilityButton abilityButton;
     [SerializeField] private GameObject explosionPrefab;
+
+    [Header("----------UPGRADING----------")]
+    [SerializeField] private DamageLevel currentDamageLevel;
+    [SerializeField] private float firegunDamageLevel1;
+    [SerializeField] private float firegunDamageLevel2;
+    [SerializeField] private float firegunDamageLevel3;
+    [SerializeField] private float firegunDamageLevel4;
+
+    [SerializeField] private DotDurationLevel currentDotDurationLevel;
+    [SerializeField] private int dotDurationLevel1;
+    [SerializeField] private int dotDurationLevel2;
+    [SerializeField] private int dotDurationLevel3;
+    [SerializeField] private int dotDurationLevel4;
+
+    [SerializeField] private DotDamageLevel currentDotDamageLevel;
+    [SerializeField] private float dotDamageLevel1;
+    [SerializeField] private float dotDamageLevel2;
+    [SerializeField] private float dotDamageLevel3;
+    [SerializeField] private float dotDamageLevel4;
+
+    public enum DamageLevel
+    {
+        Level1 = 1,
+        Level2 = 2,
+        Level3 = 3,
+        Level4 = 4
+    }
+
+    public enum DotDurationLevel
+    {
+        Level1 = 1,
+        Level2 = 2,
+        Level3 = 3,
+        Level4 = 4
+    }
+
+    public enum DotDamageLevel
+    {
+        Level1 = 1, 
+        Level2 = 2, 
+        Level3 = 3, 
+        Level4 = 4
+    }
+
     private void Awake()
     {
         gameObject.AddComponent<AudioSource>();
@@ -74,6 +118,8 @@ public class FireGun : Weapon
         if (playerScript.activeGun != Player.Weapon.FireGun) {
             StopShoot();
         }
+
+        HandleUpgrading();
     }
 
     public override void Shoot()
@@ -140,8 +186,107 @@ public class FireGun : Weapon
         }
     }
 
+    private void HandleUpgrading()
+    {
+        switch (currentDamageLevel) {
+            case DamageLevel.Level1:
+                damage = firegunDamageLevel1;
+                break;
+            case DamageLevel.Level2:
+                damage = firegunDamageLevel2;
+                break;
+            case DamageLevel.Level3:
+                damage = firegunDamageLevel3;
+                break;
+            case DamageLevel.Level4:
+                damage = firegunDamageLevel4;
+                break;
+        }
+
+        switch (currentDotDamageLevel) {
+            case DotDamageLevel.Level1:
+                dotDamage = dotDamageLevel1;
+                break;
+            case DotDamageLevel.Level2:
+                dotDamage = dotDamageLevel2;
+                break;
+            case DotDamageLevel.Level3:
+                dotDamage = dotDamageLevel3;
+                break;
+            case DotDamageLevel.Level4:
+                dotDamage = dotDamageLevel4;
+                break;
+        }
+
+        switch (currentDotDurationLevel) {
+            case DotDurationLevel.Level1:
+                dotTicks = dotDurationLevel1;
+                break;
+            case DotDurationLevel.Level2:
+                dotTicks = dotDurationLevel2;
+                break;
+            case DotDurationLevel.Level3:
+                dotTicks = dotDurationLevel3;
+                break;
+            case DotDurationLevel.Level4:
+                dotTicks = dotDurationLevel4;
+                break;
+        }
+    }
+
     public float GetAbilityCooldown()
     {
         return abilityCooldown;
+    }
+
+    public void UpgradeDamageLevel()
+    {
+        if (currentDamageLevel == DamageLevel.Level4) return;
+
+        currentDamageLevel++;
+    }
+
+    public void UpgradeDotDurationLevel()
+    {
+        if (currentDotDurationLevel == DotDurationLevel.Level4) return;
+
+        currentDotDurationLevel++;
+    }
+
+    public void UpgradeDotDamageLevel()
+    {
+        if (currentDotDamageLevel == DotDamageLevel.Level4) return;
+
+        currentDotDamageLevel++;
+    }
+
+    public DamageLevel GetCurrentDamageLevel()
+    {
+        return currentDamageLevel;
+    }
+
+    public DotDamageLevel GetCurrentDotDamageLevel()
+    {
+        return currentDotDamageLevel;
+    }
+
+    public DotDurationLevel GetCurrentDotDurationLevel()
+    {
+        return currentDotDurationLevel;
+    }
+
+    public float GetCurrentDamage()
+    {
+        return damage;
+    }
+
+    public int GetCurrentDotDuration()
+    {
+        return dotTicks;
+    }
+
+    public float GetCurrentDotDamage()
+    {
+        return dotDamage;
     }
 }

@@ -570,9 +570,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5406909853707276220}
+  - component: {fileID: 5406909853707276217}
   - component: {fileID: 5406909853707276221}
   - component: {fileID: 5406909853707276219}
-  - component: {fileID: 5406909853707276217}
   - component: {fileID: 7801493622915064449}
   - component: {fileID: -1573197880362484188}
   m_Layer: 0
@@ -599,6 +599,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5406909853707276217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406909853707276214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 101d6a1fa66464a4d81ad46709430aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 5406909853116123531}
+  wall: {fileID: 0}
+  isAttacking: 0
+  isAttracted: 0
+  maxHealth: 37.5
+  health: 0
+  speed: 0.5
+  damage: 7
+  attackCooldown: 0.5
+  score: 50
+  gameManager: {fileID: 0}
+  walkAnimationClip: {fileID: 7400000, guid: eb0fe023fb462734687d3b9791960d98, type: 2}
+  armor: 7
+  arrowDamageResist: 0.05
+  bombDamageResist: 0.02
+  fireDamageResist: 0.3
+  centerObject: {fileID: 4972140678034856437, guid: daccb1cae4864794a9854973fe02d6f0, type: 3}
+  currentDamageResist: 0
+  damageReduce: 0
+  actualDamage: 0
+  coinsForDestroy: 10
+  isShieldAlive: 1
+  shieldHealth: 75
+  shieldArmor: 0
+  shieldArrowDamageResist: 0
+  shieldBombDamageResist: 0.1
+  shieldFireDamageResist: 1
+  shieldBombDamageXAxisReduce: 0.2
 --- !u!212 &5406909853707276221
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -671,45 +711,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5406909853707276217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5406909853707276214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 101d6a1fa66464a4d81ad46709430aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 5406909853116123531}
-  wall: {fileID: 0}
-  isAttacking: 0
-  isAttracted: 0
-  maxHealth: 37.5
-  health: 0
-  speed: 0.5
-  damage: 7
-  attackCooldown: 0.5
-  score: 50
-  gameManager: {fileID: 0}
-  walkAnimationClip: {fileID: 7400000, guid: eb0fe023fb462734687d3b9791960d98, type: 2}
-  armor: 7
-  arrowDamageResist: 0.05
-  bombDamageResist: 0.02
-  fireDamageResist: 0.3
-  centerObject: {fileID: 4972140678034856437, guid: daccb1cae4864794a9854973fe02d6f0, type: 3}
-  currentDamageResist: 0
-  damageReduce: 0
-  actualDamage: 0
-  isShieldAlive: 1
-  shieldHealth: 75
-  shieldArmor: 0
-  shieldArrowDamageResist: 0
-  shieldBombDamageResist: 0.1
-  shieldFireDamageResist: 1
-  shieldBombDamageXAxisReduce: 0.2
 --- !u!61 &7801493622915064449
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -998,6 +999,7 @@ MonoBehaviour:
   currentDamageResist: 0
   damageReduce: 0
   actualDamage: 0
+  coinsForDestroy: 0
   NOTE: CHANGE SHIELD PROPERTIES IN ENEMY WITH SHIELD PREFAB
   parentEnemy: {fileID: 0}
 --- !u!95 &4309069794961391867

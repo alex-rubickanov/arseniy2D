@@ -41,7 +41,7 @@ public abstract class Enemy : MonoBehaviour
     [HideInInspector] public float damageReduce;
     [HideInInspector] public float actualDamage;
 
-
+    [SerializeField] private int coinsForDestroy;
 
     private void Awake()
     {
@@ -159,5 +159,10 @@ public abstract class Enemy : MonoBehaviour
         }
         lastAttackTime = Time.time;
         wall.GetComponent<WallBehavior>().TakeDamage(damage);
+    }
+
+    private void OnDestroy()
+    {
+        Player.Instance.AddCoins(coinsForDestroy);
     }
 }

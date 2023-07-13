@@ -315,9 +315,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2510928172862851781}
+  - component: {fileID: 9182409556127914240}
   - component: {fileID: 8662196171040571056}
   - component: {fileID: 1213148765}
-  - component: {fileID: 9182409556127914240}
   - component: {fileID: 5947858272253930557}
   - component: {fileID: 6843328406678559822}
   m_Layer: 7
@@ -342,6 +342,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9182409556127914240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139428957088055403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9567bfbb7a451e1499928a942abdea56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 7540918527916061863}
+  wall: {fileID: 0}
+  isAttacking: 0
+  isAttracted: 0
+  maxHealth: 25
+  health: 0
+  speed: 1
+  damage: 3
+  attackCooldown: 0.2
+  score: 10
+  gameManager: {fileID: 0}
+  walkAnimationClip: {fileID: 7400000, guid: 1053bdce39e70cb41845ccb2d3014b43, type: 2}
+  armor: 5
+  arrowDamageResist: 0
+  bombDamageResist: 0
+  fireDamageResist: 0
+  centerObject: {fileID: 4972140678034856437, guid: daccb1cae4864794a9854973fe02d6f0, type: 3}
+  currentDamageResist: 0
+  damageReduce: 0
+  actualDamage: 0
+  coinsForDestroy: 10
 --- !u!212 &8662196171040571056
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -414,38 +447,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &9182409556127914240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9139428957088055403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9567bfbb7a451e1499928a942abdea56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 7540918527916061863}
-  wall: {fileID: 0}
-  isAttacking: 0
-  isAttracted: 0
-  maxHealth: 25
-  health: 0
-  speed: 1
-  damage: 3
-  attackCooldown: 0.2
-  score: 10
-  gameManager: {fileID: 0}
-  walkAnimationClip: {fileID: 7400000, guid: 1053bdce39e70cb41845ccb2d3014b43, type: 2}
-  armor: 5
-  arrowDamageResist: 0
-  bombDamageResist: 0
-  fireDamageResist: 0
-  centerObject: {fileID: 4972140678034856437, guid: daccb1cae4864794a9854973fe02d6f0, type: 3}
-  currentDamageResist: 0
-  damageReduce: 0
-  actualDamage: 0
 --- !u!61 &5947858272253930557
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ public class SuperBombProjectile : Projectile
     [SerializeField] float destroyTime = 2f;
 
     public static event EventHandler OnSuperBombActivation;
+    bool once = true;
+
 
     public static void ResetStaticData()
     {
@@ -40,8 +42,11 @@ public class SuperBombProjectile : Projectile
                 transform.GetChild(2).gameObject.SetActive(true);
                 GetComponent<CircleCollider2D>().enabled = true;
                 StartCoroutine(DestroyCoroutine(destroyTime));
-
-                OnSuperBombActivation?.Invoke(this, EventArgs.Empty);
+                if (once) {
+                    OnSuperBombActivation?.Invoke(this, EventArgs.Empty);
+                    once = false;
+                }
+                
             }
         }
     }
