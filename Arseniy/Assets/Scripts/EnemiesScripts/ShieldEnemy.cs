@@ -79,7 +79,7 @@ public class ShieldEnemy : Enemy
 
     public override void Die()
     {
-        shield.Die();
+        //shield.Die();
 
         animator.SetBool("IsDead", true);
 
@@ -90,6 +90,6 @@ public class ShieldEnemy : Enemy
             once = false;
         }
 
-        Destroy(gameObject, 1);
+        Destroy(gameObject, 2);
     }
 }
