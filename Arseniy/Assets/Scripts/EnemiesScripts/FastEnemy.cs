@@ -23,7 +23,7 @@ public class FastEnemy : Enemy
         if (once)
         {
             gameManager.UpdateScore(score);
-            enemySpawner.DecreaseEnemiesCount();
+            //enemySpawner.DecreaseEnemiesCount();
             once = false;
         }
 
