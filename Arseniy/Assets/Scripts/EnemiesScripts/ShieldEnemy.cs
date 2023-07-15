@@ -16,6 +16,8 @@ public class ShieldEnemy : Enemy
     [SerializeField] private float shieldBombDamageXAxisReduce = 0.2f;
 
     private bool triggerHit = false;
+
+
     public void TakeDamage(float weaponDamage, string weaponName, GameObject projectile)
     {
 
@@ -57,6 +59,21 @@ public class ShieldEnemy : Enemy
             isAttacking = true;
         }
         triggerHit = true;
+    }
+
+    public override void Attack()
+    {
+        if (Time.time - lastAttackTime < attackCooldown)
+        {
+            return;
+        }
+        if (isShieldAlive)
+        {
+            animator.SetBool("IsAttacking", true);
+        }
+
+        lastAttackTime = Time.time;
+        wall.GetComponent<WallBehavior>().TakeDamage(damage);
     }
 
     public override void Die()

@@ -8,7 +8,7 @@ public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] public Slider healthBar;
     [HideInInspector] public WallBehavior wall;
-    float lastAttackTime;
+    protected float lastAttackTime;
     [HideInInspector] public bool isAttacking = false;
     [HideInInspector] public bool isAttracted = false;
 
@@ -19,13 +19,15 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] public float speed = 0.5f;
     [SerializeField] public float damage;
     [SerializeField] public int weight;
-    [SerializeField] float attackCooldown = 2f;
+    [SerializeField] protected float attackCooldown = 2f;
     [SerializeField]  protected int score;
     [SerializeField] protected GameManager gameManager;
     [SerializeField] protected TempSpawner enemySpawner;
     [SerializeField] private AnimationClip walkAnimationClip;
 
     private Animation animationComponent;
+    [SerializeField] protected Animator animator;
+
 
 
     [Header("----------DAMAGE RESIST----------")]
@@ -55,6 +57,7 @@ public abstract class Enemy : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         enemySpawner = GameObject.Find("EnemySpawnerTemp").GetComponent<TempSpawner>();
 
+        animator = GetComponent<Animator>();
         speedValue = speed;
         animationComponent = gameObject.AddComponent<Animation>();
         animationComponent.AddClip(walkAnimationClip, "Walk");
@@ -139,6 +142,7 @@ public abstract class Enemy : MonoBehaviour
     
     public virtual void Die()
     {
+        animator.SetBool("IsDead", true);
         Destroy(gameObject);
         gameManager.UpdateScore(score);
         enemySpawner.DecreaseEnemiesCount();

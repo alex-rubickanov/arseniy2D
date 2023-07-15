@@ -56,6 +56,18 @@ public class FlyingEnemy : Enemy
         //transform.position = startPosition + new Vector3(-1 * time * speed, amplitude * Mathf.Sin(time), 0);
     }
 
+    public override void Attack()
+    {
+        if (Time.time - lastAttackTime < attackCooldown)
+        {
+            return;
+        }
+
+        animator.SetBool("IsAttacking", true);
+        lastAttackTime = Time.time;
+        wall.GetComponent<WallBehavior>().TakeDamage(damage);
+    }
+
     public override void Die()
     {
         Destroy(gameObject);

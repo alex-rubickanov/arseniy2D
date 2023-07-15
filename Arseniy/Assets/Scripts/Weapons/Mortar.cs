@@ -29,6 +29,9 @@ public class Mortar : Weapon
     [SerializeField] int superShootsCount = 3;
     [SerializeField] public float superProjectileSpeed = 10f;
     [SerializeField] private MortarAbilityButton abilityButton;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite defaultSprite;
+    [SerializeField] Sprite ReloadingSprite;
 
     [Header("----------UPGRADING----------")]
     [SerializeField] private DamageLevel currentDamageLevel;
@@ -55,6 +58,8 @@ public class Mortar : Weapon
 
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         ResetStaticData();
     }
 
@@ -129,9 +134,8 @@ public class Mortar : Weapon
 
             OnMortarShot?.Invoke(this, EventArgs.Empty);
 
+            spriteRenderer.sprite = ReloadingSprite;
             StartCoroutine(Reload());
-
-            
         }
     }
 
@@ -152,6 +156,7 @@ public class Mortar : Weapon
     private IEnumerator Reload()
     {
         yield return new WaitForSeconds(reloadTime);
+        spriteRenderer.sprite = defaultSprite;
         isReloading = false;
     }
 

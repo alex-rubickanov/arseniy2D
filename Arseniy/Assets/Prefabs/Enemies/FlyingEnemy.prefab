@@ -382,12 +382,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -427066485589525634, guid: ecc78c7f3bab27a448e5c86210e19fd0, type: 3}
+  m_Sprite: {fileID: 1989797388566967148, guid: 58e46b066d282654aa606afe2e89abd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 3.162857, y: 1.3960711}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -438,7 +438,9 @@ MonoBehaviour:
   attackCooldown: 0.33
   score: 34
   gameManager: {fileID: 0}
+  enemySpawner: {fileID: 0}
   walkAnimationClip: {fileID: 7400000, guid: b69d0203dcc679540aee71b2a4d89971, type: 2}
+  animator: {fileID: 0}
   armor: 6
   arrowDamageResist: 0
   bombDamageResist: 1
@@ -467,8 +469,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.8, y: 1.275}
-    newSize: {x: 1, y: 2}
+    oldSize: {x: 3.162857, y: 1.3960711}
+    newSize: {x: 3.162857, y: 1.3960711}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

@@ -12,6 +12,8 @@ public class SuperBombProjectile : Projectile
     [SerializeField] float magnetRadius = 5f;
     [SerializeField] float stunRadius = 2f;
     [SerializeField] float destroyTime = 2f;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite ActivatedBombSprite;
 
     public static event EventHandler OnSuperBombActivation;
     bool once = true;
@@ -27,6 +29,7 @@ public class SuperBombProjectile : Projectile
         mortar = GameObject.Find("Mortar").GetComponent<Mortar>();
         damage = mortar.projectileDamage;
         projectileTarget = mortar.target;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
@@ -38,8 +41,9 @@ public class SuperBombProjectile : Projectile
             } 
             else 
             {
+                spriteRenderer.sprite = ActivatedBombSprite;
+                transform.GetChild(0).gameObject.SetActive(true);
                 transform.GetChild(1).gameObject.SetActive(true);
-                transform.GetChild(2).gameObject.SetActive(true);
                 GetComponent<CircleCollider2D>().enabled = true;
                 StartCoroutine(DestroyCoroutine(destroyTime));
                 if (once) {
