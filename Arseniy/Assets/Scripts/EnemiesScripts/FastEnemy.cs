@@ -19,10 +19,15 @@ public class FastEnemy : Enemy
     public override void Die()
     {
         animator.SetBool("IsDead", true);
-        Destroy(gameObject);
-        gameManager.UpdateScore(score);
-        enemySpawner.DecreaseEnemiesCount();
-        enemySpawner.KilledFastEnemiesIncrease();
+
+        if (once)
+        {
+            gameManager.UpdateScore(score);
+            enemySpawner.DecreaseEnemiesCount();
+            once = false;
+        }
+
+        Destroy(gameObject, 1);
     }
 
 }

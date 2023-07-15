@@ -70,10 +70,16 @@ public class FlyingEnemy : Enemy
 
     public override void Die()
     {
-        Destroy(gameObject);
-        gameManager.UpdateScore(score);
-        enemySpawner.DecreaseEnemiesCount();
-        enemySpawner.KilledFlyingEnemiesIncrease();
+        animator.SetBool("IsDead", true);
+
+        if (once)
+        {
+            gameManager.UpdateScore(score);
+            //enemySpawner.DecreaseEnemiesCount();
+            once = false;
+        }
+
+        Destroy(gameObject, 1);
     }
 }
 

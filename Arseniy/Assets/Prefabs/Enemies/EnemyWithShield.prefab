@@ -695,7 +695,10 @@ MonoBehaviour:
   attackCooldown: 0.5
   score: 50
   gameManager: {fileID: 0}
+  enemySpawner: {fileID: 0}
   walkAnimationClip: {fileID: 7400000, guid: eb0fe023fb462734687d3b9791960d98, type: 2}
+  coinsForDestroy: 2
+  animator: {fileID: 0}
   armor: 7
   arrowDamageResist: 0.05
   bombDamageResist: 0.02
@@ -711,6 +714,7 @@ MonoBehaviour:
   shieldBombDamageResist: 0.1
   shieldFireDamageResist: 1
   shieldBombDamageXAxisReduce: 0.2
+  shield: {fileID: 5406909853973987043}
 --- !u!61 &7801493622915064449
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -991,7 +995,10 @@ MonoBehaviour:
   attackCooldown: 2
   score: 0
   gameManager: {fileID: 0}
+  enemySpawner: {fileID: 0}
   walkAnimationClip: {fileID: 7400000, guid: 4bb92d8126bf46e48beda1d8271a6958, type: 2}
+  coinsForDestroy: 0
+  animator: {fileID: 0}
   armor: 0
   arrowDamageResist: 0
   bombDamageResist: 0

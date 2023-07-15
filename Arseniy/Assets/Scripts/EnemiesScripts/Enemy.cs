@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour
 {
+    protected bool once = true;
     [SerializeField] public Slider healthBar;
     [HideInInspector] public WallBehavior wall;
     protected float lastAttackTime;
@@ -24,6 +25,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected GameManager gameManager;
     [SerializeField] protected TempSpawner enemySpawner;
     [SerializeField] private AnimationClip walkAnimationClip;
+    [SerializeField] private int coinsForDestroy;
 
     private Animation animationComponent;
     [SerializeField] protected Animator animator;
@@ -46,7 +48,10 @@ public abstract class Enemy : MonoBehaviour
     [HideInInspector] public float damageReduce;
     [HideInInspector] public float actualDamage;
 
-
+    private void OnDestroy()
+    {
+        Player.Instance.AddCoins(coinsForDestroy);
+    }
 
     private void Awake()
     {
@@ -55,7 +60,7 @@ public abstract class Enemy : MonoBehaviour
         health = maxHealth;
         healthBar.maxValue = maxHealth;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        enemySpawner = GameObject.Find("EnemySpawnerTemp").GetComponent<TempSpawner>();
+        //enemySpawner = GameObject.Find("EnemySpawnerTemp").GetComponent<TempSpawner>();
 
         animator = GetComponent<Animator>();
         speedValue = speed;
@@ -143,9 +148,15 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Die()
     {
         animator.SetBool("IsDead", true);
-        Destroy(gameObject);
-        gameManager.UpdateScore(score);
-        enemySpawner.DecreaseEnemiesCount();
+
+        if (once)
+        {
+            gameManager.UpdateScore(score);
+            //enemySpawner.DecreaseEnemiesCount();
+            once = false;
+        }
+
+        Destroy(gameObject, 3);
     }
 
     public virtual void Move()

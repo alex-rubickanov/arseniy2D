@@ -90,9 +90,9 @@ public class ShopUI : MonoBehaviour
 
     private void Start()
     {
-        fireGunAbilityBuyText.text = $"Купить \n {firegunAbilityPrice}";
-        crossbowAbilityBuyText.text = $"Купить \n {crossbowAbilityPrice}";
-        mortarAbilityBuyText.text = $"Купить \n {mortarAbilityPrice}";
+        fireGunAbilityBuyText.text = $"{firegunAbilityPrice}";
+        crossbowAbilityBuyText.text = $"{crossbowAbilityPrice}";
+        mortarAbilityBuyText.text = $"{mortarAbilityPrice}";
 
         fireGunAbilityBuy.onClick.AddListener(() => {
             TryToBuyAbility(Player.Weapon.FireGun);
@@ -215,19 +215,19 @@ public class ShopUI : MonoBehaviour
     private void UpdateAllButtons()
     {
         upgradeFiregunDamageText.text = $"Базовая атака: {firegun.GetCurrentDamage()}";
-        upgradeFiregunDamagePriceText.text = $"Улучшить \n {firegunDamagePrice}";
+        upgradeFiregunDamagePriceText.text = $"{firegunDamagePrice}";
 
         upgradeDotDurationText.text = $"Длительность горения: {firegun.GetCurrentDotDuration()}";
-        upgradeDotDurationPriceText.text = $"Улучшить \n {firegunDotDurationPrice}";
+        upgradeDotDurationPriceText.text = $"{firegunDotDurationPrice}";
 
         upgradeDotDamageText.text = $"Урон горения: {firegun.GetCurrentDotDamage()}";
-        upgradeDotDamagePriceText.text = $"Улучшить \n {firegunDotDamagePrice}";
+        upgradeDotDamagePriceText.text = $"{firegunDotDamagePrice}";
 
         upgradeCrossbowDamageText.text = $"Базовая атака: {crossbow.GetCurrentDamage()}";
-        upgradeCrossbowDamagePriceText.text = $"Улучшить \n {crossbowDamagePrice}";
+        upgradeCrossbowDamagePriceText.text = $"{crossbowDamagePrice}";
 
         upgradeMortarDamageText.text = $"Базовая атака: {mortar.GetCurrentDamage()}";
-        upgradeMortarDamagePriceText.text = $"Улучшить \n {mortarDamagePrice}";
+        upgradeMortarDamagePriceText.text = $"{mortarDamagePrice}";
 
 
         switch (firegun.GetCurrentDamageLevel()) {

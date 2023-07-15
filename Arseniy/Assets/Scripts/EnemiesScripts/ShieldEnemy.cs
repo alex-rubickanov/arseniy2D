@@ -14,6 +14,7 @@ public class ShieldEnemy : Enemy
     [SerializeField] public float shieldBombDamageResist;
     [SerializeField] public float shieldFireDamageResist;
     [SerializeField] private float shieldBombDamageXAxisReduce = 0.2f;
+    [SerializeField] private Shield shield;
 
     private bool triggerHit = false;
 
@@ -78,9 +79,17 @@ public class ShieldEnemy : Enemy
 
     public override void Die()
     {
-        Destroy(gameObject);
-        gameManager.UpdateScore(score);
-        enemySpawner.DecreaseEnemiesCount();
-        enemySpawner.KilledShieldEnemiesIncrease();
+        shield.Die();
+
+        animator.SetBool("IsDead", true);
+
+        if (once)
+        {
+            gameManager.UpdateScore(score);
+            //enemySpawner.DecreaseEnemiesCount();
+            once = false;
+        }
+
+        Destroy(gameObject, 1);
     }
 }

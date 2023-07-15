@@ -440,6 +440,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   enemySpawner: {fileID: 0}
   walkAnimationClip: {fileID: 7400000, guid: b69d0203dcc679540aee71b2a4d89971, type: 2}
+  coinsForDestroy: 3
   animator: {fileID: 0}
   armor: 6
   arrowDamageResist: 0

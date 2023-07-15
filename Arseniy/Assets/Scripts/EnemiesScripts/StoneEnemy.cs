@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class StoneEnemy : Enemy
 {
-    private Animator animator;
 
     [Header("----------DO !NOT! TOUCH----------")]
     [SerializeField] private GameObject _rockPrefab;
@@ -31,7 +30,9 @@ public class StoneEnemy : Enemy
 
             if (_steps >= _stopSteps)
             {
+                animator.SetBool("IsThrowing", true);
                 Stop();
+                animator.SetBool("IsThrowing", false);
             }
         }
         else
@@ -66,8 +67,19 @@ public class StoneEnemy : Enemy
         GameObject rock = Instantiate(_rockPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rockRigidbody = rock.GetComponent<Rigidbody2D>();
         rockRigidbody.AddForce(Vector2.left * 500f);
-
     }
 
+    public override void Die()
+    {
+        animator.SetBool("IsDead", true);
 
+        if (once)
+        {
+            gameManager.UpdateScore(score);
+            //enemySpawner.DecreaseEnemiesCount();
+            once = false;
+        }
+
+        Destroy(gameObject, 1.5f);
+    }
 }
